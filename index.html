@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Productivity Tracker</title>
+    <title>My Dashboard</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +14,16 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        dark: { 900: '#0f172a', 800: '#1e293b', 700: '#334155', 600: '#475569', 500: '#64748b', 400: '#94a3b8', },
+                        dark: { 900: '#0f172a', 800: '#1e293b', 700: '#334155', 600: '#475569', 500: '#64748b', 400: '#94a3b8' },
                         brand: { primary: '#818cf8', success: '#34d399', danger: '#fb7185', warning: '#fbbf24', info: '#38bdf8' }
                     }
                 }
             }
         }
     </script>
-
+    
     <style>
         body { background-color: #0f172a; color: #f8fafc; }
         ::-webkit-scrollbar { width: 6px; }
@@ -31,842 +31,694 @@
         ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #818cf8; }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        
         .custom-checkbox {
-            appearance: none; width: 1.25rem; height: 1.25rem; border: 2px solid #475569; border-radius: 0.375rem; cursor: pointer; transition: all 0.2s ease; position: relative;
+            appearance: none; width: 1.25rem; height: 1.25rem; border: 2px solid #475569;
+            border-radius: 0.375rem; cursor: pointer; transition: all 0.2s ease; position: relative;
         }
         .custom-checkbox:checked { background-color: #34d399; border-color: #34d399; }
         .custom-checkbox:checked::after {
-            content: ''; position: absolute; top: 2px; left: 6px; width: 5px; height: 10px; border: solid #0f172a; border-width: 0 2px 2px 0; transform: rotate(45deg);
+            content: ''; position: absolute; top: 2px; left: 6px; width: 5px; height: 10px;
+            border: solid #0f172a; border-width: 0 2px 2px 0; transform: rotate(45deg);
         }
+        
         .ring-container { position: relative; width: 140px; height: 140px; margin: 0 auto; }
         .ring-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
         .ring-circle { transition: stroke-dashoffset 1s linear, stroke 0.5s ease; }
         .strike-through { text-decoration: line-through; color: #64748b; }
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-6 lg:p-8 selection:bg-brand-primary selection:text-white">
+<body class="p-4 md:p-8">
 
-    <header class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-            <h1 class="text-3xl font-bold text-white mb-2">My Dashboard</h1>
-            <p id="current-date" class="text-dark-400 text-sm font-medium tracking-wide"></p>
-        </div>
-        <div id="connection-status" class="text-sm px-4 py-2 rounded-full bg-dark-800 border border-dark-700 text-dark-500 flex items-center gap-2 font-medium shadow-md">
-            <div class="w-2.5 h-2.5 rounded-full bg-brand-warning animate-pulse" id="status-dot"></div>
-            <span id="status-text">Connecting to sync...</span>
-        </div>
-    </header>
+<!-- HEADER -->
+<header class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div>
+        <h1 class="text-3xl font-bold text-white tracking-tight">My Dashboard</h1>
+    </div>
+    <div id="connection-status" class="text-sm px-4 py-2 rounded-full bg-dark-800 border border-dark-700 text-brand-success flex items-center gap-2 font-medium shadow-md">
+        <div class="w-2.5 h-2.5 rounded-full bg-brand-success shadow-[0_0_8px_rgba(52,211,153,0.8)]" id="status-dot"></div>
+        <span id="status-text">Live Sync Active</span>
+    </div>
+</header>
 
-    <main class="max-w-7xl mx-auto flex flex-col gap-6">
+<main class="max-w-7xl mx-auto flex flex-col gap-6">
+    
+    <!-- TOP ROW: Pomodoro & Habit Tracker -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        <!-- TOP ROW: Pomodoro & Habit Tracker -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- POMODORO -->
+        <section class="bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl relative overflow-hidden flex flex-col min-h-[340px]">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-primary to-brand-info"></div>
+            <div class="flex justify-between items-center mb-4 border-b border-dark-700 pb-4">
+                <h2 class="text-lg font-bold flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Pomodoro
+                </h2>
+                <button id="pomo-settings-btn" class="text-dark-500 hover:text-white transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </button>
+            </div>
             
-            <!-- Pomodoro Section (5 columns) -->
-            <section class="lg:col-span-5 bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl relative overflow-hidden flex flex-col min-h-[340px]">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-primary to-brand-info"></div>
-                <div class="flex justify-between items-center mb-6">
+            <div class="flex flex-col items-center justify-center flex-1 relative">
+                <!-- Settings Panel -->
+                <div id="pomo-settings-panel" class="hidden absolute inset-0 z-20 w-full h-full bg-dark-900/95 backdrop-blur-sm rounded-xl p-4 flex-col justify-center gap-3 border border-dark-700 text-sm">
+                    <h3 class="text-white font-bold mb-2 text-center">Timer Settings</h3>
+                    <div class="flex justify-between items-center px-6">
+                        <label class="text-dark-400 font-medium">Work (min):</label>
+                        <input type="number" id="pomo-work-input" value="25" min="1" class="w-16 bg-dark-800 border border-dark-700 rounded px-2 py-1 text-center text-white focus:outline-none focus:border-brand-primary">
+                    </div>
+                    <div class="flex justify-between items-center px-6">
+                        <label class="text-dark-400 font-medium">Short Break:</label>
+                        <input type="number" id="pomo-short-input" value="5" min="1" class="w-16 bg-dark-800 border border-dark-700 rounded px-2 py-1 text-center text-white focus:outline-none focus:border-brand-primary">
+                    </div>
+                    <div class="flex justify-between items-center px-6">
+                        <label class="text-dark-400 font-medium">Long Break:</label>
+                        <input type="number" id="pomo-long-input" value="15" min="1" class="w-16 bg-dark-800 border border-dark-700 rounded px-2 py-1 text-center text-white focus:outline-none focus:border-brand-primary">
+                    </div>
+                    <button id="pomo-save-settings" class="mx-6 mt-2 bg-brand-primary text-dark-900 font-bold py-2 rounded hover:bg-indigo-400 transition shadow">Save</button>
+                </div>
+
+                <p id="pomo-mode-text" class="text-brand-primary font-bold text-sm mb-1 uppercase tracking-wider">Work Session</p>
+                <p id="pomo-cycle-text" class="text-dark-500 text-xs mb-4 font-medium">Cycle: 1/4</p>
+
+                <div class="ring-container mb-6">
+                    <svg class="ring-svg">
+                        <circle cx="70" cy="70" r="65" fill="none" stroke="#334155" stroke-width="6"/>
+                        <circle id="pomo-ring" cx="70" cy="70" r="65" fill="none" stroke="#818cf8" stroke-width="6" stroke-dasharray="408" stroke-dashoffset="0" stroke-linecap="round" class="ring-circle"/>
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span id="pomo-display" class="text-4xl font-bold tracking-wider text-white">25:00</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 w-full mt-auto">
+                    <button id="pomo-start-btn" class="flex-1 bg-brand-primary text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90">Start</button>
+                    <button id="pomo-skip-btn" class="flex-1 bg-dark-700 hover:bg-dark-600 text-white font-medium py-2.5 rounded-xl transition">Skip</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HABIT TRACKER (SAT - FRI) -->
+        <section class="bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl flex flex-col min-h-[340px]">
+            <div class="flex items-center justify-between border-b border-dark-700 pb-4 mb-4">
+                <div class="flex items-center gap-3">
                     <h2 class="text-lg font-bold flex items-center gap-2">
-                        <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Pomodoro
+                        <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Habit Tracker
                     </h2>
-                    <button id="pomo-settings-btn" class="text-dark-500 hover:text-white transition">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    </button>
+                    <span id="habit-week-range" class="text-xs font-bold text-dark-300 bg-dark-900 px-3 py-1 rounded-full border border-dark-600 shadow-inner"></span>
                 </div>
-                
-                <div class="flex flex-col items-center flex-1 justify-center relative">
-                    <div id="pomo-settings-panel" class="hidden absolute inset-0 z-20 w-full h-full bg-dark-900/95 backdrop-blur-sm rounded-xl p-4 flex-col justify-center gap-3 border border-dark-700 text-sm">
-                        <h3 class="text-white font-bold mb-2 text-center">Timer Settings</h3>
-                        <div class="flex justify-between items-center px-4">
-                            <label class="text-dark-400 font-medium">Work (min):</label>
-                            <input type="number" id="pomo-work-input" value="25" min="1" class="w-16 bg-dark-800 border border-dark-700 rounded px-2 py-1 text-center text-white focus:outline-none focus:border-brand-primary">
-                        </div>
-                        <div class="flex justify-between items-center px-4">
-                            <label class="text-dark-400 font-medium">Short Break:</label>
-                            <input type="number" id="pomo-short-input" value="5" min="1" class="w-16 bg-dark-800 border border-dark-700 rounded px-2 py-1 text-center text-white focus:outline-none focus:border-brand-primary">
-                        </div>
-                        <div class="flex justify-between items-center px-4">
-                            <label class="text-dark-400 font-medium">Long Break:</label>
-                            <input type="number" id="pomo-long-input" value="15" min="1" class="w-16 bg-dark-800 border border-dark-700 rounded px-2 py-1 text-center text-white focus:outline-none focus:border-brand-primary">
-                        </div>
-                        <div class="flex justify-between items-center px-4 mb-2">
-                            <label class="text-dark-400 font-medium">Cycles:</label>
-                            <input type="number" id="pomo-cycles-input" value="4" min="1" class="w-16 bg-dark-800 border border-dark-700 rounded px-2 py-1 text-center text-white focus:outline-none focus:border-brand-primary">
-                        </div>
-                        <button id="pomo-save-settings" class="mx-4 bg-brand-primary text-dark-900 font-bold py-2 rounded hover:bg-indigo-400 transition shadow">Save</button>
-                    </div>
-
-                    <p id="pomo-mode-text" class="text-brand-primary font-bold text-sm mb-1 uppercase tracking-wider">Work Session</p>
-                    <p id="pomo-cycle-text" class="text-dark-500 text-xs mb-4 font-medium">Cycle: 1/4</p>
-
-                    <div class="ring-container mb-6">
-                        <svg class="ring-svg">
-                            <circle cx="70" cy="70" r="65" fill="none" stroke="#334155" stroke-width="6"/>
-                            <circle id="pomo-ring" cx="70" cy="70" r="65" fill="none" stroke="#818cf8" stroke-width="6" stroke-dasharray="408" stroke-dashoffset="0" stroke-linecap="round" class="ring-circle"/>
-                        </svg>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span id="pomo-display" class="text-3xl font-bold tracking-wider text-white">25:00</span>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-3 w-full mt-auto">
-                        <button id="pomo-start-btn" class="flex-1 bg-brand-primary text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90">Start</button>
-                        <button id="pomo-skip-btn" class="flex-1 bg-dark-700 hover:bg-dark-600 text-white font-medium py-2.5 rounded-xl transition">Skip</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Habit Tracker Section (7 columns) -->
-            <section class="lg:col-span-7 bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl relative flex flex-col overflow-hidden min-h-[340px]">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-5 gap-3 border-b border-dark-700 pb-4">
-                    <div class="flex flex-wrap items-center gap-3">
-                        <h2 class="text-lg font-bold flex items-center gap-2">
-                            <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Habit Tracker
-                        </h2>
-                        <span id="habit-week-range" class="text-xs font-bold text-dark-300 bg-dark-900 px-3 py-1 rounded-full border border-dark-600 shadow-inner"></span>
-                    </div>
-                    <button id="toggle-habit-archive-btn" class="text-xs text-dark-400 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900 uppercase tracking-wider whitespace-nowrap">
-                        View Archive
-                    </button>
-                </div>
-                
-                <div id="active-habits-view" class="flex flex-col flex-1 h-full w-full">
-                    <form id="add-habit-form" class="mb-5 flex gap-3">
-                        <input type="text" id="new-habit-input" required placeholder="e.g., Read Quran, Drink Water..." class="flex-1 bg-dark-900 border border-dark-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-brand-success transition text-white">
-                        <button type="submit" class="bg-brand-success text-dark-900 px-5 py-2 rounded-lg text-sm font-bold hover:bg-emerald-400 transition shadow flex-shrink-0">Add Habit</button>
-                    </form>
-
-                    <div class="flex flex-col flex-1 w-full">
-                        <div class="flex justify-end gap-2 text-[11px] text-dark-400 font-bold uppercase w-full pr-[34px] mb-3" id="habit-days-header"></div>
-                        <div id="habits-list" class="space-y-3 flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar pr-2 max-h-[160px] w-full">
-                            <!-- Habits injected here -->
-                        </div>
-                    </div>
-                </div>
-
-                <div id="archive-habits-view" class="hidden flex-col flex-1 h-full">
-                    <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
-                        <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <p class="text-sm text-dark-400">Total days completed for all habits over time.</p>
-                    </div>
-                    <div id="archive-habits-list" class="space-y-2 flex-1 overflow-y-auto custom-scrollbar pr-2 max-h-[160px]">
-                        <!-- Archived stats injected here -->
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- BOTTOM ROW: Tasks & Courses -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <button id="toggle-habit-archive-btn" class="text-xs text-dark-400 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900 uppercase tracking-wider whitespace-nowrap">
+                    View Archive
+                </button>
+            </div>
             
-            <!-- Tasks Section (5 columns) -->
-            <section class="lg:col-span-5 bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl h-[650px] flex flex-col">
-                <div class="flex justify-between items-center border-b border-dark-700 pb-4 mb-6">
-                    <h2 class="text-lg font-bold flex items-center gap-2">
-                        <svg class="w-5 h-5 text-brand-info" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                        Daily Tasks
-                        <span class="text-dark-500 font-normal text-xs ml-2 current-date-tasks uppercase tracking-wider"></span>
-                    </h2>
-                    <button id="toggle-archive-btn" class="text-xs text-dark-400 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900 uppercase tracking-wider">
-                        View Archive
-                    </button>
-                </div>
-
-                <div id="active-tasks-view" class="flex flex-col h-full flex-1 overflow-hidden">
-                    <form id="add-task-form" class="mb-6 bg-dark-900 p-4 rounded-xl border border-dark-700">
-                        <input type="text" id="task-input" required placeholder="What needs to be done today?" class="w-full bg-transparent border-b border-dark-600 pb-2 mb-4 focus:outline-none focus:border-brand-info transition text-sm placeholder-dark-500 text-white">
-                        
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <div class="flex gap-2">
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="task-category" value="must" checked class="peer sr-only">
-                                    <span class="px-3 py-1.5 rounded-lg text-[11px] font-bold border border-dark-600 text-dark-400 peer-checked:bg-brand-danger/20 peer-checked:text-brand-danger peer-checked:border-brand-danger transition whitespace-nowrap">Must Do</span>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="task-category" value="important" class="peer sr-only">
-                                    <span class="px-3 py-1.5 rounded-lg text-[11px] font-bold border border-dark-600 text-dark-400 peer-checked:bg-brand-warning/20 peer-checked:text-brand-warning peer-checked:border-brand-warning transition whitespace-nowrap">Important</span>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="task-category" value="small" class="peer sr-only">
-                                    <span class="px-3 py-1.5 rounded-lg text-[11px] font-bold border border-dark-600 text-dark-400 peer-checked:bg-brand-info/20 peer-checked:text-brand-info peer-checked:border-brand-info transition whitespace-nowrap">Small</span>
-                                </label>
-                            </div>
-                            <button type="submit" class="bg-brand-info text-dark-900 font-bold px-4 py-2 rounded-lg hover:bg-sky-400 transition text-xs">Add</button>
-                        </div>
-                    </form>
-
-                    <div class="flex-1 overflow-y-auto pr-2 space-y-5 custom-scrollbar">
-                        <div>
-                            <h3 class="text-brand-danger font-bold text-xs mb-3 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
-                                <span class="w-2 h-2 rounded-full bg-brand-danger"></span> Must Do 
-                            </h3>
-                            <div id="list-must" class="space-y-2"></div>
-                        </div>
-                        <div>
-                            <h3 class="text-brand-warning font-bold text-xs mb-3 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
-                                <span class="w-2 h-2 rounded-full bg-brand-warning"></span> Important
-                            </h3>
-                            <div id="list-important" class="space-y-2"></div>
-                        </div>
-                        <div>
-                            <h3 class="text-brand-info font-bold text-xs mb-3 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
-                                <span class="w-2 h-2 rounded-full bg-brand-info"></span> Small Tasks
-                            </h3>
-                            <div id="list-small" class="space-y-2"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="archive-tasks-view" class="hidden flex-col h-full flex-1 overflow-hidden">
-                    <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
-                        <svg class="w-5 h-5 text-dark-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-                        <p class="text-sm text-dark-400">Tasks from previous days are moved here automatically.</p>
-                    </div>
-                    <div id="list-archive" class="flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar"></div>
-                </div>
-            </section>
-
-            <!-- Courses Section (7 columns) -->
-            <section class="lg:col-span-7 bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl h-[650px] flex flex-col relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-                
-                <div class="flex items-center justify-between mb-6 relative z-10 border-b border-dark-700 pb-4">
-                    <div class="flex items-center gap-4">
-                        <h2 class="text-lg font-bold flex items-center gap-2">
-                            <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                            Courses Progress
-                        </h2>
-                        <button id="toggle-course-archive-btn" class="text-xs text-dark-400 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900 uppercase tracking-wider">
-                            View Archive
-                        </button>
-                    </div>
-                    <button id="add-course-toggle" class="bg-brand-primary/10 hover:bg-brand-primary/20 text-brand-primary font-bold py-2 px-3 rounded-lg transition border border-brand-primary/30 flex items-center gap-1.5">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                        <span>New</span>
-                    </button>
-                </div>
-
-                <form id="add-course-form" class="hidden mb-6 bg-dark-900 p-5 rounded-xl border border-dark-700 relative z-10 space-y-4 shadow-inner">
-                    <div>
-                        <label class="text-dark-400 text-xs font-bold mb-1 block uppercase">Course Title</label>
-                        <input type="text" id="course-title" required placeholder="e.g. Advanced JavaScript" class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-primary transition text-white">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="text-dark-400 text-xs font-bold mb-1 block uppercase">Start Date</label>
-                            <input type="date" id="course-start" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-primary transition text-white">
-                        </div>
-                        <div>
-                            <label class="text-dark-400 text-xs font-bold mb-1 block uppercase">Expected End</label>
-                            <input type="date" id="course-end" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-primary transition text-white">
-                        </div>
-                    </div>
-                    <button type="submit" class="w-full bg-brand-primary text-dark-900 px-4 py-2.5 rounded-lg text-sm font-bold hover:bg-indigo-400 transition shadow">Create Course Tracker</button>
+            <div id="active-habits-view" class="flex flex-col flex-1 h-full">
+                <form id="add-habit-form" class="mb-4 flex gap-3">
+                    <input type="text" id="new-habit-input" required placeholder="e.g., Read Quran, Workout..." class="flex-1 bg-dark-900 border border-dark-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-brand-success transition text-white min-w-0">
+                    <button type="submit" class="bg-brand-success/90 text-dark-900 px-4 py-2 rounded-lg text-sm font-bold hover:bg-brand-success transition shadow whitespace-nowrap">Add Habit</button>
                 </form>
 
-                <div id="active-courses-view" class="flex flex-col h-full flex-1 overflow-hidden">
-                    <div id="courses-list" class="flex-1 overflow-y-auto space-y-5 relative z-10 pr-2 custom-scrollbar">
-                        <!-- Active courses injected here -->
+                <div class="flex flex-col flex-1 overflow-hidden">
+                    <div class="flex justify-end gap-[6px] text-[10px] sm:text-[11px] text-dark-400 font-bold uppercase w-full pr-[2px] mb-2" id="habit-days-header"></div>
+                    
+                    <div id="habits-list" class="space-y-3 flex-1 overflow-y-auto custom-scrollbar pr-2 max-h-[170px]">
+                        <!-- Habits injected here -->
                     </div>
                 </div>
-
-                <div id="archive-courses-view" class="hidden flex-col h-full flex-1 overflow-hidden">
-                     <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
-                        <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <p class="text-sm text-dark-400">Completed courses (100%) are moved here automatically.</p>
-                    </div>
-                    <div id="archive-courses-list" class="flex-1 overflow-y-auto space-y-5 relative z-10 pr-2 custom-scrollbar">
-                        <!-- Archived courses injected here -->
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Modal for Confirmations -->
-    <div id="custom-modal" class="fixed inset-0 bg-dark-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
-        <div class="bg-dark-800 border border-dark-700 rounded-2xl p-6 shadow-2xl max-w-sm w-full mx-4 transform scale-95 transition-transform duration-300" id="modal-content">
-            <h3 id="modal-title" class="text-xl font-bold text-white mb-2">Confirm Action</h3>
-            <p id="modal-desc" class="text-dark-400 mb-6 text-sm">Are you sure you want to proceed?</p>
-            <div class="flex justify-end gap-3">
-                <button id="modal-cancel" class="px-4 py-2 rounded-lg text-sm font-bold text-dark-400 hover:text-white hover:bg-dark-700 transition">Cancel</button>
-                <button id="modal-confirm" class="px-4 py-2 rounded-lg text-sm font-bold bg-brand-danger text-dark-900 hover:bg-rose-400 transition shadow-lg">Confirm</button>
             </div>
-        </div>
+
+            <div id="archive-habits-view" class="hidden flex-col flex-1 h-full">
+                <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
+                    <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <p class="text-sm text-dark-400">Total lifetime progress for all your habits.</p>
+                </div>
+                <div id="archive-habits-list" class="space-y-2 flex-1 overflow-y-auto custom-scrollbar pr-2 max-h-[170px]"></div>
+            </div>
+        </section>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, doc, addDoc, updateDoc, deleteDoc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    <!-- BOTTOM ROW: Daily Tasks & Courses -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- DAILY TASKS -->
+        <section class="bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl h-[600px] flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-dark-700 pb-4 mb-5 gap-4">
+                <div class="flex items-center gap-3 flex-wrap">
+                    <h2 class="text-lg font-bold flex items-center gap-2">
+                        <svg class="w-5 h-5 text-brand-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        Daily Tasks
+                    </h2>
+                    <span id="tasks-date-display" class="text-xs font-bold text-dark-300 bg-dark-900 px-3 py-1 rounded-full border border-dark-600 shadow-inner tracking-wide"></span>
+                </div>
+                <button id="toggle-archive-btn" class="text-xs text-dark-400 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900 uppercase tracking-wider whitespace-nowrap">
+                    View Archive
+                </button>
+            </div>
 
-        let db, auth, userId;
-        let todos = [], courses = [], habits = [];
+            <div id="active-tasks-view" class="flex flex-col h-full flex-1 overflow-hidden">
+                <form id="add-task-form" class="mb-5 bg-dark-900 p-4 rounded-xl border border-dark-700">
+                    <input type="text" id="task-input" required placeholder="What needs to be done today?" class="w-full bg-transparent border-b border-dark-600 pb-2 mb-4 focus:outline-none focus:border-brand-danger transition text-sm placeholder-dark-500 text-white">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex gap-2 flex-wrap">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="task-category" value="must" checked class="peer sr-only">
+                                <span class="px-3 py-1.5 rounded-lg text-[11px] font-bold border border-dark-600 text-dark-400 peer-checked:bg-brand-danger/20 peer-checked:text-brand-danger peer-checked:border-brand-danger transition whitespace-nowrap">Must Do</span>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="task-category" value="important" class="peer sr-only">
+                                <span class="px-3 py-1.5 rounded-lg text-[11px] font-bold border border-dark-600 text-dark-400 peer-checked:bg-brand-warning/20 peer-checked:text-brand-warning peer-checked:border-brand-warning transition whitespace-nowrap">Important</span>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="task-category" value="small" class="peer sr-only">
+                                <span class="px-3 py-1.5 rounded-lg text-[11px] font-bold border border-dark-600 text-dark-400 peer-checked:bg-brand-info/20 peer-checked:text-brand-info peer-checked:border-brand-info transition whitespace-nowrap">Small</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="bg-brand-danger/90 text-white font-bold px-5 py-2 rounded-lg hover:bg-brand-danger transition text-xs whitespace-nowrap">Add Task</button>
+                    </div>
+                </form>
 
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'prod-dashboard-tracker-final-v7';
-        let firebaseConfig = null;
+                <div class="flex-1 overflow-y-auto pr-2 space-y-5 custom-scrollbar">
+                    <div>
+                        <h3 class="text-brand-danger font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-danger"></span> Must Do
+                        </h3>
+                        <div id="list-must" class="space-y-2"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-brand-warning font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-warning"></span> Important
+                        </h3>
+                        <div id="list-important" class="space-y-2"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-brand-info font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-info"></span> Small Tasks
+                        </h3>
+                        <div id="list-small" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="archive-tasks-view" class="hidden flex-col h-full flex-1 overflow-hidden">
+                <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
+                    <svg class="w-5 h-5 text-dark-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <p class="text-sm text-dark-400">Past tasks automatically move here.</p>
+                </div>
+                <div id="list-archive" class="flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar"></div>
+            </div>
+        </section>
+
+        <!-- COURSES PROGRESS -->
+        <section class="bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl h-[600px] flex flex-col relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-40 h-40 bg-brand-info/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex items-center justify-between border-b border-dark-700 pb-4 mb-5 relative z-10">
+                <div class="flex items-center gap-3">
+                    <h2 class="text-lg font-bold flex items-center gap-2">
+                        <svg class="w-5 h-5 text-brand-info" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Courses Progress
+                    </h2>
+                    <button id="toggle-course-archive-btn" class="text-xs text-dark-400 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900 uppercase tracking-wider">
+                        Archive
+                    </button>
+                </div>
+                <button id="add-course-toggle" class="bg-brand-info/10 hover:bg-brand-info/20 text-brand-info font-bold py-1.5 px-3 rounded-lg transition border border-brand-info/30 flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    <span>New</span>
+                </button>
+            </div>
+
+            <form id="add-course-form" class="hidden mb-5 bg-dark-900 p-4 rounded-xl border border-dark-700 relative z-10 space-y-3 shadow-inner">
+                <div>
+                    <label class="text-dark-400 text-[10px] font-bold mb-1 block uppercase">Course Title</label>
+                    <input type="text" id="course-title" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-info text-white">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-dark-400 text-[10px] font-bold mb-1 block uppercase">Start Date</label>
+                        <input type="date" id="course-start" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-info text-white">
+                    </div>
+                    <div>
+                        <label class="text-dark-400 text-[10px] font-bold mb-1 block uppercase">Expected End</label>
+                        <input type="date" id="course-end" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-info text-white">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-brand-info/90 text-dark-900 px-4 py-2 rounded-lg text-sm font-bold hover:bg-brand-info transition shadow">Create Course</button>
+            </form>
+
+            <div id="active-courses-view" class="flex flex-col h-full flex-1 overflow-hidden">
+                <div id="courses-list" class="flex-1 overflow-y-auto space-y-5 relative z-10 pr-2 custom-scrollbar"></div>
+            </div>
+
+            <div id="archive-courses-view" class="hidden flex-col h-full flex-1 overflow-hidden">
+                 <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
+                    <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <p class="text-sm text-dark-400">Completed courses (100%) move here.</p>
+                </div>
+                <div id="archive-courses-list" class="flex-1 overflow-y-auto space-y-4 relative z-10 pr-2 custom-scrollbar"></div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Delete Confirmation Modal -->
+<div id="custom-modal" class="fixed inset-0 bg-dark-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+    <div class="bg-dark-800 border border-dark-700 rounded-2xl p-6 shadow-2xl max-w-sm w-full mx-4 transform scale-95 transition-transform duration-300" id="modal-content">
+        <h3 id="modal-title" class="text-xl font-bold text-white mb-2">Confirm Action</h3>
+        <p id="modal-desc" class="text-dark-400 mb-6 text-sm">Are you sure you want to proceed?</p>
+        <div class="flex justify-end gap-3">
+            <button id="modal-cancel" class="px-4 py-2 rounded-lg text-sm font-bold text-dark-400 hover:text-white hover:bg-dark-700 transition">Cancel</button>
+            <button id="modal-confirm" class="px-4 py-2 rounded-lg text-sm font-bold bg-brand-danger text-white hover:bg-rose-500 transition shadow-lg">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    // ==== GLOBAL DATA & LOCAL STORAGE ====
+    let todos = [];
+    let courses = [];
+    let habits = [];
+    
+    // Fallback LocalStorage mechanism (ensures data is never lost if Firebase is missing)
+    const saveToLocal = () => {
+        const data = { todos, courses, habits };
+        localStorage.setItem('productivityDashData', JSON.stringify(data));
+    };
+
+    const loadFromLocal = () => {
         try {
-            if (typeof __firebase_config !== 'undefined') {
-                firebaseConfig = typeof __firebase_config === 'string' ? JSON.parse(__firebase_config) : __firebase_config;
+            const data = JSON.parse(localStorage.getItem('productivityDashData'));
+            if(data) {
+                todos = data.todos || [];
+                courses = data.courses || [];
+                habits = data.habits || [];
             }
-        } catch(e) { console.warn("Could not parse firebase config."); }
+        } catch(e) { console.warn("Failed to load local data."); }
+    };
 
-        // Format: Thursday , 01-10-26
-        const formatCustomDate = (date) => {
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const dayName = days[date.getDay()];
-            const dd = String(date.getDate()).padStart(2, '0');
-            const mm = String(date.getMonth() + 1).padStart(2, '0');
-            const yy = String(date.getFullYear()).slice(-2);
-            return `${dayName} , ${dd}-${mm}-${yy}`;
-        };
-        
-        document.getElementById('current-date').textContent = formatCustomDate(new Date());
-        
-        // Add date to Daily Tasks title
-        document.querySelectorAll('.current-date-tasks').forEach(el => {
-            el.textContent = formatCustomDate(new Date());
+    // ==== DATE FORMATTING ====
+    const formatCustomDate = (date) => {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const dayName = days[date.getDay()];
+        const dd = String(date.getDate()).padStart(2, '0');
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const yy = String(date.getFullYear()).slice(-2);
+        return `${dayName} , ${dd}-${mm}-${yy}`;
+    };
+    
+    const getLocalTodayStr = () => {
+        const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+        return d.toISOString().split('T')[0];
+    };
+    const todayStr = getLocalTodayStr();
+    document.getElementById('tasks-date-display').textContent = formatCustomDate(new Date());
+
+    // ==== MODAL LOGIC ====
+    let confirmAction = null;
+    const modal = document.getElementById('custom-modal');
+    const modalContent = document.getElementById('modal-content');
+    
+    const openModal = (title, desc, action) => {
+        document.getElementById('modal-title').textContent = title;
+        document.getElementById('modal-desc').textContent = desc;
+        confirmAction = action;
+        modal.classList.remove('hidden');
+        setTimeout(() => { modal.classList.remove('opacity-0'); modalContent.classList.remove('scale-95'); }, 10);
+    };
+    
+    const closeModal = () => {
+        modal.classList.add('opacity-0'); modalContent.classList.add('scale-95');
+        setTimeout(() => { modal.classList.add('hidden'); confirmAction = null; }, 300);
+    };
+
+    document.getElementById('modal-cancel').addEventListener('click', closeModal);
+    document.getElementById('modal-confirm').addEventListener('click', () => { if(confirmAction) confirmAction(); closeModal(); });
+
+    // ==== VIEW TOGGLES ====
+    const setupToggle = (btnId, activeViewId, archiveViewId, defaultText) => {
+        let showingArchive = false;
+        document.getElementById(btnId).addEventListener('click', (e) => {
+            showingArchive = !showingArchive;
+            e.target.textContent = showingArchive ? "Back to Active" : defaultText;
+            e.target.classList.toggle('bg-dark-700'); e.target.classList.toggle('text-white');
+            document.getElementById(activeViewId).classList.toggle('hidden'); document.getElementById(activeViewId).classList.toggle('flex');
+            document.getElementById(archiveViewId).classList.toggle('hidden'); document.getElementById(archiveViewId).classList.toggle('flex');
         });
+    };
+    setupToggle('toggle-archive-btn', 'active-tasks-view', 'archive-tasks-view', 'View Archive');
+    setupToggle('toggle-course-archive-btn', 'active-courses-view', 'archive-courses-view', 'Archive');
+    setupToggle('toggle-habit-archive-btn', 'active-habits-view', 'archive-habits-view', 'View Archive');
 
-        const getLocalTodayStr = () => {
-            const d = new Date();
-            d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-            return d.toISOString().split('T')[0];
-        };
-        const todayStr = getLocalTodayStr();
+    // ==== POMODORO TIMER ====
+    let pomoInterval; let isPomoRunning = false; let pomoState = 'work'; let currentCycle = 1;
+    const pomoDisplay = document.getElementById('pomo-display');
+    const pomoRing = document.getElementById('pomo-ring');
+    const pomoModeText = document.getElementById('pomo-mode-text');
+    const pomoStartBtn = document.getElementById('pomo-start-btn');
+    
+    let config = { work: 25, short: 5, long: 15, maxCycles: 4 };
+    let pomoTimeLeft = config.work * 60; let currentTotalTime = config.work * 60;
+
+    document.getElementById('pomo-settings-btn').addEventListener('click', () => {
+        const panel = document.getElementById('pomo-settings-panel');
+        panel.classList.toggle('hidden'); panel.classList.toggle('flex');
+    });
+
+    document.getElementById('pomo-save-settings').addEventListener('click', () => {
+        config.work = parseInt(document.getElementById('pomo-work-input').value) || 25;
+        config.short = parseInt(document.getElementById('pomo-short-input').value) || 5;
+        config.long = parseInt(document.getElementById('pomo-long-input').value) || 15;
+        document.getElementById('pomo-settings-panel').classList.add('hidden');
+        resetPomoState('work');
+    });
+
+    const resetPomoState = (state) => {
+        clearInterval(pomoInterval); isPomoRunning = false; pomoState = state;
+        pomoStartBtn.textContent = 'Start'; pomoStartBtn.className = 'flex-1 bg-brand-primary text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90';
         
-        let confirmAction = null;
-        const modal = document.getElementById('custom-modal');
-        const modalContent = document.getElementById('modal-content');
-        
-        const openModal = (title, desc, action) => {
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-desc').textContent = desc;
-            confirmAction = action;
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); modalContent.classList.remove('scale-95'); }, 10);
-        };
-        
-        const closeModal = () => {
-            modal.classList.add('opacity-0'); modalContent.classList.add('scale-95');
-            setTimeout(() => { modal.classList.add('hidden'); confirmAction = null; }, 300);
-        };
-        document.getElementById('modal-cancel').addEventListener('click', closeModal);
-        document.getElementById('modal-confirm').addEventListener('click', () => { if(confirmAction) confirmAction(); closeModal(); });
-
-        const setupToggle = (btnId, activeViewId, archiveViewId, defaultText) => {
-            let showingArchive = false;
-            document.getElementById(btnId).addEventListener('click', (e) => {
-                showingArchive = !showingArchive;
-                e.target.textContent = showingArchive ? "Back to Active" : defaultText;
-                e.target.classList.toggle('bg-dark-700'); e.target.classList.toggle('text-white');
-                document.getElementById(activeViewId).classList.toggle('hidden'); document.getElementById(activeViewId).classList.toggle('flex');
-                document.getElementById(archiveViewId).classList.toggle('hidden'); document.getElementById(archiveViewId).classList.toggle('flex');
-            });
-        };
-        
-        setupToggle('toggle-archive-btn', 'active-tasks-view', 'archive-tasks-view', 'View Archive');
-        setupToggle('toggle-course-archive-btn', 'active-courses-view', 'archive-courses-view', 'View Archive');
-        setupToggle('toggle-habit-archive-btn', 'active-habits-view', 'archive-habits-view', 'View Archive');
-
-        let pomoInterval; let isPomoRunning = false; let pomoState = 'work'; let currentCycle = 1;
-        const pomoDisplay = document.getElementById('pomo-display');
-        const pomoRing = document.getElementById('pomo-ring');
-        const pomoModeText = document.getElementById('pomo-mode-text');
-        const pomoCycleText = document.getElementById('pomo-cycle-text');
-        const pomoStartBtn = document.getElementById('pomo-start-btn');
-        
-        let config = { work: 25, short: 5, long: 15, maxCycles: 4 };
-        let pomoTimeLeft = config.work * 60; let currentTotalTime = config.work * 60;
-
-        document.getElementById('pomo-settings-btn').addEventListener('click', () => {
-            const panel = document.getElementById('pomo-settings-panel');
-            panel.classList.toggle('hidden'); panel.classList.toggle('flex');
-        });
-
-        document.getElementById('pomo-save-settings').addEventListener('click', () => {
-            config.work = parseInt(document.getElementById('pomo-work-input').value) || 25;
-            config.short = parseInt(document.getElementById('pomo-short-input').value) || 5;
-            config.long = parseInt(document.getElementById('pomo-long-input').value) || 15;
-            config.maxCycles = parseInt(document.getElementById('pomo-cycles-input').value) || 4;
-            document.getElementById('pomo-settings-panel').classList.add('hidden'); document.getElementById('pomo-settings-panel').classList.remove('flex');
-            resetPomoState('work');
-        });
-
-        const resetPomoState = (state) => {
-            clearInterval(pomoInterval); isPomoRunning = false; pomoState = state;
-            pomoStartBtn.textContent = 'Start';
-            pomoStartBtn.className = 'flex-1 bg-brand-primary text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90';
-            
-            if(state === 'work') {
-                currentTotalTime = config.work * 60; pomoModeText.textContent = "Work Session";
-                pomoModeText.className = "text-brand-primary font-bold text-sm mb-1 uppercase tracking-wider";
-                pomoRing.setAttribute('stroke', '#818cf8');
-            } else if (state === 'shortBreak') {
-                currentTotalTime = config.short * 60; pomoModeText.textContent = "Short Break";
-                pomoModeText.className = "text-brand-info font-bold text-sm mb-1 uppercase tracking-wider";
-                pomoRing.setAttribute('stroke', '#38bdf8');
-            } else {
-                currentTotalTime = config.long * 60; pomoModeText.textContent = "Long Break";
-                pomoModeText.className = "text-brand-success font-bold text-sm mb-1 uppercase tracking-wider";
-                pomoRing.setAttribute('stroke', '#34d399');
-            }
-            pomoTimeLeft = currentTotalTime; pomoCycleText.textContent = `Cycle: ${currentCycle}/${config.maxCycles}`;
-            updatePomoDisplay();
-        };
-
-        const advancePomoState = () => {
-            if (pomoState === 'work') {
-                if (currentCycle >= config.maxCycles) { currentCycle = 1; resetPomoState('longBreak'); } 
-                else { resetPomoState('shortBreak'); }
-            } else {
-                if(pomoState === 'shortBreak') currentCycle++;
-                resetPomoState('work');
-            }
-        };
-
-        const updatePomoDisplay = () => {
-            const minutes = Math.floor(pomoTimeLeft / 60); const seconds = pomoTimeLeft % 60;
-            pomoDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            const progress = 1 - (pomoTimeLeft / currentTotalTime);
-            pomoRing.style.strokeDashoffset = progress * 408; 
-        };
-
-        pomoStartBtn.addEventListener('click', () => {
-            if (isPomoRunning) {
-                clearInterval(pomoInterval);
-                pomoStartBtn.textContent = 'Resume';
-                pomoStartBtn.className = 'flex-1 bg-brand-warning text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90';
-            } else {
-                pomoInterval = setInterval(() => {
-                    pomoTimeLeft--; updatePomoDisplay();
-                    if (pomoTimeLeft <= 0) advancePomoState();
-                }, 1000);
-                pomoStartBtn.textContent = 'Pause';
-                pomoStartBtn.className = 'flex-1 bg-brand-warning text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90';
-            }
-            isPomoRunning = !isPomoRunning;
-        });
-
-        document.getElementById('pomo-skip-btn').addEventListener('click', advancePomoState);
+        if(state === 'work') {
+            currentTotalTime = config.work * 60;
+            pomoModeText.textContent = "Work Session"; pomoModeText.className = "text-brand-primary font-bold text-sm mb-1 uppercase tracking-wider";
+            pomoRing.setAttribute('stroke', '#818cf8');
+        } else if (state === 'shortBreak') {
+            currentTotalTime = config.short * 60;
+            pomoModeText.textContent = "Short Break"; pomoModeText.className = "text-brand-info font-bold text-sm mb-1 uppercase tracking-wider";
+            pomoRing.setAttribute('stroke', '#38bdf8');
+        } else {
+            currentTotalTime = config.long * 60;
+            pomoModeText.textContent = "Long Break"; pomoModeText.className = "text-brand-success font-bold text-sm mb-1 uppercase tracking-wider";
+            pomoRing.setAttribute('stroke', '#34d399');
+        }
+        pomoTimeLeft = currentTotalTime;
+        document.getElementById('pomo-cycle-text').textContent = `Cycle: ${currentCycle}/${config.maxCycles}`;
         updatePomoDisplay();
+    };
 
-        // Habit Tracker logic (Sat to Fri)
-        const getWeekDates = () => {
-            const now = new Date();
-            const dayOfWeek = now.getDay(); // 0:Sun, 1:Mon, 2:Tue, 3:Wed, 4:Thu, 5:Fri, 6:Sat
-            // Diff to get back to Saturday.
-            let diffToSaturday = dayOfWeek === 6 ? 0 : -(dayOfWeek + 1);
-            
-            const saturday = new Date(now);
-            saturday.setDate(now.getDate() + diffToSaturday);
-            
-            const dates = [];
-            for(let i = 0; i < 7; i++) {
-                const d = new Date(saturday);
-                d.setDate(saturday.getDate() + i);
-                dates.push(d.toISOString().split('T')[0]);
-            }
-            
-            const endFriday = new Date(saturday);
-            endFriday.setDate(saturday.getDate() + 6);
-            
-            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            let dateRangeStr = '';
-            if (saturday.getMonth() === endFriday.getMonth()) {
-                dateRangeStr = `(${saturday.getDate()}-${endFriday.getDate()}) ${monthNames[saturday.getMonth()]}`;
-            } else {
-                dateRangeStr = `${saturday.getDate()} ${monthNames[saturday.getMonth()]} - ${endFriday.getDate()} ${monthNames[endFriday.getMonth()]}`;
-            }
+    const advancePomoState = () => {
+        if (pomoState === 'work') {
+            if (currentCycle >= config.maxCycles) { currentCycle = 1; resetPomoState('longBreak'); } else { resetPomoState('shortBreak'); }
+        } else {
+            if(pomoState === 'shortBreak') currentCycle++;
+            resetPomoState('work');
+        }
+    };
 
-            return { dates, labels: ['S', 'S', 'M', 'T', 'W', 'T', 'F'], dateRangeStr };
-        };
+    const updatePomoDisplay = () => {
+        const minutes = Math.floor(pomoTimeLeft / 60); const seconds = pomoTimeLeft % 60;
+        pomoDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        pomoRing.style.strokeDashoffset = (1 - (pomoTimeLeft / currentTotalTime)) * 408; 
+    };
 
-        const currentWeekInfo = getWeekDates();
-        const currentWeekDates = currentWeekInfo.dates;
-        document.getElementById('habit-week-range').textContent = currentWeekInfo.dateRangeStr;
+    pomoStartBtn.addEventListener('click', () => {
+        if (isPomoRunning) {
+            clearInterval(pomoInterval); pomoStartBtn.textContent = 'Resume';
+            pomoStartBtn.className = 'flex-1 bg-brand-warning text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90';
+        } else {
+            pomoInterval = setInterval(() => { pomoTimeLeft--; updatePomoDisplay(); if (pomoTimeLeft <= 0) advancePomoState(); }, 1000);
+            pomoStartBtn.textContent = 'Pause';
+            pomoStartBtn.className = 'flex-1 bg-brand-warning text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90';
+        }
+        isPomoRunning = !isPomoRunning;
+    });
+    document.getElementById('pomo-skip-btn').addEventListener('click', advancePomoState);
+    updatePomoDisplay();
 
-        const renderHabits = () => {
-            const list = document.getElementById('habits-list');
-            const archiveList = document.getElementById('archive-habits-list');
-            const header = document.getElementById('habit-days-header');
+    // ==== HABIT TRACKER (Saturday to Friday) ====
+    const getWeekDates = () => {
+        const now = new Date();
+        const dayOfWeek = now.getDay(); // 0:Sun, 1:Mon, 2:Tue, 3:Wed, 4:Thu, 5:Fri, 6:Sat
+        const diffToSaturday = (dayOfWeek === 6) ? 0 : -(dayOfWeek + 1); // Go back to Saturday
+        
+        const saturday = new Date(now); saturday.setDate(now.getDate() + diffToSaturday);
+        const dates = [];
+        for(let i = 0; i < 7; i++) {
+            const d = new Date(saturday); d.setDate(saturday.getDate() + i);
+            dates.push(d.toISOString().split('T')[0]);
+        }
+        
+        const endFriday = new Date(saturday); endFriday.setDate(saturday.getDate() + 6);
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let dateRangeStr = (saturday.getMonth() === endFriday.getMonth()) 
+            ? `(${saturday.getDate()}-${endFriday.getDate()}) ${monthNames[saturday.getMonth()]}`
+            : `${saturday.getDate()} ${monthNames[saturday.getMonth()]} - ${endFriday.getDate()} ${monthNames[endFriday.getMonth()]}`;
+
+        return { dates, labels: ['S', 'S', 'M', 'T', 'W', 'T', 'F'], dateRangeStr };
+    };
+
+    const currentWeekInfo = getWeekDates();
+    document.getElementById('habit-week-range').textContent = currentWeekInfo.dateRangeStr;
+
+    const renderHabits = () => {
+        const list = document.getElementById('habits-list');
+        const archiveList = document.getElementById('archive-habits-list');
+        const header = document.getElementById('habit-days-header');
+        
+        header.innerHTML = '';
+        currentWeekInfo.labels.forEach(lbl => {
+            const span = document.createElement('span');
+            span.className = "w-[24px] sm:w-[28px] text-center inline-block text-dark-500 font-bold";
+            span.textContent = lbl; header.appendChild(span);
+        });
+
+        list.innerHTML = ''; archiveList.innerHTML = '';
+        if(habits.length === 0) list.innerHTML = `<p class="text-xs text-dark-500 italic text-center py-4">No habits tracked yet.</p>`;
+
+        habits.forEach(habit => {
+            // Active View
+            const item = document.createElement('div');
+            item.className = 'group flex items-center justify-between bg-dark-900/60 p-2.5 sm:p-3 rounded-xl border border-dark-700 hover:border-dark-600 transition gap-2';
             
-            header.innerHTML = '';
-            currentWeekInfo.labels.forEach(lbl => {
-                const span = document.createElement('span'); span.className = "w-[26px] text-center inline-block"; span.textContent = lbl; header.appendChild(span);
-            });
-
-            list.innerHTML = ''; archiveList.innerHTML = '';
-            
-            if(habits.length === 0) {
-                list.innerHTML = `<p class="text-xs text-dark-500 italic text-center py-4 w-full">No habits tracked yet.</p>`;
-                archiveList.innerHTML = `<p class="text-xs text-dark-500 italic text-center py-4 w-full">Archive is empty.</p>`;
-                return;
-            }
-
-            habits.forEach(habit => {
-                // Active View rendering (Current Week)
-                const item = document.createElement('div');
-                item.className = 'group flex items-center bg-dark-900/80 p-3 rounded-xl border border-dark-700 hover:border-dark-600 transition gap-3 w-full';
-                
-                let html = `
-                    <button class="delete-habit-btn text-dark-600 hover:text-brand-danger opacity-0 group-hover:opacity-100 transition focus:opacity-100 p-1 flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            let html = `
+                <div class="flex items-center gap-2 min-w-0 flex-1">
+                    <button class="delete-habit-btn text-dark-600 hover:text-brand-danger opacity-0 group-hover:opacity-100 transition p-1 flex-shrink-0">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </button>
-                    <span class="text-sm text-white font-medium flex-1 break-words whitespace-normal pr-2">${habit.title}</span>
-                    <div class="flex justify-end gap-2 flex-shrink-0">
-                `;
-                
-                currentWeekDates.forEach(dateStr => {
-                    const isDone = (habit.completedDates || []).includes(dateStr);
-                    const isFuture = dateStr > todayStr;
-                    const circleClass = isDone 
-                        ? 'bg-brand-success border-brand-success text-dark-900 shadow-sm' 
-                        : `bg-dark-800 border-dark-600 hover:border-dark-500 ${isFuture ? 'opacity-40 cursor-default' : 'cursor-pointer hover:bg-dark-700'}`;
-                    const svgIcon = isDone ? '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>' : '';
-                    
-                    html += `<button class="habit-circle w-[26px] h-[26px] rounded-full border ${circleClass} flex justify-center items-center transition-all flex-shrink-0" data-date="${dateStr}" ${isFuture ? 'disabled' : ''}>${svgIcon}</button>`;
-                });
-                html += `</div>`;
-                item.innerHTML = html;
-
-                item.querySelectorAll('.habit-circle:not([disabled])').forEach(btn => {
-                    btn.addEventListener('click', async (e) => {
-                        const date = e.currentTarget.dataset.date;
-                        let completed = [...(habit.completedDates || [])];
-                        if(completed.includes(date)) completed = completed.filter(d => d !== date);
-                        else completed.push(date);
-
-                        if(db && userId) {
-                            try { await updateDoc(doc(db, 'artifacts', appId, 'users', userId, 'habits', habit.id), { completedDates: completed }); } 
-                            catch(err) { console.error(err); }
-                        } else { habit.completedDates = completed; renderHabits(); }
-                    });
-                });
-
-                item.querySelector('.delete-habit-btn').addEventListener('click', () => {
-                    openModal('Delete Habit', `Remove "${habit.title}" forever?`, async () => {
-                        if(db && userId) await deleteDoc(doc(db, 'artifacts', appId, 'users', userId, 'habits', habit.id));
-                        else { habits = habits.filter(h => h.id !== habit.id); renderHabits(); }
-                    });
-                });
-                list.appendChild(item);
-
-                // Archive View rendering
-                const totalCompleted = (habit.completedDates || []).length;
-                const archiveItem = document.createElement('div');
-                archiveItem.className = 'flex items-center justify-between bg-dark-900/80 p-3 rounded-xl border border-dark-700';
-                archiveItem.innerHTML = `
-                    <span class="text-sm text-white font-medium break-words">${habit.title}</span>
-                    <span class="text-xs font-bold bg-brand-success/20 text-brand-success px-3 py-1 rounded-lg border border-brand-success/30 whitespace-nowrap">${totalCompleted} Days Total</span>
-                `;
-                archiveList.appendChild(archiveItem);
-            });
-        };
-
-        document.getElementById('add-habit-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const input = document.getElementById('new-habit-input');
-            if(!input.value.trim()) return;
-            const newHabit = { title: input.value.trim(), completedDates: [], createdAt: db ? serverTimestamp() : Date.now() };
-            try {
-                if(db && userId) await addDoc(collection(db, 'artifacts', appId, 'users', userId, 'habits'), newHabit);
-                else { newHabit.id = Date.now().toString(); habits.unshift(newHabit); renderHabits(); }
-                input.value = '';
-            } catch(err) { console.error(err); }
-        });
-
-
-        // Course Section Logic
-        document.getElementById('add-course-toggle').addEventListener('click', () => {
-            document.getElementById('add-course-form').classList.toggle('hidden');
-        });
-
-        document.getElementById('add-course-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const titleInput = document.getElementById('course-title');
-            const startInput = document.getElementById('course-start');
-            const endInput = document.getElementById('course-end');
+                    <span class="text-[13px] text-white font-medium break-words leading-tight">${habit.title}</span>
+                </div>
+                <div class="flex justify-end gap-[6px] flex-shrink-0">
+            `;
             
-            const newCourse = { title: titleInput.value.trim(), startDate: startInput.value, endDate: endInput.value, lessons: [], createdAt: db ? serverTimestamp() : Date.now() };
-            try {
-                if(db && userId) await addDoc(collection(db, 'artifacts', appId, 'users', userId, 'courses'), newCourse);
-                else { newCourse.id = Date.now().toString(); courses.unshift(newCourse); renderCourses(); }
-                e.target.reset(); e.target.classList.add('hidden');
-            } catch(err) { console.error(err); }
+            currentWeekInfo.dates.forEach(dateStr => {
+                const isDone = (habit.completedDates || []).includes(dateStr);
+                const isFuture = dateStr > todayStr;
+                const circleClass = isDone 
+                    ? 'bg-brand-success border-brand-success text-dark-900' 
+                    : `bg-dark-800 border-dark-600 ${isFuture ? 'opacity-30 cursor-default' : 'cursor-pointer hover:border-brand-success/50'}`;
+                const svgIcon = isDone ? '<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>' : '';
+                
+                html += `<button class="habit-circle w-[24px] h-[24px] sm:w-[28px] sm:h-[28px] rounded-full border ${circleClass} flex justify-center items-center transition-colors flex-shrink-0" data-date="${dateStr}" ${isFuture ? 'disabled' : ''}>${svgIcon}</button>`;
+            });
+            html += `</div>`;
+            item.innerHTML = html;
+
+            item.querySelectorAll('.habit-circle:not([disabled])').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const date = e.currentTarget.dataset.date;
+                    let completed = [...(habit.completedDates || [])];
+                    if(completed.includes(date)) completed = completed.filter(d => d !== date); else completed.push(date);
+                    habit.completedDates = completed; saveToLocal(); renderHabits();
+                });
+            });
+
+            item.querySelector('.delete-habit-btn').addEventListener('click', () => {
+                openModal('Delete Habit', `Remove "${habit.title}"?`, () => { habits = habits.filter(h => h.id !== habit.id); saveToLocal(); renderHabits(); });
+            });
+            list.appendChild(item);
+
+            // Archive View
+            const total = (habit.completedDates || []).length;
+            const arch = document.createElement('div');
+            arch.className = 'flex items-center justify-between bg-dark-900/60 p-3 rounded-xl border border-dark-700';
+            arch.innerHTML = `<span class="text-sm text-white font-medium">${habit.title}</span><span class="text-xs font-bold bg-brand-success/20 text-brand-success px-3 py-1 rounded-lg">${total} Days Total</span>`;
+            archiveList.appendChild(arch);
         });
+    };
 
-        const renderCourses = () => {
-            const activeList = document.getElementById('courses-list');
-            const archiveList = document.getElementById('archive-courses-list');
-            activeList.innerHTML = ''; archiveList.innerHTML = '';
-            let activeCount = 0; let archiveCount = 0;
+    document.getElementById('add-habit-form').addEventListener('submit', (e) => {
+        e.preventDefault(); const input = document.getElementById('new-habit-input');
+        if(!input.value.trim()) return;
+        habits.unshift({ id: Date.now().toString(), title: input.value.trim(), completedDates: [], createdAt: Date.now() });
+        input.value = ''; saveToLocal(); renderHabits();
+    });
 
-            courses.forEach(course => {
-                const lessons = course.lessons || [];
-                let totalDuration = 0; let totalProgress = 0; let lessonsHtmlStr = '';
+    // ==== COURSES TRACKER ====
+    document.getElementById('add-course-toggle').addEventListener('click', () => document.getElementById('add-course-form').classList.toggle('hidden'));
 
-                lessons.forEach((lesson, idx) => {
-                    const prog = Number(lesson.progress) || 0;
-                    const dur = Number(lesson.duration) || 1;
-                    const targetDays = Number(lesson.targetDays) || 0;
-                    
-                    totalDuration += dur; totalProgress += prog;
+    document.getElementById('add-course-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        courses.unshift({ 
+            id: Date.now().toString(), 
+            title: document.getElementById('course-title').value.trim(), 
+            startDate: document.getElementById('course-start').value, 
+            endDate: document.getElementById('course-end').value, 
+            lessons: [], createdAt: Date.now() 
+        });
+        e.target.reset(); e.target.classList.add('hidden'); saveToLocal(); renderCourses();
+    });
 
-                    const isComplete = prog >= dur;
-                    const progPercent = Math.min(100, Math.round((prog / dur) * 100));
-                    const barColor = isComplete ? 'bg-brand-success' : 'bg-brand-info';
-                    
-                    let daysBadge = targetDays > 0 ? `<div class="text-[11px] font-bold text-dark-400 bg-dark-800 px-2.5 py-1 rounded-md border border-dark-600 flex items-center gap-1.5 shadow-inner">Days: <span class="text-white">${targetDays}</span></div>` : '';
+    const renderCourses = () => {
+        const activeList = document.getElementById('courses-list'); const archiveList = document.getElementById('archive-courses-list');
+        activeList.innerHTML = ''; archiveList.innerHTML = '';
+        let activeCount = 0; let archiveCount = 0;
 
-                    lessonsHtmlStr += `
-                        <div class="flex flex-col gap-2.5 bg-dark-900/60 p-4 rounded-xl border border-dark-700/50 shadow-sm relative">
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <div class="flex items-center gap-3 min-w-0 flex-1">
-                                    <span class="font-bold text-sm text-white break-words">${lesson.title}</span>
-                                </div>
-                                
-                                <div class="flex items-center gap-3 flex-shrink-0">
-                                    ${daysBadge}
-                                    <div class="flex items-center bg-dark-900 border border-dark-600 rounded-lg overflow-hidden flex-shrink-0 focus-within:border-brand-primary transition-colors h-8 shadow-inner">
-                                        <input type="number" class="lesson-progress-input w-[60px] h-full bg-transparent border-r border-dark-700 text-center text-brand-info font-bold text-sm focus:outline-none focus:bg-dark-800" 
-                                            value="${prog}" min="0" max="${dur}" data-course-id="${course.id}" data-lesson-idx="${idx}">
-                                        <span class="text-dark-400 px-3 font-medium text-xs">/ ${dur} m</span>
-                                    </div>
-                                </div>
+        courses.forEach(course => {
+            const lessons = course.lessons || [];
+            let totalDuration = 0; let totalProgress = 0; let lessonsHtml = '';
+
+            lessons.forEach((lesson, idx) => {
+                const prog = Number(lesson.progress) || 0; const dur = Number(lesson.duration) || 1; const days = Number(lesson.targetDays) || 0;
+                totalDuration += dur; totalProgress += prog;
+                const progPercent = Math.min(100, Math.round((prog / dur) * 100));
+                
+                const daysBadge = days > 0 ? `<span class="bg-dark-700/60 text-brand-info text-[10px] font-bold px-2 py-0.5 rounded border border-dark-600">Target: ${days} Days</span>` : '';
+
+                lessonsHtml += `
+                    <div class="flex flex-col gap-2.5 bg-dark-900/60 p-3.5 rounded-xl border border-dark-700/50 shadow-sm lesson-block">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="font-bold text-[13px] text-white">${lesson.title}</span>
+                                ${daysBadge}
                             </div>
-                            <div class="w-full bg-dark-900 rounded-full h-1.5 mt-1 overflow-hidden">
-                                <div class="lesson-progress-bar ${barColor} h-1.5 rounded-full transition-all duration-300 ease-out" style="width: ${progPercent}%"></div>
+                            <div class="flex items-center bg-dark-900 border border-dark-600 rounded-lg overflow-hidden flex-shrink-0 focus-within:border-brand-info transition-colors">
+                                <input type="number" class="lesson-progress-input w-16 bg-transparent border-r border-dark-700 text-center text-brand-info font-bold text-sm focus:outline-none focus:bg-dark-800 py-1.5" 
+                                    value="${prog}" min="0" max="${dur}" data-idx="${idx}">
+                                <span class="text-dark-400 px-3 font-medium text-xs">/ ${dur} m</span>
                             </div>
                         </div>
-                    `;
-                });
-                
-                const percent = totalDuration > 0 ? Math.round((totalProgress / totalDuration) * 100) : 0;
-                const isCourseComplete = percent >= 100 && totalDuration > 0;
-                
-                const item = document.createElement('div');
-                item.className = 'bg-dark-800/50 p-5 rounded-2xl border border-dark-700 relative transition hover:border-dark-600';
-                
-                item.innerHTML = `
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-base text-white pr-6">${course.title}</h3>
-                        <span class="text-xs font-bold text-dark-900 ${isCourseComplete ? 'bg-brand-success' : 'bg-brand-primary'} px-2.5 py-1 rounded-md shadow-sm flex-shrink-0">${percent}%</span>
-                    </div>
-                    <div class="text-xs text-dark-500 mb-4 flex gap-4 font-medium">
-                        <span>Start: <span class="text-dark-400">${course.startDate || 'N/A'}</span></span>
-                        <span>End: <span class="text-dark-400">${course.endDate || 'N/A'}</span></span>
-                    </div>
-                    
-                    <div class="w-full bg-dark-900 rounded-full h-2 mb-2 border border-dark-700 overflow-hidden shadow-inner">
-                        <div class="course-main-progress ${isCourseComplete ? 'bg-brand-success' : 'bg-gradient-to-r from-brand-primary to-brand-info'} h-2 rounded-full transition-all duration-500 ease-out" style="width: ${percent}%"></div>
-                    </div>
-                    
-                    <div class="flex justify-between items-center mb-5">
-                        <span class="course-main-text text-[11px] text-dark-400 font-bold uppercase tracking-wide">${totalProgress} / ${totalDuration} Minutes Completed</span>
-                        <button class="delete-course-btn text-dark-600 hover:text-brand-danger transition p-1.5 bg-dark-900 hover:bg-dark-800 rounded-lg border border-dark-700">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                        </button>
-                    </div>
-
-                    <div class="space-y-3 max-h-60 overflow-y-auto pr-1 custom-scrollbar">${lessonsHtmlStr}</div>
-
-                    ${isCourseComplete ? '' : `
-                    <form class="add-lesson-form flex flex-col sm:flex-row gap-3 mt-5 pt-5 border-t border-dark-700 w-full">
-                        <input type="text" required placeholder="Lesson title..." class="w-full sm:flex-[2] bg-dark-900 border border-dark-700 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-brand-primary text-white transition">
-                        <div class="flex gap-2 w-full sm:w-auto">
-                            <div class="relative flex-1 sm:w-[100px]">
-                                <input type="number" required placeholder="Mins" min="1" class="w-full bg-dark-900 border border-dark-700 rounded-lg pl-3 pr-7 py-2.5 text-sm focus:outline-none focus:border-brand-primary text-white transition">
-                                <span class="absolute right-3 top-3 text-xs text-dark-500">m</span>
-                            </div>
-                            <div class="relative flex-1 sm:w-[100px]">
-                                <input type="number" placeholder="Days" min="1" class="w-full bg-dark-900 border border-dark-700 rounded-lg pl-3 pr-7 py-2.5 text-sm focus:outline-none focus:border-brand-primary text-white transition">
-                                <span class="absolute right-3 top-3 text-xs text-dark-500">d</span>
-                            </div>
-                            <button type="submit" class="bg-brand-primary/10 hover:bg-brand-primary/20 text-brand-primary border border-brand-primary/30 px-4 py-2.5 rounded-lg text-sm font-bold transition flex items-center justify-center gap-1.5 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                                Add
-                            </button>
+                        <div class="w-full bg-dark-900 rounded-full h-1.5 overflow-hidden">
+                            <div class="lesson-bar ${progPercent >= 100 ? 'bg-brand-success' : 'bg-brand-info'} h-1.5 rounded-full transition-all duration-300 ease-out" style="width: ${progPercent}%"></div>
                         </div>
-                    </form>
-                    `}
+                    </div>
                 `;
-
-                // Handle instant progress bar updates and db saving
-                item.querySelectorAll('.lesson-progress-input').forEach(inputEl => {
-                    
-                    const saveProgress = async (e) => {
-                        const idx = parseInt(e.target.dataset.lessonIdx);
-                        let newVal = parseInt(e.target.value) || 0;
-                        const maxVal = parseInt(e.target.getAttribute('max'));
-                        if(newVal < 0) newVal = 0; if(newVal > maxVal) newVal = maxVal;
-                        e.target.value = newVal;
-
-                        const updatedLessons = JSON.parse(JSON.stringify(course.lessons));
-                        updatedLessons[idx].progress = newVal;
-
-                        if(db && userId) {
-                            try { await updateDoc(doc(db, 'artifacts', appId, 'users', userId, 'courses', course.id), { lessons: updatedLessons }); } 
-                            catch(err) { console.error(err); }
-                        } else { course.lessons = updatedLessons; renderCourses(); }
-                    };
-
-                    inputEl.addEventListener('input', (e) => {
-                        let newVal = parseInt(e.target.value) || 0;
-                        const maxVal = parseInt(e.target.getAttribute('max'));
-                        if(newVal > maxVal) newVal = maxVal;
-                        
-                        const lessonContainer = e.target.closest('.flex-col.gap-2\\.5');
-                        const progressBar = lessonContainer.querySelector('.lesson-progress-bar');
-                        if (progressBar) {
-                            const progPercent = Math.min(100, Math.round((newVal / maxVal) * 100));
-                            progressBar.style.width = `${progPercent}%`;
-                            progressBar.className = `lesson-progress-bar ${progPercent >= 100 ? 'bg-brand-success' : 'bg-brand-info'} h-1.5 rounded-full transition-all duration-300 ease-out`;
-                        }
-                    });
-
-                    inputEl.addEventListener('change', saveProgress);
-                    inputEl.addEventListener('blur', saveProgress);
-                });
-
-                const addForm = item.querySelector('.add-lesson-form');
-                if (addForm) {
-                    addForm.addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        const inputs = e.target.querySelectorAll('input');
-                        const title = inputs[0].value.trim(); const duration = parseInt(inputs[1].value); const targetDays = parseInt(inputs[2].value) || 0;
-                        if(!title || !duration) return;
-
-                        const newLesson = { title, duration, targetDays, progress: 0 };
-                        const updatedLessons = [...(course.lessons || []), newLesson];
-
-                        if(db && userId) {
-                            try { await updateDoc(doc(db, 'artifacts', appId, 'users', userId, 'courses', course.id), { lessons: updatedLessons }); } 
-                            catch(err) { console.error(err); }
-                        } else { course.lessons = updatedLessons; renderCourses(); }
-                    });
-                }
-
-                item.querySelector('.delete-course-btn').addEventListener('click', () => {
-                    openModal('Delete Course', `Remove "${course.title}"?`, async () => {
-                        if(db && userId) await deleteDoc(doc(db, 'artifacts', appId, 'users', userId, 'courses', course.id));
-                        else { courses = courses.filter(c => c.id !== course.id); renderCourses(); }
-                    });
-                });
-
-                if (isCourseComplete) { archiveList.appendChild(item); archiveCount++; } 
-                else { activeList.appendChild(item); activeCount++; }
             });
             
-            if(activeCount === 0) activeList.innerHTML = `<div class="text-center p-6"><p class="text-sm text-dark-500">No active courses. Add one above!</p></div>`;
-            if(archiveCount === 0) archiveList.innerHTML = `<div class="text-center p-6"><p class="text-sm text-dark-500">Archive is empty.</p></div>`;
-        };
-
-        // Task Logic
-        document.getElementById('add-task-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const input = document.getElementById('task-input');
-            const category = document.querySelector('input[name="task-category"]:checked').value;
-            if(!input.value.trim()) return;
-
-            const newTask = { text: input.value.trim(), category, completed: false, dateStr: todayStr, createdAt: db ? serverTimestamp() : Date.now() };
-            try {
-                if(db && userId) await addDoc(collection(db, 'artifacts', appId, 'users', userId, 'todos'), newTask);
-                else { newTask.id = Date.now().toString(); todos.unshift(newTask); renderTodos(); }
-                input.value = '';
-            } catch(err) { console.error(err); } 
-        });
-
-        const renderTodos = () => {
-            const lists = { must: document.getElementById('list-must'), important: document.getElementById('list-important'), small: document.getElementById('list-small'), archive: document.getElementById('list-archive') };
-            Object.values(lists).forEach(l => l.innerHTML = '');
-            let counts = { must:0, important:0, small:0, archive:0 };
-
-            todos.forEach(task => {
-                const isArchive = task.dateStr && task.dateStr < todayStr;
-                const item = document.createElement('div');
-                item.className = 'group flex items-start gap-3 p-3 bg-dark-900/80 rounded-xl border border-dark-700 transition hover:border-dark-600';
-                
-                let dateBadge = isArchive ? `<span class="text-[10px] bg-dark-800 text-dark-400 font-medium px-2 py-0.5 rounded mt-1 inline-block">${task.dateStr}</span>` : '';
-
-                item.innerHTML = `
-                    <input type="checkbox" class="custom-checkbox mt-0.5 flex-shrink-0" ${task.completed ? 'checked' : ''}>
-                    <div class="flex-1 flex flex-col min-w-0">
-                        <span class="text-sm break-words transition-colors duration-200 ${task.completed ? 'strike-through' : 'text-white'}">${task.text}</span>
-                        ${dateBadge}
-                    </div>
-                    <button class="delete-task-btn text-dark-600 hover:text-brand-danger opacity-0 group-hover:opacity-100 transition focus:opacity-100 p-1 flex-shrink-0">
+            const percent = totalDuration > 0 ? Math.round((totalProgress / totalDuration) * 100) : 0;
+            const isCourseComplete = percent >= 100 && totalDuration > 0;
+            
+            const item = document.createElement('div');
+            item.className = 'bg-dark-800/50 p-5 rounded-2xl border border-dark-700 transition hover:border-dark-600';
+            item.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-base text-white pr-6">${course.title}</h3>
+                    <span class="text-xs font-bold text-dark-900 ${isCourseComplete ? 'bg-brand-success' : 'bg-brand-info'} px-2.5 py-1 rounded-md shadow-sm course-percent">${percent}%</span>
+                </div>
+                <div class="text-[11px] text-dark-500 mb-4 flex gap-4 font-medium uppercase tracking-wider">
+                    <span>Start: <span class="text-dark-400">${course.startDate}</span></span>
+                    <span>End: <span class="text-dark-400">${course.endDate}</span></span>
+                </div>
+                <div class="w-full bg-dark-900 rounded-full h-2 mb-2 border border-dark-700 overflow-hidden shadow-inner">
+                    <div class="course-bar ${isCourseComplete ? 'bg-brand-success' : 'bg-gradient-to-r from-brand-primary to-brand-info'} h-2 rounded-full transition-all duration-500 ease-out" style="width: ${percent}%"></div>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[11px] text-dark-400 font-bold uppercase tracking-wide course-text">${totalProgress} / ${totalDuration} Minutes Completed</span>
+                    <button class="delete-course-btn text-dark-600 hover:text-brand-danger transition p-1 bg-dark-900 rounded-md border border-dark-700">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </button>
-                `;
+                </div>
+                <div class="space-y-3 max-h-56 overflow-y-auto pr-1 custom-scrollbar">${lessonsHtml}</div>
+                ${isCourseComplete ? '' : `
+                <form class="add-lesson-form flex flex-wrap sm:flex-nowrap gap-2 mt-4 pt-4 border-t border-dark-700">
+                    <input type="text" required placeholder="Lesson title..." class="flex-[2] min-w-[120px] bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-info text-white">
+                    <div class="relative flex-1 min-w-[70px]">
+                        <input type="number" required placeholder="Mins" min="1" class="w-full bg-dark-900 border border-dark-700 rounded-lg pl-2 pr-6 py-2 text-xs focus:outline-none focus:border-brand-info text-white">
+                        <span class="absolute right-2 top-2 text-[10px] text-dark-500 font-bold">m</span>
+                    </div>
+                    <div class="relative flex-1 min-w-[70px]">
+                        <input type="number" placeholder="Days" min="1" class="w-full bg-dark-900 border border-dark-700 rounded-lg pl-2 pr-6 py-2 text-xs focus:outline-none focus:border-brand-info text-white">
+                        <span class="absolute right-2 top-2 text-[10px] text-dark-500 font-bold">d</span>
+                    </div>
+                    <button type="submit" class="bg-brand-info/10 text-brand-info border border-brand-info/30 px-3 py-2 rounded-lg text-xs font-bold transition hover:bg-brand-info hover:text-dark-900">Add</button>
+                </form>`}
+            `;
 
-                item.querySelector('input[type="checkbox"]').addEventListener('change', async (e) => {
-                    const isChecked = e.target.checked;
-                    if(db && userId) {
-                        try { await updateDoc(doc(db, 'artifacts', appId, 'users', userId, 'todos', task.id), { completed: isChecked }); }
-                        catch(err) { e.target.checked = !isChecked; console.error(err); }
-                    } else { task.completed = isChecked; renderTodos(); }
+            // Instant visual & data update
+            item.querySelectorAll('.lesson-progress-input').forEach(inputEl => {
+                inputEl.addEventListener('input', (e) => {
+                    let val = parseInt(e.target.value) || 0; const max = parseInt(e.target.getAttribute('max'));
+                    if(val > max) { val = max; e.target.value = max; }
+                    
+                    const block = e.target.closest('.lesson-block');
+                    const bar = block.querySelector('.lesson-bar');
+                    const progP = Math.min(100, Math.round((val / max) * 100));
+                    bar.style.width = `${progP}%`;
+                    bar.className = `lesson-bar ${progP >= 100 ? 'bg-brand-success' : 'bg-brand-info'} h-1.5 rounded-full transition-all duration-300 ease-out`;
+
+                    course.lessons[e.target.dataset.idx].progress = val;
+                    saveToLocal(); // Save instantly while typing
+                    
+                    // Update main course bar visually instantly
+                    let newTotal = 0; course.lessons.forEach(l => newTotal += Number(l.progress));
+                    const newPerc = totalDuration > 0 ? Math.round((newTotal / totalDuration) * 100) : 0;
+                    item.querySelector('.course-bar').style.width = `${newPerc}%`;
+                    item.querySelector('.course-percent').textContent = `${newPerc}%`;
+                    item.querySelector('.course-text').textContent = `${newTotal} / ${totalDuration} Minutes Completed`;
+                    
+                    if (newPerc >= 100) setTimeout(renderCourses, 800); // Re-render to move to archive
                 });
-
-                item.querySelector('.delete-task-btn').addEventListener('click', () => {
-                    openModal('Delete Task', `Remove "${task.text}"?`, async () => {
-                        if(db && userId) await deleteDoc(doc(db, 'artifacts', appId, 'users', userId, 'todos', task.id));
-                        else { todos = todos.filter(t => t.id !== task.id); renderTodos(); }
-                    });
-                });
-
-                if(isArchive) { lists.archive.appendChild(item); counts.archive++; }
-                else { lists[task.category].appendChild(item); counts[task.category]++; }
-            });
-        };
-
-        const initApp = async () => {
-            const setStatus = (connected, text) => {
-                const dot = document.getElementById('status-dot'); const statusText = document.getElementById('status-text');
-                statusText.textContent = text;
-                if(connected) {
-                    dot.className = "w-2.5 h-2.5 rounded-full bg-brand-success shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-none"; statusText.className = "text-brand-success";
-                } else {
-                    dot.className = "w-2.5 h-2.5 rounded-full bg-brand-warning animate-none"; statusText.className = "text-brand-warning";
-                }
-            };
-
-            const sortDesc = (arr) => arr.sort((a, b) => {
-                const tA = a.createdAt?.seconds ? a.createdAt.seconds * 1000 : a.createdAt;
-                const tB = b.createdAt?.seconds ? b.createdAt.seconds * 1000 : b.createdAt;
-                return tB - tA;
             });
 
-            try {
-                if (!firebaseConfig) throw new Error("No config available.");
-                const app = initializeApp(firebaseConfig); db = getFirestore(app); auth = getAuth(app);
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) await signInWithCustomToken(auth, __initial_auth_token);
-                else await signInAnonymously(auth);
-                userId = auth.currentUser?.uid; setStatus(true, 'Live Sync Active');
+            const form = item.querySelector('.add-lesson-form');
+            if(form) form.addEventListener('submit', (e) => {
+                e.preventDefault(); const inputs = e.target.querySelectorAll('input');
+                course.lessons.push({ title: inputs[0].value.trim(), duration: parseInt(inputs[1].value), targetDays: parseInt(inputs[2].value) || 0, progress: 0 });
+                saveToLocal(); renderCourses();
+            });
 
-                onSnapshot(query(collection(db, 'artifacts', appId, 'users', userId, 'todos')), (snap) => {
-                    todos = []; snap.forEach((doc) => todos.push({ id: doc.id, ...doc.data() })); todos = sortDesc(todos); renderTodos();
-                }, err => console.error(err));
+            item.querySelector('.delete-course-btn').addEventListener('click', () => {
+                openModal('Delete Course', `Remove "${course.title}"?`, () => { courses = courses.filter(c => c.id !== course.id); saveToLocal(); renderCourses(); });
+            });
 
-                onSnapshot(query(collection(db, 'artifacts', appId, 'users', userId, 'courses')), (snap) => {
-                    courses = []; snap.forEach((doc) => courses.push({ id: doc.id, ...doc.data() })); courses = sortDesc(courses); renderCourses();
-                }, err => console.error(err));
-                
-                onSnapshot(query(collection(db, 'artifacts', appId, 'users', userId, 'habits')), (snap) => {
-                    habits = []; snap.forEach((doc) => habits.push({ id: doc.id, ...doc.data() })); habits = sortDesc(habits); renderHabits();
-                }, err => console.error(err));
+            if (isCourseComplete) { archiveList.appendChild(item); archiveCount++; } 
+            else { activeList.appendChild(item); activeCount++; }
+        });
+        
+        if(activeCount === 0) activeList.innerHTML = `<p class="text-sm text-dark-500 text-center mt-4">No active courses.</p>`;
+        if(archiveCount === 0) archiveList.innerHTML = `<p class="text-sm text-dark-500 text-center mt-4">Archive is empty.</p>`;
+    };
 
-            } catch (error) {
-                console.error("Initialization Failed:", error); setStatus(false, 'Local Memory Mode');
-                renderTodos(); renderCourses(); renderHabits();
-            }
-        };
+    // ==== TO-DO LIST ====
+    document.getElementById('add-task-form').addEventListener('submit', (e) => {
+        e.preventDefault(); const input = document.getElementById('task-input');
+        if(!input.value.trim()) return;
+        todos.unshift({ id: Date.now().toString(), text: input.value.trim(), category: document.querySelector('input[name="task-category"]:checked').value, completed: false, dateStr: todayStr, createdAt: Date.now() });
+        input.value = ''; saveToLocal(); renderTodos();
+    });
 
-        initApp();
-    </script>
+    const renderTodos = () => {
+        const lists = { must: document.getElementById('list-must'), important: document.getElementById('list-important'), small: document.getElementById('list-small'), archive: document.getElementById('list-archive') };
+        Object.values(lists).forEach(l => l.innerHTML = '');
+
+        todos.forEach(task => {
+            const isArchive = task.dateStr && task.dateStr < todayStr;
+            const item = document.createElement('div');
+            item.className = 'group flex items-start gap-3 p-2.5 bg-dark-900/60 rounded-xl border border-dark-700 transition hover:border-dark-600';
+            
+            const badge = isArchive ? `<span class="text-[9px] bg-dark-800 text-dark-400 font-bold px-1.5 py-0.5 rounded mt-1 inline-block">${task.dateStr}</span>` : '';
+            item.innerHTML = `
+                <input type="checkbox" class="custom-checkbox mt-0.5 flex-shrink-0" ${task.completed ? 'checked' : ''}>
+                <div class="flex-1 flex flex-col min-w-0">
+                    <span class="text-[13px] break-words transition-colors duration-200 ${task.completed ? 'strike-through' : 'text-white'}">${task.text}</span>
+                    ${badge}
+                </div>
+                <button class="delete-task-btn text-dark-600 hover:text-brand-danger opacity-0 group-hover:opacity-100 transition p-1 flex-shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+            `;
+
+            item.querySelector('input[type="checkbox"]').addEventListener('change', (e) => { task.completed = e.target.checked; saveToLocal(); renderTodos(); });
+            item.querySelector('.delete-task-btn').addEventListener('click', () => {
+                openModal('Delete Task', `Remove task?`, () => { todos = todos.filter(t => t.id !== task.id); saveToLocal(); renderTodos(); });
+            });
+
+            if(isArchive) lists.archive.appendChild(item); else lists[task.category].appendChild(item);
+        });
+    };
+
+    // Load Local Data instantly and Render
+    loadFromLocal();
+    renderTodos(); renderCourses(); renderHabits();
+
+</script>
 </body>
 </html>
