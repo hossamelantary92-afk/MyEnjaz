@@ -501,18 +501,17 @@
             
             currentWeekInfo.dates.forEach(dateStr => {
                 const isDone = (habit.completedDates || []).includes(dateStr);
-                const isFuture = dateStr > todayStr;
                 const circleClass = isDone 
                     ? 'bg-brand-success border-brand-success text-dark-900' 
-                    : `bg-dark-800 border-dark-600 ${isFuture ? 'opacity-30 cursor-default' : 'cursor-pointer hover:border-brand-success/50'}`;
+                    : 'bg-dark-800 border-dark-600 cursor-pointer hover:border-brand-success/50';
                 const svgIcon = isDone ? '<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>' : '';
                 
-                html += `<button class="habit-circle w-[24px] h-[24px] sm:w-[28px] sm:h-[28px] rounded-full border ${circleClass} flex justify-center items-center transition-colors flex-shrink-0" data-date="${dateStr}" ${isFuture ? 'disabled' : ''}>${svgIcon}</button>`;
+                html += `<button class="habit-circle w-[24px] h-[24px] sm:w-[28px] sm:h-[28px] rounded-full border ${circleClass} flex justify-center items-center transition-colors flex-shrink-0" data-date="${dateStr}">${svgIcon}</button>`;
             });
             html += `</div>`;
             item.innerHTML = html;
 
-            item.querySelectorAll('.habit-circle:not([disabled])').forEach(btn => {
+            item.querySelectorAll('.habit-circle').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const date = e.currentTarget.dataset.date;
                     let completed = [...(habit.completedDates || [])];
