@@ -25,7 +25,31 @@
     </script>
     
     <style>
-        body { background-color: #0f172a; color: #f8fafc; }
+        /* Primary navy is kept: #0f172a base, #1e293b surfaces. Only depth/polish added on top. */
+        body {
+            background-color: #0f172a; color: #f8fafc; min-height: 100vh;
+            background-image:
+                radial-gradient(900px 520px at 12% -8%, rgba(99,102,241,0.16), transparent 60%),
+                radial-gradient(800px 480px at 100% 0%, rgba(56,189,248,0.08), transparent 55%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+        }
+        .card {
+            background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(30,41,59,0.80));
+            border: 1px solid rgba(71,85,105,0.55);
+            box-shadow: 0 14px 34px -14px rgba(2,6,23,0.75), inset 0 1px 0 rgba(255,255,255,0.04);
+            transition: border-color .25s ease, box-shadow .25s ease;
+        }
+        .card:hover { border-color: rgba(100,116,139,0.75); box-shadow: 0 18px 40px -14px rgba(2,6,23,0.85), inset 0 1px 0 rgba(255,255,255,0.05); }
+        .section-title svg {
+            width: 2rem; height: 2rem; padding: 0.45rem; border-radius: 0.65rem; flex-shrink: 0;
+            background: color-mix(in srgb, currentColor 14%, transparent);
+            border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+        }
+        button { transition: background-color .2s ease, color .2s ease, border-color .2s ease, opacity .2s ease, transform .1s ease; }
+        button:active { transform: scale(0.98); }
+        button:focus-visible { outline: 2px solid rgba(129,140,248,0.8); outline-offset: 2px; }
+        input[type="date"] { color-scheme: dark; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #1e293b; }
         ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
@@ -42,20 +66,21 @@
             border: solid #0f172a; border-width: 0 2px 2px 0; transform: rotate(45deg);
         }
         
-        .ring-container { position: relative; width: 140px; height: 140px; margin: 0 auto; }
+        .ring-container { position: relative; width: 176px; height: 176px; margin: 0 auto; }
         .ring-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-        .ring-circle { transition: stroke-dashoffset 1s linear, stroke 0.5s ease; }
+        .ring-circle { transition: stroke-dashoffset 1s linear, stroke 0.5s ease; filter: drop-shadow(0 0 5px rgba(148,163,184,0.35)); }
         .strike-through { text-decoration: line-through; color: #64748b; }
     </style>
 </head>
 <body class="p-4 md:p-8">
 
 <!-- HEADER -->
-<header class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
-    <div>
-        <h1 class="text-3xl font-bold text-white tracking-tight">My Dashboard</h1>
+<header class="max-w-7xl mx-auto mt-2 mb-10 flex flex-col items-center text-center gap-4">
+    <div class="flex flex-col items-center gap-3">
+        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">My Dashboard</h1>
+        <div class="h-1 w-16 rounded-full bg-gradient-to-r from-brand-primary to-brand-info"></div>
     </div>
-    <div id="connection-status" class="text-sm px-4 py-2 rounded-full bg-dark-800 border border-dark-700 text-brand-success flex items-center gap-2 font-medium shadow-md">
+    <div id="connection-status" class="text-xs px-4 py-1.5 rounded-full bg-dark-800/80 border border-dark-700 text-brand-success flex items-center gap-2 font-medium shadow-md">
         <div class="w-2.5 h-2.5 rounded-full bg-brand-success shadow-[0_0_8px_rgba(52,211,153,0.8)]" id="status-dot"></div>
         <span id="status-text">Live Sync Active</span>
     </div>
@@ -67,10 +92,10 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         <!-- POMODORO -->
-        <section class="bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl relative overflow-hidden flex flex-col min-h-[340px]">
+        <section class="card rounded-2xl p-6 relative overflow-hidden flex flex-col min-h-[340px]">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-primary to-brand-info"></div>
             <div class="flex justify-between items-center mb-4 border-b border-dark-700 pb-4">
-                <h2 class="text-lg font-bold flex items-center gap-2">
+                <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
                     <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Pomodoro
                 </h2>
@@ -102,12 +127,12 @@
                 <p id="pomo-cycle-text" class="text-dark-500 text-xs mb-4 font-medium">Cycle: 1/4</p>
 
                 <div class="ring-container mb-6">
-                    <svg class="ring-svg">
+                    <svg class="ring-svg" viewBox="0 0 140 140">
                         <circle cx="70" cy="70" r="65" fill="none" stroke="#334155" stroke-width="6"/>
                         <circle id="pomo-ring" cx="70" cy="70" r="65" fill="none" stroke="#818cf8" stroke-width="6" stroke-dasharray="408" stroke-dashoffset="0" stroke-linecap="round" class="ring-circle"/>
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span id="pomo-display" class="text-4xl font-bold tracking-wider text-white">25:00</span>
+                        <span id="pomo-display" class="text-5xl font-bold tracking-wider text-white tabular-nums">--:--</span>
                     </div>
                 </div>
 
@@ -119,10 +144,10 @@
         </section>
 
         <!-- HABIT TRACKER (SAT - FRI) -->
-        <section class="bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl flex flex-col min-h-[340px]">
+        <section class="card rounded-2xl p-6 flex flex-col min-h-[340px]">
             <div class="flex items-center justify-between border-b border-dark-700 pb-4 mb-4">
                 <div class="flex items-center gap-3">
-                    <h2 class="text-lg font-bold flex items-center gap-2">
+                    <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
                         <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         Habit Tracker
                     </h2>
@@ -162,10 +187,10 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         <!-- DAILY TASKS -->
-        <section class="bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl h-[600px] flex flex-col">
+        <section class="card rounded-2xl p-6 h-[600px] flex flex-col">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-dark-700 pb-4 mb-5 gap-4">
                 <div class="flex items-center gap-3 flex-wrap">
-                    <h2 class="text-lg font-bold flex items-center gap-2">
+                    <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
                         <svg class="w-5 h-5 text-brand-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                         Daily Tasks
                     </h2>
@@ -230,12 +255,12 @@
         </section>
 
         <!-- COURSES PROGRESS -->
-        <section class="bg-dark-800 rounded-2xl border border-dark-700 p-6 shadow-xl h-[600px] flex flex-col relative overflow-hidden">
+        <section class="card rounded-2xl p-6 h-[600px] flex flex-col relative overflow-hidden">
             <div class="absolute top-0 right-0 w-40 h-40 bg-brand-info/5 rounded-full blur-3xl pointer-events-none"></div>
             
             <div class="flex items-center justify-between border-b border-dark-700 pb-4 mb-5 relative z-10">
                 <div class="flex items-center gap-3">
-                    <h2 class="text-lg font-bold flex items-center gap-2">
+                    <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
                         <svg class="w-5 h-5 text-brand-info" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                         Courses Progress
                     </h2>
@@ -377,7 +402,25 @@
     const pomoModeText = document.getElementById('pomo-mode-text');
     const pomoStartBtn = document.getElementById('pomo-start-btn');
     
-    let config = { work: 25, short: 5, long: 15, maxCycles: 4 };
+    // Timer settings are saved in the browser, so a custom time survives reloads.
+    const POMO_KEY = 'productivityDashPomoConfig';
+    let config = { work: 25, short: 5, long: 15, maxCycles: 4 }; // first-run values only
+
+    try {
+        const saved = JSON.parse(localStorage.getItem(POMO_KEY));
+        if (saved) ['work', 'short', 'long'].forEach(k => {
+            const v = parseInt(saved[k], 10);
+            if (Number.isFinite(v) && v >= 1) config[k] = v;
+        });
+    } catch(e) { console.warn("Failed to load timer settings."); }
+
+    const syncPomoInputs = () => {
+        document.getElementById('pomo-work-input').value = config.work;
+        document.getElementById('pomo-short-input').value = config.short;
+        document.getElementById('pomo-long-input').value = config.long;
+    };
+    syncPomoInputs();
+
     let pomoTimeLeft = config.work * 60; let currentTotalTime = config.work * 60;
 
     document.getElementById('pomo-settings-btn').addEventListener('click', () => {
@@ -385,12 +428,23 @@
         panel.classList.toggle('hidden'); panel.classList.toggle('flex');
     });
 
+    // An empty or invalid field keeps the value you already had (never snaps back to 25/5/15).
+    const readMinutes = (id, current) => {
+        const v = parseInt(document.getElementById(id).value, 10);
+        return Number.isFinite(v) && v >= 1 ? v : current;
+    };
+
     document.getElementById('pomo-save-settings').addEventListener('click', () => {
-        config.work = parseInt(document.getElementById('pomo-work-input').value) || 25;
-        config.short = parseInt(document.getElementById('pomo-short-input').value) || 5;
-        config.long = parseInt(document.getElementById('pomo-long-input').value) || 15;
-        document.getElementById('pomo-settings-panel').classList.add('hidden');
-        resetPomoState('work');
+        config.work = readMinutes('pomo-work-input', config.work);
+        config.short = readMinutes('pomo-short-input', config.short);
+        config.long = readMinutes('pomo-long-input', config.long);
+        try {
+            localStorage.setItem(POMO_KEY, JSON.stringify({ work: config.work, short: config.short, long: config.long }));
+        } catch(e) { console.warn("Could not save timer settings."); }
+        syncPomoInputs();
+        const panel = document.getElementById('pomo-settings-panel');
+        panel.classList.add('hidden'); panel.classList.remove('flex');
+        resetPomoState(pomoState); // apply the new time to the current mode
     });
 
     const resetPomoState = (state) => {
