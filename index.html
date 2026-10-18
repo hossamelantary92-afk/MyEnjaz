@@ -201,6 +201,34 @@
   #calendar-grid{gap:4px!important;}
   .calendar-day{min-height:42px!important;font-size:10px!important;}
 }
+
+/* Courses mobile refinement */
+@media (max-width: 640px){
+  #courses-section{min-height:0!important;}
+  #courses-section>.flex.items-center.justify-between{align-items:center!important;flex-wrap:nowrap!important;}
+  #courses-section>.flex.items-center.justify-between>div:first-child{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important;}
+  #courses-section>.flex.items-center.justify-between>div:first-child .section-title{font-size:15px!important;white-space:nowrap!important;}
+  #courses-section>.flex.items-center.justify-between>div:last-child{display:flex!important;align-items:center!important;gap:6px!important;flex:0 0 auto!important;}
+  #courses-section .archive-btn,#add-course-toggle{height:36px!important;min-height:36px!important;padding:7px 10px!important;font-size:9px!important;line-height:1!important;}
+  #courses-list{padding-right:0!important;overflow-x:hidden!important;}
+  #courses-list>div{padding:13px!important;border-radius:15px!important;}
+  #courses-list>div .flex.justify-between.items-start.mb-2{gap:8px!important;align-items:flex-start!important;}
+  #courses-list>div h3{font-size:14px!important;line-height:1.3!important;min-width:0!important;word-break:break-word!important;padding-right:0!important;}
+  #courses-list>div .course-percent{flex:0 0 auto!important;font-size:10px!important;padding:6px 8px!important;}
+  #courses-list>div .text-\[11px\]{gap:6px!important;margin-bottom:12px!important;line-height:1.45!important;}
+  #courses-list>div .course-text{font-size:9px!important;line-height:1.3!important;max-width:78%;}
+  #courses-list>div .delete-course-btn{width:30px!important;height:30px!important;display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 30px!important;}
+  #courses-list>div .space-y-3{max-height:210px!important;padding-right:0!important;}
+  #courses-list>div .add-lesson-form{display:grid!important;grid-template-columns:minmax(0,1fr) 74px 74px!important;gap:7px!important;}
+  #courses-list>div .add-lesson-form input[type=text]{min-width:0!important;width:100%!important;}
+  #courses-list>div .add-lesson-form .relative{min-width:0!important;}
+  #courses-list>div .add-lesson-form button{grid-column:1 / -1!important;width:100%!important;min-height:40px!important;}
+}
+@media (max-width:380px){
+  #courses-section>.flex.items-center.justify-between>div:last-child{gap:4px!important;}
+  #courses-section .archive-btn,#add-course-toggle{padding:6px 8px!important;font-size:8px!important;}
+  #courses-list>div .add-lesson-form{grid-template-columns:minmax(0,1fr) 68px 68px!important;}
+}
 @media (max-width:380px){
   header>div:nth-of-type(2)>button{font-size:10px!important;}
   .pomo-icon-btn{width:38px;height:38px;flex-basis:38px;}
