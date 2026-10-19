@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>My Dashboard</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -263,6 +263,107 @@
   #tasks-section input[type="time"]:focus{
     border-color:rgba(96,165,250,.75)!important; box-shadow:0 0 0 2px rgba(96,165,250,.12);
   }
+}
+</style>
+<style>
+/* V17 — mobile page, courses & task-time refinement */
+@media (max-width: 640px){
+  html{font-size:15px;overflow-x:hidden;}
+  body{padding:10px!important;overflow-x:hidden!important;}
+  header{width:100%!important;margin:0 auto 14px!important;gap:10px!important;padding:4px 2px!important;}
+  header h1{font-size:1.75rem!important;line-height:1.08!important;}
+  header .h-1{width:52px!important;height:3px!important;}
+  header>div:nth-of-type(2){width:100%!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;}
+  header>div:nth-of-type(2)>button{width:100%!important;min-height:40px!important;padding:8px 7px!important;font-size:10px!important;}
+  #connection-status{width:fit-content!important;max-width:100%!important;margin:auto!important;font-size:9px!important;padding:6px 9px!important;}
+  main{width:100%!important;gap:12px!important;}
+  #main-core-grid,#main-work-grid{display:flex!important;flex-direction:column!important;gap:12px!important;}
+  #pomo-section,#habit-section,#tasks-section,#courses-section{width:100%!important;min-width:0!important;padding:13px!important;border-radius:15px!important;overflow:hidden!important;}
+  .section-title{font-size:14px!important;line-height:1.2!important;}
+  .section-title svg{width:17px!important;height:17px!important;}
+  /* compact section headers */
+  #tasks-section>.flex.items-center.justify-between,
+  #courses-section>.flex.items-center.justify-between,
+  #habit-section>.flex.items-center.justify-between{gap:7px!important;min-width:0!important;}
+  #tasks-section>.flex.items-center.justify-between>div:first-child,
+  #courses-section>.flex.items-center.justify-between>div:first-child,
+  #habit-section>.flex.items-center.justify-between>div:first-child{min-width:0!important;}
+  #tasks-date-display{font-size:8px!important;padding:5px 7px!important;white-space:nowrap!important;}
+  .archive-btn,#add-course-toggle{height:34px!important;min-height:34px!important;padding:7px 9px!important;font-size:8px!important;line-height:1!important;}
+
+  /* Tasks: time field should look exactly like the neighboring controls */
+  #add-task-form .grid{grid-template-columns:1fr 1fr!important;gap:7px!important;}
+  #add-task-form select,#add-task-form input[type="time"]{height:40px!important;min-height:40px!important;border-radius:9px!important;font-size:10px!important;box-sizing:border-box!important;}
+  #add-task-form .relative:has(#task-due){height:40px!important;min-width:0!important;background:rgb(30 41 59 / .9)!important;border:1px solid rgb(71 85 105 / .9)!important;border-radius:9px!important;}
+  #add-task-form .relative:has(#task-due) > span:first-child{left:9px!important;font-size:11px!important;color:#94a3b8!important;z-index:2!important;}
+  #tasks-section input[type="time"]{width:100%!important;min-width:0!important;height:38px!important;padding:8px 28px 8px 28px!important;border:0!important;border-radius:8px!important;background:transparent!important;box-shadow:none!important;color:#f8fafc!important;}
+  #tasks-section input[type="time"]::-webkit-calendar-picker-indicator{opacity:.72!important;filter:invert(1)!important;width:16px!important;height:16px!important;cursor:pointer!important;position:absolute!important;right:8px!important;left:auto!important;}
+  #tasks-section input[type="time"]::before{content:none!important;}
+  #tasks-section input[type="time"]:focus{outline:none!important;border:0!important;box-shadow:none!important;}
+
+  /* Courses: dates stack cleanly on narrow screens */
+  #add-course-form{padding:12px!important;border-radius:13px!important;}
+  #add-course-form .grid.grid-cols-2{display:grid!important;grid-template-columns:1fr!important;gap:9px!important;}
+  #add-course-form label{font-size:9px!important;margin-bottom:4px!important;}
+  #add-course-form input[type="date"]{width:100%!important;min-width:0!important;height:40px!important;padding:8px 10px!important;border-radius:9px!important;font-size:10px!important;box-sizing:border-box!important;}
+  #add-course-form #course-title{height:40px!important;font-size:11px!important;}
+  #add-course-form button{height:40px!important;font-size:10px!important;}
+  #courses-list{width:100%!important;max-width:100%!important;padding:0!important;overflow-x:hidden!important;}
+  #courses-list>div{width:100%!important;max-width:100%!important;box-sizing:border-box!important;padding:12px!important;overflow:hidden!important;}
+  #courses-list>div .course-text{max-width:72%!important;word-break:break-word!important;}
+  #courses-list>div .space-y-3{max-width:100%!important;overflow-x:hidden!important;}
+  #courses-list>div .add-lesson-form{grid-template-columns:minmax(0,1fr) 68px 68px!important;gap:6px!important;}
+
+  /* Keep stats / insights readable and prevent horizontal squeeze */
+  #insights-panel{width:100%!important;max-width:100%!important;overflow:hidden!important;}
+  #insights-panel .grid{grid-template-columns:1fr!important;}
+  #calendar-grid{min-width:0!important;}
+  .overflow-x-auto{max-width:100%!important;}
+}
+@media (max-width:380px){
+  body{padding:8px!important;}
+  #pomo-section,#habit-section,#tasks-section,#courses-section{padding:11px!important;}
+  #add-task-form .grid{grid-template-columns:1fr!important;}
+  #tasks-section input[type="time"],#add-task-form select{width:100%!important;}
+  #courses-section .archive-btn,#add-course-toggle{padding:6px 7px!important;font-size:8px!important;}
+}
+</style>
+<style>
+/* V18 mobile stability */
+html,body{max-width:100%;overflow-x:hidden;}
+button,a,input,select,textarea{touch-action:manipulation;}
+@media(max-width:640px){
+  html{font-size:16px!important;overflow-x:hidden!important;}
+  body{width:100%!important;min-width:0!important;max-width:100vw!important;padding:8px!important;overflow-x:hidden!important;}
+  main{width:100%!important;max-width:100%!important;min-width:0!important;}
+  #main-core-grid,#main-work-grid{display:flex!important;flex-direction:column!important;width:100%!important;min-width:0!important;gap:12px!important;}
+  #pomo-section,#habit-section,#tasks-section,#courses-section{width:100%!important;max-width:100%!important;min-width:0!important;min-height:0!important;height:auto!important;box-sizing:border-box!important;}
+  #tasks-section,#courses-section{min-height:0!important;}
+  #active-tasks-view,#active-courses-view,#archive-tasks-view,#archive-courses-view{min-height:0!important;height:auto!important;overflow:visible!important;}
+  input,select,textarea{font-size:16px!important;}
+  #pomo-display{font-size:clamp(2.35rem,11vw,3rem)!important;line-height:1!important;white-space:nowrap;}
+  .ring-container{width:min(176px,52vw)!important;height:min(176px,52vw)!important;}
+  .pomo-actions{margin-top:16px!important;}
+  .pomo-action{height:46px!important;font-size:15px!important;}
+  .fullscreen-btn{min-height:38px!important;padding:7px 10px!important;font-size:10px!important;white-space:nowrap!important;touch-action:manipulation!important;}
+  .dashboard-fullscreen{position:fixed!important;inset:0!important;z-index:9999!important;width:100vw!important;height:100dvh!important;max-width:none!important;min-height:0!important;margin:0!important;border-radius:0!important;overflow-y:auto!important;overflow-x:hidden!important;padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom))!important;background:#0f172a!important;}
+  .dashboard-fullscreen .fullscreen-btn{position:sticky!important;top:4px!important;z-index:10001!important;}
+}
+
+/* V19 — final mobile stability */
+html{touch-action:manipulation;}
+body{overscroll-behavior-x:none;}
+button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+@media (max-width:640px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden!important;}
+  body{padding:8px!important;}
+  input,select,textarea{font-size:16px!important;}
+  button{min-height:40px;}
+  .pomo-actions{width:100%!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;}
+  .pomo-actions button{width:100%!important;min-width:0!important;}
+  #pomo-display{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;}
+  .dashboard-fullscreen{position:fixed!important;left:0!important;top:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;min-height:100dvh!important;max-height:none!important;z-index:2147483000!important;margin:0!important;border-radius:0!important;overflow:auto!important;overscroll-behavior:contain!important;padding:calc(10px + env(safe-area-inset-top)) 10px calc(12px + env(safe-area-inset-bottom))!important;background:#0f172a!important;}
+  .dashboard-fullscreen .fullscreen-btn{position:sticky!important;top:0!important;z-index:2147483001!important;}
 }
 </style>
 </head>
@@ -719,7 +820,7 @@
         const section=document.getElementById(sectionId); if(!section||section.querySelector('.fullscreen-btn'))return;
         const btn=document.createElement('button'); btn.className='fullscreen-btn text-xs font-bold text-dark-400 hover:text-white border border-dark-600 rounded-lg px-2.5 py-1.5'; btn.textContent='Full page';
         const update=()=>{btn.textContent=(document.fullscreenElement===section)?'Exit':'Full page'; section.classList.toggle('fullscreen-active',document.fullscreenElement===section);};
-        btn.onclick=async()=>{ try{ if(document.fullscreenElement===section){ await document.exitFullscreen(); } else if(section.requestFullscreen){ await section.requestFullscreen(); } else { section.classList.toggle('dashboard-fullscreen'); btn.textContent=section.classList.contains('dashboard-fullscreen')?'Exit':'Full page'; } }catch(e){ section.classList.toggle('dashboard-fullscreen'); update(); } };
+        btn.onclick=async()=>{ try{ if(section.classList.contains('dashboard-fullscreen')){ section.classList.remove('dashboard-fullscreen'); btn.textContent='Full page'; return; } if(window.matchMedia('(max-width: 640px)').matches){ section.classList.add('dashboard-fullscreen'); btn.textContent='Exit'; return; } if(document.fullscreenElement===section){ await document.exitFullscreen(); } else if(section.requestFullscreen){ await section.requestFullscreen(); } else { section.classList.add('dashboard-fullscreen'); btn.textContent='Exit'; } }catch(e){ section.classList.add('dashboard-fullscreen'); btn.textContent='Exit'; } };
         document.addEventListener('fullscreenchange',update);
         const h=section.querySelector('.border-b'); if(h){h.classList.add('gap-2');h.appendChild(btn)} else section.appendChild(btn);
     };
@@ -749,50 +850,71 @@
     document.querySelectorAll('.pomo-bg-choice').forEach(b=>b.addEventListener('click',()=>{applyPomoBackground(b.dataset.bg);document.getElementById('pomo-bg-panel')?.classList.add('hidden');}));
 
     // ==== POMODORO TIMER ====
-    // Audio cues are intentionally created from a user gesture (Start / Notifications)
-    // so modern browsers are more likely to allow them without blocking autoplay.
+    // Stable timer engine: the clock is based on an absolute end timestamp,
+    // so it stays accurate when the phone sleeps, the tab is backgrounded,
+    // or the browser throttles timers.
     let pomoAudioContext = null;
     let pomoAudioCuePlayed = false;
     const ensurePomoAudio = async () => {
         try {
-            if(!pomoAudioContext) pomoAudioContext = new (window.AudioContext || window.webkitAudioContext)();
-            if(pomoAudioContext.state === 'suspended') await pomoAudioContext.resume();
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return null;
+            if (!pomoAudioContext) pomoAudioContext = new AudioCtx();
+            if (pomoAudioContext.state === 'suspended') await pomoAudioContext.resume();
             window.pomoAudioContext = pomoAudioContext;
             return pomoAudioContext;
-        } catch(e) { return null; }
+        } catch (e) { return null; }
     };
     const playPomoCue = async (type='warning') => {
         const ctx = await ensurePomoAudio();
-        if(!ctx) return;
+        if (!ctx) return;
         const now = ctx.currentTime;
-        const notes = type==='break' ? [523.25,659.25] : [880,660];
-        notes.forEach((freq,i)=>{
-            const osc=ctx.createOscillator(), gain=ctx.createGain();
-            osc.type='sine'; osc.frequency.value=freq;
-            gain.gain.setValueAtTime(0.0001,now+i*0.13);
-            gain.gain.exponentialRampToValueAtTime(0.16,now+i*0.13+0.02);
-            gain.gain.exponentialRampToValueAtTime(0.0001,now+i*0.13+0.32);
-            osc.connect(gain); gain.connect(ctx.destination); osc.start(now+i*0.13); osc.stop(now+i*0.13+0.34);
+        const notes = type === 'break' ? [523.25, 659.25, 783.99] : [880, 659.25, 880];
+        notes.forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const t = now + i * 0.14;
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0.0001, t);
+            gain.gain.exponentialRampToValueAtTime(0.14, t + 0.025);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.28);
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.start(t); osc.stop(t + 0.30);
         });
     };
-    let pomoInterval; let isPomoRunning = false; let pomoState = 'work'; let currentCycle = 1;
+
+    let pomoInterval = null;
+    let pomoAnimationFrame = null;
+    let isPomoRunning = false;
+    let pomoState = 'work';
+    let currentCycle = 1;
+    let pomoTimeLeft = 0;
+    let currentTotalTime = 0;
+    let pomoEndAt = null;
+    let pomoLastSavedSecond = -1;
+
     const pomoDisplay = document.getElementById('pomo-display');
     const pomoRing = document.getElementById('pomo-ring');
     const pomoModeText = document.getElementById('pomo-mode-text');
     const pomoStartBtn = document.getElementById('pomo-start-btn');
-    
-    // Timer settings are saved in the browser, so a custom time survives reloads.
+    const pomoSkipBtn = document.getElementById('pomo-skip-btn');
+    const pomoCycleText = document.getElementById('pomo-cycle-text');
     const POMO_KEY = 'productivityDashPomoConfig';
     const POMO_STATE_KEY = 'productivityDashPomoState';
-    let config = { work: 25, short: 5, long: 15, maxCycles: 4 }; // first-run values only
+    let config = { work: 25, short: 5, long: 15, maxCycles: 4 };
 
     try {
-        const saved = JSON.parse(localStorage.getItem(POMO_KEY));
-        if (saved) ['work', 'short', 'long'].forEach(k => {
-            const v = parseInt(saved[k], 10);
-            if (Number.isFinite(v) && v >= 1) config[k] = v;
-        });
-    } catch(e) { console.warn("Failed to load timer settings."); }
+        const saved = JSON.parse(localStorage.getItem(POMO_KEY) || 'null');
+        if (saved) {
+            ['work','short','long'].forEach(k => {
+                const v = parseInt(saved[k], 10);
+                if (Number.isFinite(v) && v >= 1 && v <= 240) config[k] = v;
+            });
+            const cycles = parseInt(saved.maxCycles, 10);
+            if (Number.isFinite(cycles) && cycles >= 1 && cycles <= 12) config.maxCycles = cycles;
+        }
+    } catch (e) {}
 
     const syncPomoInputs = () => {
         document.getElementById('pomo-work-input').value = config.work;
@@ -801,101 +923,282 @@
     };
     syncPomoInputs();
 
-    let pomoTimeLeft = config.work * 60; let currentTotalTime = config.work * 60;
-    const savePomoState=()=>{try{localStorage.setItem(POMO_STATE_KEY,JSON.stringify({state:pomoState,cycle:currentCycle,timeLeft:pomoTimeLeft,total:currentTotalTime,running:isPomoRunning,savedAt:Date.now()}))}catch(e){}};
-
-    document.getElementById('pomo-settings-btn').addEventListener('click', () => {
-        const panel = document.getElementById('pomo-settings-panel');
-        panel.classList.toggle('hidden'); panel.classList.toggle('flex');
-    });
-
-    // An empty or invalid field keeps the value you already had (never snaps back to 25/5/15).
-    const readMinutes = (id, current) => {
-        const v = parseInt(document.getElementById(id).value, 10);
-        return Number.isFinite(v) && v >= 1 ? v : current;
-    };
-
-    document.getElementById('pomo-save-settings').addEventListener('click', () => {
-        config.work = readMinutes('pomo-work-input', config.work);
-        config.short = readMinutes('pomo-short-input', config.short);
-        config.long = readMinutes('pomo-long-input', config.long);
+    const savePomoState = () => {
         try {
-            localStorage.setItem(POMO_KEY, JSON.stringify({ work: config.work, short: config.short, long: config.long }));
-        } catch(e) { console.warn("Could not save timer settings."); }
-        syncPomoInputs();
-        const panel = document.getElementById('pomo-settings-panel');
-        panel.classList.add('hidden'); panel.classList.remove('flex');
-        resetPomoState(pomoState); // apply the new time to the current mode
-    });
-
-    const resetPomoState = (state) => {
-        clearInterval(pomoInterval); isPomoRunning = false; pomoState = state;
-        pomoStartBtn.textContent = 'Start'; pomoStartBtn.className = 'w-28 sm:w-32 bg-brand-primary text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90';
-        
-        if(state === 'work') {
-            currentTotalTime = config.work * 60;
-            pomoModeText.textContent = "Work Session"; pomoModeText.className = "text-brand-primary font-bold text-sm mb-1 uppercase tracking-wider";
-            pomoRing.setAttribute('stroke', '#818cf8');
-        } else if (state === 'shortBreak') {
-            currentTotalTime = config.short * 60;
-            pomoModeText.textContent = "Short Break"; pomoModeText.className = "text-brand-info font-bold text-sm mb-1 uppercase tracking-wider";
-            pomoRing.setAttribute('stroke', '#38bdf8');
-        } else {
-            currentTotalTime = config.long * 60;
-            pomoModeText.textContent = "Long Break"; pomoModeText.className = "text-brand-success font-bold text-sm mb-1 uppercase tracking-wider";
-            pomoRing.setAttribute('stroke', '#34d399');
-        }
-        pomoTimeLeft = currentTotalTime;
-        savePomoState();
-        document.getElementById('pomo-cycle-text').textContent = `Cycle: ${currentCycle}/${config.maxCycles}`;
-        updatePomoDisplay();
+            localStorage.setItem(POMO_STATE_KEY, JSON.stringify({
+                state: pomoState,
+                cycle: currentCycle,
+                timeLeft: Math.max(0, Math.ceil(pomoTimeLeft)),
+                total: currentTotalTime,
+                running: isPomoRunning,
+                endAt: pomoEndAt,
+                savedAt: Date.now()
+            }));
+        } catch (e) {}
     };
 
-    const advancePomoState = () => {
-        if (pomoState === 'work') {
-            recordFocusSession(config.work);
-            renderDashboard();
-            if (currentCycle >= config.maxCycles) { currentCycle = 1; resetPomoState('longBreak'); } else { resetPomoState('shortBreak'); }
+    const setPomoButton = (running) => {
+        if (!pomoStartBtn) return;
+        pomoStartBtn.textContent = running ? 'Pause' : (pomoTimeLeft < currentTotalTime ? 'Resume' : 'Start');
+        pomoStartBtn.className = running
+            ? 'w-28 sm:w-32 bg-brand-warning text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90'
+            : 'w-28 sm:w-32 bg-brand-primary text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90';
+    };
+
+    const setPomoModeUI = (state) => {
+        if (state === 'work') {
+            pomoModeText.textContent = 'Work Session';
+            pomoModeText.className = 'text-brand-primary font-bold text-sm mb-1 uppercase tracking-wider';
+            pomoRing.setAttribute('stroke', '#818cf8');
+            currentTotalTime = config.work * 60;
+        } else if (state === 'shortBreak') {
+            pomoModeText.textContent = 'Short Break';
+            pomoModeText.className = 'text-brand-info font-bold text-sm mb-1 uppercase tracking-wider';
+            pomoRing.setAttribute('stroke', '#38bdf8');
+            currentTotalTime = config.short * 60;
         } else {
-            if(pomoState === 'shortBreak') currentCycle++;
-            resetPomoState('work');
+            pomoModeText.textContent = 'Long Break';
+            pomoModeText.className = 'text-brand-success font-bold text-sm mb-1 uppercase tracking-wider';
+            pomoRing.setAttribute('stroke', '#34d399');
+            currentTotalTime = config.long * 60;
         }
+        pomoCycleText.textContent = `Cycle: ${currentCycle}/${config.maxCycles}`;
     };
 
     const updatePomoDisplay = () => {
-        const minutes = Math.floor(pomoTimeLeft / 60); const seconds = pomoTimeLeft % 60;
-        pomoDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        pomoRing.style.strokeDashoffset = (1 - (pomoTimeLeft / currentTotalTime)) * 408; 
+        const safeLeft = Math.max(0, Math.ceil(pomoTimeLeft || 0));
+        const minutes = Math.floor(safeLeft / 60);
+        const seconds = safeLeft % 60;
+        pomoDisplay.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        const ratio = currentTotalTime > 0 ? Math.min(1, Math.max(0, safeLeft / currentTotalTime)) : 0;
+        pomoRing.style.strokeDashoffset = String((1 - ratio) * 408);
+        pomoCycleText.textContent = `Cycle: ${currentCycle}/${config.maxCycles}`;
     };
 
-    const tickPomo = () => {
-        pomoTimeLeft=Math.max(0,pomoTimeLeft-1);
-        updatePomoDisplay();
-        // One cue 10 seconds before every work session / break ends.
-        if(pomoTimeLeft===10 && !pomoAudioCuePlayed){
-            pomoAudioCuePlayed=true;
-            playPomoCue(pomoState==='work'?'warning':'break');
-            sendProductivityNotification(pomoState==='work'?'10 seconds left':'Break ends in 10 seconds',pomoState==='work'?'Finish your focus session.':'Get ready for the next focus session.');
-        }
-        savePomoState();
-        if(pomoTimeLeft<=0){ pomoAudioCuePlayed=false; sendProductivityNotification(pomoState==='work'?'Focus session complete':'Break complete',pomoState==='work'?'Time for a break.':'Ready to focus again.'); advancePomoState(); }
+    const stopPomoTicker = () => {
+        if (pomoInterval) clearInterval(pomoInterval);
+        pomoInterval = null;
+        if (pomoAnimationFrame) cancelAnimationFrame(pomoAnimationFrame);
+        pomoAnimationFrame = null;
     };
-    pomoStartBtn.addEventListener('click', async () => {
-        await ensurePomoAudio();
-        if (isPomoRunning) { clearInterval(pomoInterval); isPomoRunning=false; pomoStartBtn.textContent='Resume'; pomoStartBtn.className='w-28 sm:w-32 bg-brand-warning text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90'; savePomoState(); }
-        else { isPomoRunning=true; pomoAudioCuePlayed=false; pomoInterval=setInterval(tickPomo,1000); pomoStartBtn.textContent='Pause'; pomoStartBtn.className='w-28 sm:w-32 bg-brand-warning text-dark-900 font-bold py-2.5 rounded-xl transition shadow-lg hover:opacity-90'; savePomoState(); }
+
+    const startPomoTicker = () => {
+        stopPomoTicker();
+        // Render with requestAnimationFrame for a smooth mobile UI; the absolute
+        // end timestamp remains the single source of truth for timing accuracy.
+        const frame = () => {
+            if (!isPomoRunning || !pomoEndAt) return;
+            tickPomo();
+            if (isPomoRunning) pomoAnimationFrame = requestAnimationFrame(frame);
+        };
+        frame();
+        // Persistence is throttled inside tickPomo, so the animation does not
+        // cause excessive localStorage writes.
+    };
+
+    const resetPomoState = (state = 'work') => {
+        stopPomoTicker();
+        isPomoRunning = false;
+        pomoEndAt = null;
+        pomoAudioCuePlayed = false;
+        pomoState = state;
+        setPomoModeUI(state);
+        pomoTimeLeft = currentTotalTime;
+        pomoLastSavedSecond = -1;
+        setPomoButton(false);
+        updatePomoDisplay();
+        savePomoState();
+    };
+
+    const finishPomoSession = () => {
+        // Automatic phase transition: when a phase reaches zero, immediately
+        // enter the next phase AND start it. No extra tap is required.
+        const finishedState = pomoState;
+        stopPomoTicker();
+        isPomoRunning = false;
+        pomoEndAt = null;
+        pomoAudioCuePlayed = false;
+
+        if (finishedState === 'work') {
+            recordFocusSession(config.work);
+            try { renderDashboard(); } catch (e) {}
+        }
+        sendProductivityNotification(
+            finishedState === 'work' ? 'Focus session complete' : 'Break complete',
+            finishedState === 'work' ? 'Break starts now.' : 'Next focus session starts now.'
+        );
+
+        let nextState;
+        if (finishedState === 'work') {
+            nextState = currentCycle >= config.maxCycles ? 'longBreak' : 'shortBreak';
+        } else {
+            if (finishedState === 'shortBreak') currentCycle = Math.min(config.maxCycles, currentCycle + 1);
+            else currentCycle = 1;
+            nextState = 'work';
+        }
+
+        pomoState = nextState;
+        setPomoModeUI(nextState);
+        pomoTimeLeft = currentTotalTime;
+        pomoEndAt = Date.now() + currentTotalTime * 1000;
+        isPomoRunning = true;
+        pomoAudioCuePlayed = false;
+        pomoLastSavedSecond = -1;
+        setPomoButton(true);
+        updatePomoDisplay();
+        savePomoState();
+        startPomoTicker();
+    };
+
+    const advancePomoState = () => {
+        // Manual Skip intentionally does NOT count as a completed focus session.
+        stopPomoTicker();
+        isPomoRunning = false;
+        pomoEndAt = null;
+        pomoAudioCuePlayed = false;
+        if (pomoState === 'work') {
+            if (currentCycle >= config.maxCycles) {
+                currentCycle = 1;
+                resetPomoState('longBreak');
+            } else {
+                resetPomoState('shortBreak');
+            }
+        } else {
+            if (pomoState === 'shortBreak') currentCycle = Math.min(config.maxCycles, currentCycle + 1);
+            resetPomoState('work');
+        }
+
+        // Skip = transition now and start the new phase immediately.
+        isPomoRunning = true;
+        pomoEndAt = Date.now() + Math.max(1, currentTotalTime) * 1000;
+        pomoLastSavedSecond = -1;
+        setPomoButton(true);
+        updatePomoDisplay();
+        savePomoState();
+        startPomoTicker();
+    };
+    function tickPomo() {
+        if (!isPomoRunning || !pomoEndAt) return;
+        const remainingMs = pomoEndAt - Date.now();
+        pomoTimeLeft = Math.max(0, Math.ceil(remainingMs / 1000));
+        updatePomoDisplay();
+
+        if (pomoTimeLeft <= 10 && pomoTimeLeft > 0 && !pomoAudioCuePlayed) {
+            pomoAudioCuePlayed = true;
+            playPomoCue(pomoState === 'work' ? 'warning' : 'break');
+            sendProductivityNotification(
+                pomoState === 'work' ? '10 seconds left' : 'Break ends in 10 seconds',
+                pomoState === 'work' ? 'Finish your focus session.' : 'Get ready for the next focus session.'
+            );
+        }
+
+        if (pomoTimeLeft <= 0) {
+            finishPomoSession();
+            return;
+        }
+
+        // Save at most once per second, not every 250ms.
+        if (pomoTimeLeft !== pomoLastSavedSecond) {
+            pomoLastSavedSecond = pomoTimeLeft;
+            savePomoState();
+        }
+    }
+
+    document.getElementById('pomo-settings-btn')?.addEventListener('click', () => {
+        const panel = document.getElementById('pomo-settings-panel');
+        panel?.classList.toggle('hidden');
+        panel?.classList.toggle('flex');
     });
-    document.getElementById('pomo-skip-btn').addEventListener('click', advancePomoState);
+
+    const readMinutes = (id, current) => {
+        const v = parseInt(document.getElementById(id)?.value, 10);
+        return Number.isFinite(v) && v >= 1 ? Math.min(v, 240) : current;
+    };
+
+    document.getElementById('pomo-save-settings')?.addEventListener('click', () => {
+        config.work = readMinutes('pomo-work-input', config.work);
+        config.short = readMinutes('pomo-short-input', config.short);
+        config.long = readMinutes('pomo-long-input', config.long);
+        try { localStorage.setItem(POMO_KEY, JSON.stringify(config)); } catch (e) {}
+        syncPomoInputs();
+        document.getElementById('pomo-settings-panel')?.classList.add('hidden');
+        document.getElementById('pomo-settings-panel')?.classList.remove('flex');
+        resetPomoState(pomoState);
+    });
+
+    pomoStartBtn?.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        await ensurePomoAudio();
+        if (isPomoRunning) {
+            // Pause: capture the exact remaining time first.
+            pomoTimeLeft = Math.max(0, Math.ceil((pomoEndAt - Date.now()) / 1000));
+            stopPomoTicker();
+            isPomoRunning = false;
+            pomoEndAt = null;
+            updatePomoDisplay();
+            setPomoButton(false);
+            savePomoState();
+            return;
+        }
+        if (pomoTimeLeft <= 0 || !Number.isFinite(pomoTimeLeft)) pomoTimeLeft = currentTotalTime;
+        isPomoRunning = true;
+        pomoAudioCuePlayed = false;
+        pomoEndAt = Date.now() + Math.max(1, pomoTimeLeft) * 1000;
+        pomoLastSavedSecond = -1;
+        setPomoButton(true);
+        updatePomoDisplay();
+        savePomoState();
+        startPomoTicker();
+    });
+
+    pomoSkipBtn?.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        await ensurePomoAudio();
+        advancePomoState();
+    });
+
+    // Restore the exact running state after refresh. If the phone slept past the end,
+    // finish the phase immediately and move to the correct next phase.
     try {
-        const saved=JSON.parse(localStorage.getItem(POMO_STATE_KEY));
-        if(saved && saved.state && Number.isFinite(saved.timeLeft) && Number.isFinite(saved.total)){
-            pomoState=saved.state; currentCycle=saved.cycle||1; currentTotalTime=saved.total;
-            const elapsed=saved.running?Math.floor((Date.now()-(saved.savedAt||Date.now()))/1000):0; pomoTimeLeft=Math.max(0,saved.timeLeft-elapsed);
-            pomoModeText.textContent=pomoState==='work'?'Work Session':(pomoState==='shortBreak'?'Short Break':'Long Break'); document.getElementById('pomo-cycle-text').textContent=`Cycle: ${currentCycle}/${config.maxCycles}`; updatePomoDisplay();
-            if(saved.running && pomoTimeLeft>0){ isPomoRunning=true; pomoAudioCuePlayed=(pomoTimeLeft<=10); pomoStartBtn.textContent='Pause'; pomoInterval=setInterval(tickPomo,1000); savePomoState(); }
-            else if(pomoTimeLeft<=0) advancePomoState();
-        } else updatePomoDisplay();
-    } catch(e){updatePomoDisplay();}
+        const saved = JSON.parse(localStorage.getItem(POMO_STATE_KEY) || 'null');
+        if (saved && ['work','shortBreak','longBreak'].includes(saved.state)) {
+            pomoState = saved.state;
+            currentCycle = Math.min(config.maxCycles, Math.max(1, Number(saved.cycle) || 1));
+            setPomoModeUI(pomoState);
+            currentTotalTime = Number(saved.total) > 0 ? Number(saved.total) : currentTotalTime;
+            if (saved.running && Number(saved.endAt) > 0) {
+                pomoEndAt = Number(saved.endAt);
+                pomoTimeLeft = Math.max(0, Math.ceil((pomoEndAt - Date.now()) / 1000));
+                if (pomoTimeLeft > 0) {
+                    isPomoRunning = true;
+                    pomoAudioCuePlayed = pomoTimeLeft <= 10;
+                    setPomoButton(true);
+                    updatePomoDisplay();
+                    startPomoTicker();
+                } else {
+                    finishPomoSession();
+                }
+            } else {
+                pomoTimeLeft = Number(saved.timeLeft) >= 0 ? Math.min(Number(saved.timeLeft), currentTotalTime) : currentTotalTime;
+                isPomoRunning = false;
+                pomoEndAt = null;
+                updatePomoDisplay();
+                setPomoButton(false);
+            }
+        } else {
+            resetPomoState('work');
+        }
+    } catch (e) {
+        resetPomoState('work');
+    }
+
+    // Keep a running timer accurate even when the browser resumes a suspended tab.
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && isPomoRunning) tickPomo();
+    });
+    window.addEventListener('pageshow', () => { if (isPomoRunning) tickPomo(); });
 
     // ==== HABIT TRACKER (Saturday to Friday) ====
     const getWeekDates = () => {
