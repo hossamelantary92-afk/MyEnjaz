@@ -440,6 +440,9 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
 #habit-days-header>span{height:18px!important;font-size:10px;line-height:18px;}
 @media(max-width:640px){#habits-list .habit-week-cells{grid-template-columns:repeat(7,24px);}#habit-days-header>span,#habits-list .habit-circle{width:24px!important;min-width:24px!important;flex-basis:24px;height:24px!important;}#habit-days-header>span{height:18px!important;}#habits-list .habit-tracking-row>div:first-child{gap:3px!important;}#habits-list .habit-tracking-row>div:first-child>span{font-size:11px;}}
 </style>
+<style>
+#pomo-ring{transition:none!important;will-change:stroke-dashoffset;}
+</style>
 </head>
 <body class="p-4 md:p-8">
 
@@ -1035,13 +1038,17 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
         const safeLeft = Math.max(0, Math.ceil(pomoTimeLeft || 0));
         const minutes = Math.floor(safeLeft / 60);
         const seconds = safeLeft % 60;
-        pomoDisplay.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-        const ratio = currentTotalTime > 0 ? Math.min(1, Math.max(0, safeLeft / currentTotalTime)) : 0;
+        const label = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        if (pomoDisplay.textContent !== label) pomoDisplay.textContent = label;
+        const ratio = currentTotalTime > 0 ? Math.min(1, Math.max(0, pomoTimeLeft / currentTotalTime)) : 0;
         pomoRing.style.strokeDashoffset = String((1 - ratio) * 408);
-        pomoCycleText.textContent = `Cycle: ${currentCycle}/${config.maxCycles}`;
+        const cycleLabel = `Cycle: ${currentCycle}/${config.maxCycles}`;
+        if (pomoCycleText.textContent !== cycleLabel) pomoCycleText.textContent = cycleLabel;
     };
 
+    let pomoTickerGeneration = 0;
     const stopPomoTicker = () => {
+        pomoTickerGeneration++;
         if (pomoInterval) clearInterval(pomoInterval);
         pomoInterval = null;
         if (pomoAnimationFrame) cancelAnimationFrame(pomoAnimationFrame);
@@ -1050,16 +1057,19 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
 
     const startPomoTicker = () => {
         stopPomoTicker();
-        // Render with requestAnimationFrame for a smooth mobile UI; the absolute
-        // end timestamp remains the single source of truth for timing accuracy.
+        const generation = pomoTickerGeneration;
         const frame = () => {
-            if (!isPomoRunning || !pomoEndAt) return;
+            if (generation !== pomoTickerGeneration || !isPomoRunning || !pomoEndAt || document.hidden) return;
             tickPomo();
-            if (isPomoRunning) pomoAnimationFrame = requestAnimationFrame(frame);
+            if (generation === pomoTickerGeneration && isPomoRunning) pomoAnimationFrame = requestAnimationFrame(frame);
         };
         frame();
-        // Persistence is throttled inside tickPomo, so the animation does not
-        // cause excessive localStorage writes.
+        if (generation !== pomoTickerGeneration) return;
+        // Background tabs may be throttled. Always reconcile with the absolute
+        // end timestamp; never replay missed animation frames on return.
+        pomoInterval = setInterval(() => {
+            if (generation === pomoTickerGeneration && document.hidden && isPomoRunning) tickPomo();
+        }, 1000);
     };
 
     const resetPomoState = (state = 'work') => {
@@ -1146,7 +1156,7 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
     function tickPomo() {
         if (!isPomoRunning || !pomoEndAt) return;
         const remainingMs = pomoEndAt - Date.now();
-        pomoTimeLeft = Math.max(0, Math.ceil(remainingMs / 1000));
+        pomoTimeLeft = Math.max(0, remainingMs / 1000);
         updatePomoDisplay();
 
         if (pomoTimeLeft <= 10 && pomoTimeLeft > 0 && !pomoAudioCuePlayed) {
@@ -1164,8 +1174,8 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
         }
 
         // Save at most once per second, not every 250ms.
-        if (pomoTimeLeft !== pomoLastSavedSecond) {
-            pomoLastSavedSecond = pomoTimeLeft;
+        if (Math.ceil(pomoTimeLeft) !== pomoLastSavedSecond) {
+            pomoLastSavedSecond = Math.ceil(pomoTimeLeft);
             savePomoState();
         }
     }
@@ -1262,9 +1272,11 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
 
     // Keep a running timer accurate even when the browser resumes a suspended tab.
     document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && isPomoRunning) tickPomo();
+        if (!isPomoRunning) return;
+        if (document.visibilityState === 'visible') { tickPomo(); startPomoTicker(); }
+        else if (pomoAnimationFrame) { cancelAnimationFrame(pomoAnimationFrame); pomoAnimationFrame = null; }
     });
-    window.addEventListener('pageshow', () => { if (isPomoRunning) tickPomo(); });
+    window.addEventListener('pageshow', () => { if (isPomoRunning) { tickPomo(); startPomoTicker(); } });
 
     // ==== HABIT TRACKER (Saturday to Friday) ====
     const getWeekDates = () => {
