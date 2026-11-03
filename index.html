@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Enjaz — Your daily workspace</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%230b1f33%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2222%22%20fill%3D%22none%22%20stroke%3D%22%2334d399%22%20stroke-width%3D%227%22%2F%3E%3Cpath%20d%3D%22m19%2032%209%209%2018-20%22%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    fontFamily: { sans: ['Inter', 'Tajawal', 'sans-serif'] },
                     colors: {
                         dark: { 900: '#0f172a', 800: '#1e293b', 700: '#334155', 600: '#475569', 500: '#64748b', 400: '#94a3b8' },
-                        brand: { primary: '#818cf8', success: '#34d399', danger: '#fb7185', warning: '#fbbf24', info: '#38bdf8' }
+                        brand: { primary: '#34d399', success: '#34d399', danger: '#fb7185', warning: '#fbbf24', info: '#0ea5a8' }
                     }
                 }
             }
@@ -454,13 +455,30 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
 .editing-habit-order .habit-tracking-row{border-color:#34d39944;}
 @media(max-width:640px){.habit-order-button{font-size:10px;padding:5px 7px;min-width:36px;}.habit-order-actions{gap:4px;}}
 </style>
+<style id="enjaz-brand-2026">
+:root{--enjaz-navy:#0b1f33;--enjaz-surface:#12324a;--enjaz-teal:#0ea5a8;--enjaz-mint:#34d399;--enjaz-soft:#a7f3d0}
+body{background-color:var(--enjaz-navy);background-image:radial-gradient(900px 520px at 10% -10%,rgba(14,165,168,.13),transparent 65%),radial-gradient(750px 460px at 95% 0%,rgba(52,211,153,.075),transparent 60%)}
+.enjaz-brand-lockup{display:flex;align-items:center;gap:13px}
+.enjaz-brand-mark{width:55px;height:55px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#17465a,#0b263b);border:1px solid rgba(52,211,153,.22);box-shadow:0 9px 26px rgba(0,0,0,.22)}
+.enjaz-brand-mark svg{width:43px;height:43px}
+.enjaz-brand-lockup h1{letter-spacing:-.055em;line-height:1.05}
+.enjaz-brand-lockup .brand-caption{margin-top:5px;color:#a8c7d2}
+.card{background:linear-gradient(160deg,rgba(18,50,74,.96),rgba(11,31,51,.97));border-color:rgba(93,151,160,.27);box-shadow:0 16px 40px -22px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.045)}
+.card:hover{border-color:rgba(52,211,153,.4)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline-color:var(--enjaz-mint)}
+.custom-checkbox:checked{background-color:var(--enjaz-mint);border-color:var(--enjaz-mint)}
+#today-overview{border-color:rgba(52,211,153,.23)}
+#open-insights-btn:hover,.pomo-icon-btn:hover{border-color:var(--enjaz-mint)}
+::-webkit-scrollbar-thumb:hover{background:var(--enjaz-teal)}
+@media(max-width:640px){.enjaz-brand-mark{width:44px;height:44px;border-radius:13px}.enjaz-brand-mark svg{width:35px;height:35px}.enjaz-brand-lockup{gap:10px}}
+</style>
 </head>
 <body class="p-4 md:p-8">
 
 <!-- HEADER -->
 <header class="enjaz-header max-w-7xl mx-auto">
     <div class="flex flex-col items-center gap-3">
-        <h1 class="text-white font-bold tracking-tight">Enjaz</h1><p class="brand-caption">A little progress, every day.</p>
+        <div class="enjaz-brand-lockup"><span class="enjaz-brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="23" stroke="#12324A" stroke-width="7"/><path d="M32 9a23 23 0 1 1-22.2 29" stroke="#34D399" stroke-width="7" stroke-linecap="round"/><path d="m19 32 9 9 18-20" stroke="#F8FAFC" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h1 class="text-white font-bold tracking-tight">Enjaz</h1><p class="brand-caption">A little progress, every day.</p></div></div>
         
     </div>
     <div class="flex items-center gap-2 flex-wrap justify-center">
