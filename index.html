@@ -799,6 +799,8 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
         } catch(e) { console.warn("Failed to load local data."); }
     };
 
+    loadFromLocal();
+
     // ==== DATE FORMATTING ====
     const formatCustomDate = (date) => {
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -1697,7 +1699,8 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
         const streaks = habits.map(getHabitStreak);
         const bestCurrentStreak = streaks.length ? Math.max(...streaks) : 0;
         const nextDue = openTasks.filter(t=>t.dueTime).sort((a,b)=>a.dueTime.localeCompare(b.dueTime))[0];
-        document.getElementById('dash-focus-plan').textContent = `${focusPlan} focus block${focusPlan===1?'':'s'} planned`;
+        const focusPlanLabel = document.getElementById('dash-focus-plan');
+        if (focusPlanLabel) focusPlanLabel.textContent = `${focusPlan} focus block${focusPlan===1?'':'s'} planned`;
         document.getElementById('insight-completion').textContent = `${completionRate}%`;
         document.getElementById('insight-completion-sub').textContent = monthly ? 'this month' : 'this week';
         document.getElementById('insight-open').textContent = openTasks.length + overdue.length;
@@ -1711,16 +1714,15 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
         const streakBox=document.getElementById('streak-summary'); streakBox.innerHTML='';
         const top=[...habits].map(h=>({title:h.title, streak:getHabitStreak(h), best:getBestStreak(h)})).sort((a,b)=>b.streak-a.streak).slice(0,3);
         if(!top.length) streakBox.innerHTML='<p class="text-xs text-dark-500">Add habits to build streaks.</p>'; else top.forEach(x=>streakBox.insertAdjacentHTML('beforeend', `<div class="flex items-center justify-between bg-dark-800/60 rounded-lg px-3 py-2"><span class="text-xs text-white truncate pr-2">${x.title}</span><span class="streak-badge text-[10px] font-bold text-brand-success">🔥 ${x.streak} <span class="text-dark-500">/ ${x.best}</span></span></div>`));
-        renderHeatmap(); renderDailyPlan(); renderCalendar(); renderDailyPlanMode(); maybeMorningPlan();
+        renderCalendar(); renderDailyPlanMode(); maybeMorningPlan();
     };
-    renderHeatmap(); renderDailyPlan(); renderCalendar();
+    renderCalendar();
 
     document.getElementById('task-search')?.addEventListener('input', renderTodos);
     document.getElementById('task-filter')?.addEventListener('change', renderTodos);
     document.getElementById('complete-all-tasks')?.addEventListener('click', () => { let changed=false; todos.forEach(t=>{ if(t.dateStr===todayStr && !t.completed){t.completed=true; t.completedAt=Date.now(); changed=true;} }); if(changed){saveToLocal(); renderTodos(); renderDashboard();} });
 
-    // Load Local Data instantly and Render
-    loadFromLocal();
+    // Render the records already restored before UI setup.
     todos.forEach(t => { if (typeof t.completedAt === 'undefined') t.completedAt = t.completed ? t.createdAt : null; if (!t.priority) t.priority='medium'; if (typeof t.focusBlocks==='undefined') t.focusBlocks=1; });
     renderTodos(); renderCourses(); renderHabits(); renderDashboard();
 
