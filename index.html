@@ -431,6 +431,15 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
 #add-task-form .task-entry-controls .task-add-button{padding:0!important;}.task-add-label{display:none;}.task-add-symbol{display:block;font-size:23px;font-weight:500;line-height:1;}
 }
 </style>
+<style id="habit-day-alignment">
+#habits-list{padding-right:0!important;}
+#habit-days-header{box-sizing:border-box;position:sticky;top:0;z-index:1;background:#172234;display:flex!important;justify-content:flex-end!important;gap:6px!important;padding:6px 13px!important;margin:0 0 8px!important;min-height:28px;width:100%!important;}
+#habits-list .habit-tracking-row{padding:12px!important;gap:8px!important;}
+#habits-list .habit-week-cells{display:grid!important;grid-template-columns:repeat(7,28px);gap:6px!important;}
+#habit-days-header>span,#habits-list .habit-circle{box-sizing:border-box;width:28px!important;min-width:28px!important;height:28px!important;display:flex!important;align-items:center;justify-content:center;flex:0 0 28px;}
+#habit-days-header>span{height:18px!important;font-size:10px;line-height:18px;}
+@media(max-width:640px){#habits-list .habit-week-cells{grid-template-columns:repeat(7,24px);}#habit-days-header>span,#habits-list .habit-circle{width:24px!important;min-width:24px!important;flex-basis:24px;height:24px!important;}#habit-days-header>span{height:18px!important;}#habits-list .habit-tracking-row>div:first-child{gap:3px!important;}#habits-list .habit-tracking-row>div:first-child>span{font-size:11px;}}
+</style>
 </head>
 <body class="p-4 md:p-8">
 
@@ -889,7 +898,7 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
     syncInsightsPeriod();
     document.getElementById('open-insights-btn')?.addEventListener('click',()=>{insightsPanel.open=true;insightsPanel.scrollIntoView({behavior:'smooth',block:'start'});syncInsightsPeriod();});
     const notifyTopBtn=document.getElementById('enable-notify-top');
-    const syncNotificationButton=()=>{ if(!notifyTopBtn)return; const enabled=('Notification' in window && Notification.permission==='granted' && !!notifyState().enabled); notifyTopBtn.querySelector('span').textContent=enabled?'Notifications ✓':'Notifications'; notifyTopBtn.classList.toggle('notify-top-active',enabled); };
+    const syncNotificationButton=()=>{ if(!notifyTopBtn)return; const enabled=('Notification' in window && Notification.permission==='granted' && !!notifyState().enabled); notifyTopBtn.querySelector('span').textContent=enabled?'Notifications ✓':'Notifications'; notifyTopBtn.classList.toggle('notify-top-active',enabled); document.getElementById('planning-alert')?.classList.toggle('hidden',enabled); };
     syncNotificationButton();
     notifyTopBtn?.addEventListener('click',async()=>{
         try { if(window.pomoAudioContext?.state==='suspended') await window.pomoAudioContext.resume(); } catch(e) {}
@@ -1294,13 +1303,13 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
             span.textContent = lbl; header.appendChild(span);
         });
 
-        list.innerHTML = ''; archiveList.innerHTML = '';
-        if(habits.length === 0) list.innerHTML = `<p class="text-xs text-dark-500 italic text-center py-4">No habits tracked yet.</p>`;
+        list.replaceChildren(header); archiveList.innerHTML = '';
+        if(habits.length === 0) list.insertAdjacentHTML('beforeend', `<p class="text-xs text-dark-500 italic text-center py-4">No habits tracked yet.</p>`);
 
         habits.forEach(habit => {
             // Active View
             const item = document.createElement('div');
-            item.className = 'group flex items-center justify-between bg-dark-900/60 p-2.5 sm:p-3 rounded-xl border border-dark-700 hover:border-dark-600 transition gap-2';
+            item.className = 'habit-tracking-row group flex items-center justify-between bg-dark-900/60 p-2.5 sm:p-3 rounded-xl border border-dark-700 hover:border-dark-600 transition gap-2';
             
             let html = `
                 <div class="flex items-center gap-2 min-w-0 flex-1">
@@ -1309,7 +1318,7 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
                     </button>
                     <span class="text-[13px] text-white font-medium break-words leading-tight">${habit.title}</span>
                 </div>
-                <div class="flex justify-end gap-[6px] flex-shrink-0">
+                <div class="habit-week-cells flex justify-end gap-[6px] flex-shrink-0">
             `;
             
             currentWeekInfo.dates.forEach(dateStr => {
@@ -1660,7 +1669,7 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
         if(!plan.items.length){ el.innerHTML='<div class="text-sm text-dark-500 text-center py-4">You are clear. Add a task, habit, or lesson and regenerate the plan.</div>'; }
         else el.innerHTML=plan.items.map((x,i)=>`<div class="plan-item flex items-center gap-3 bg-dark-900/60 border border-dark-700 rounded-xl p-3" data-plan-index="${i}"><span class="plan-number">${i+1}</span><div class="min-w-0 flex-1"><div class="text-sm font-bold text-white truncate">${x.title}</div><div class="text-[10px] text-dark-500 uppercase mt-1">${x.kind} · ${x.minutes}m · ${x.meta}</div></div><button class="plan-start-btn bg-dark-800 border border-dark-600 text-brand-primary font-bold px-3 py-1.5 rounded-lg text-[10px] hover:border-brand-primary">Start</button></div>`).join('');
         el.querySelectorAll('.plan-start-btn').forEach(btn=>btn.addEventListener('click',()=>{ const item=plan.items[Number(btn.closest('.plan-item').dataset.planIndex)]; startFocusForTask({text:item.title,focusBlocks:Math.max(1,Math.ceil(item.minutes/config.work))}); }));
-        if(state.enabled) { alert.classList.add('hidden'); } else { alert.classList.remove('hidden'); alert.textContent='Tip: enable browser notifications so the dashboard can remind you when it is time to start the next focus block.'; }
+        if(state.enabled && 'Notification' in window && Notification.permission==='granted') { alert.classList.add('hidden'); } else { alert.classList.remove('hidden'); alert.textContent='Tip: enable browser notifications so the dashboard can remind you when it is time to start the next focus block.'; }
     };
     document.getElementById('generate-plan-btn')?.addEventListener('click',()=>{ buildDailyPlan(true); renderDailyPlanMode(); sendProductivityNotification('Daily plan refreshed','Your focus queue is ready.'); });
     document.getElementById('notify-btn')?.addEventListener('click',async()=>{
