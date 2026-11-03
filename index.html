@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>My Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Enjaz — Your daily workspace</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -366,14 +366,38 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
   .dashboard-fullscreen .fullscreen-btn{position:sticky!important;top:0!important;z-index:2147483001!important;}
 }
 </style>
+
+<style id="enjaz-workspace-design">
+body{background-color:#0c1424;padding:24px 28px;background-image:radial-gradient(ellipse at 0 0,rgba(99,102,241,.09),transparent 55%);}
+.enjaz-header{display:flex!important;align-items:center!important;justify-content:space-between;flex-direction:row!important;text-align:left!important;gap:20px!important;margin:0 auto 24px!important;min-height:64px;}
+.enjaz-header>div:first-child{align-items:flex-start;gap:3px;}.enjaz-header h1{font-size:30px!important;line-height:1.2!important;display:flex;align-items:center;gap:12px;}.brand-ar{font-size:20px;font-weight:500;color:#a5b4fc;border-left:1px solid #354158;padding-left:12px}.brand-caption{color:#a1aec2;font-size:12px;}
+.enjaz-header>div:nth-child(2){margin-left:auto;width:auto!important;}.enjaz-header button{min-height:38px!important;border-radius:10px;}.enjaz-header #connection-status{box-shadow:none;font-size:11px;padding:8px 12px;}
+.enjaz-main{display:flex;flex-direction:column;gap:20px!important;}.enjaz-workspace{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(310px,1fr);gap:20px;align-items:start;}.enjaz-secondary{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.enjaz-main .card{background:linear-gradient(145deg,#1a2639,#172234);border-color:#2d3a50;box-shadow:0 4px 20px rgba(0,0,0,.1);}.enjaz-main .card:hover{border-color:#45546d;box-shadow:0 4px 20px rgba(0,0,0,.1);}
+#today-overview{padding:16px 20px!important;background:transparent;border:0;box-shadow:none;}#today-overview>div:first-of-type{margin-bottom:12px!important;}#today-overview h2{font-size:15px!important;}#today-overview p{display:none;}#today-overview .dashboard-stat-grid{margin:0;gap:12px;}#today-overview .metric-glow{padding:14px 16px;box-shadow:none;background:#152034;border-color:#29364c;}#today-overview .metric-glow>div:first-child{margin-bottom:5px;}#today-overview .text-dark-500{color:#a4b1c7;}#today-overview .text-2xl{font-size:25px;}
+#tasks-section,#courses-section,#habit-section{height:auto!important;min-height:0!important;padding:20px!important;}#tasks-section{min-height:410px!important;}#tasks-section #active-tasks-view,#habit-section #active-habits-view,#courses-section #active-courses-view{height:auto!important;}
+#tasks-section .overflow-y-auto{max-height:520px;}#habits-list,#archive-habits-list{max-height:330px;}#courses-section .overflow-y-auto{max-height:390px;}
+#pomo-section{min-height:410px!important;padding:20px!important;}#pomo-section .ring-container{width:150px;height:150px;margin:12px auto 20px;}#pomo-display{font-size:40px;letter-spacing:-1px;}#pomo-section .pomo-actions{justify-content:center!important;margin-top:16px;}.ring-circle{filter:none;}.section-title{font-size:16px!important;}.section-title svg{border:0;box-shadow:none;}
+#add-task-form{position:relative;padding:14px!important;background:#111b2d;border-color:#344158;margin-bottom:16px;}#task-input{padding:7px 0 12px;margin-bottom:10px;font-size:14px;border-color:#344158;}#task-input::placeholder,#new-habit-input::placeholder,#task-search::placeholder{color:#93a2ba;}.task-options{margin-right:110px;}.task-options summary{font-size:12px;color:#cbd5e1;cursor:pointer;padding:9px 0;}.task-options summary span{font-size:10px;color:#98a9c2;margin-left:8px;}.task-options[open]{margin-right:0;}.task-options .grid{margin:10px 0 48px;}.task-options~div{position:absolute;bottom:14px;right:14px;}#add-task-form button[type=submit]{min-height:36px!important;background:#818cf8;color:#0f172a;border-radius:9px;}
+.enjaz-main .text-dark-500{color:#98a7bf;}.enjaz-main .text-dark-400{color:#aab8ce;}.enjaz-main .archive-btn,.enjaz-main .fullscreen-btn{font-size:10px!important;min-width:0;min-height:32px;border-radius:8px;text-transform:none;letter-spacing:0;}.enjaz-main button{box-shadow:none;}#daily-planning-mode{padding:20px!important;}#daily-planning-mode>div.absolute{display:none;}.metric-glow{box-shadow:none;}
+.mobile-nav,#mini-focus{display:none;}#insights-panel{scroll-margin-top:20px;}#insights-panel>summary{min-height:72px;}
+@media(max-width:900px){.enjaz-workspace{grid-template-columns:minmax(0,1.3fr) minmax(280px,1fr);}.enjaz-header{flex-wrap:wrap;}.enjaz-header #connection-status{margin-left:auto;}.enjaz-secondary{grid-template-columns:1fr;}}
+@media(max-width:640px){body{padding:14px 12px 92px!important;}.enjaz-header{gap:12px!important;margin-bottom:14px!important;}.enjaz-header h1{font-size:26px!important;}.enjaz-header>div:first-child{width:100%;}.brand-caption{font-size:11px;}.enjaz-header>div:nth-child(2){margin-left:0;gap:6px!important;}.enjaz-header>div:nth-child(2)>button{flex:none;min-height:36px!important;font-size:10px;}.enjaz-header #connection-status{font-size:9px!important;padding:6px 8px!important;}.enjaz-main{gap:14px!important;}.enjaz-workspace,.enjaz-secondary{display:flex;flex-direction:column;gap:14px;}#today-overview{padding:0!important;}#today-overview .metric-glow{padding:12px;}#today-overview .text-2xl{font-size:23px;}#today-overview .dashboard-stat-grid{gap:8px;}.task-options{margin-right:90px;}.task-options summary span{display:none;}#add-task-form button[type=submit]{width:auto!important;padding:8px 12px;}#tasks-section,#courses-section,#habit-section,#pomo-section{padding:16px!important;min-height:0!important;}.enjaz-main .section-title{font-size:15px!important;}#pomo-section{min-height:350px!important;}#pomo-section>.border-b{flex-wrap:wrap;}.enjaz-main .text-dark-500{font-size:11px;}#task-search{min-width:0;}#complete-all-tasks{padding:6px;font-size:9px;}
+.mobile-nav{display:flex;position:fixed;z-index:40;bottom:0;left:0;right:0;padding:9px 12px calc(9px + env(safe-area-inset-bottom));background:rgba(15,23,42,.97);border-top:1px solid #334155;backdrop-filter:blur(15px);gap:5px;}.mobile-nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:#a2b1c8;border-radius:10px;font-size:18px;min-height:45px;}.mobile-nav button span{font-size:10px;font-weight:600;}.mobile-nav button[aria-current=page]{color:#c7d2fe;background:#818cf81c;}
+body[data-panel=today] .enjaz-secondary,body[data-panel=today] #insights-panel,body[data-panel=habits] .enjaz-workspace,body[data-panel=habits] #today-overview,body[data-panel=habits] #courses-section,body[data-panel=habits] #daily-planning-mode,body[data-panel=habits] #insights-panel,body[data-panel=courses] .enjaz-workspace,body[data-panel=courses] #today-overview,body[data-panel=courses] #habit-section,body[data-panel=courses] #daily-planning-mode,body[data-panel=courses] #insights-panel,body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] .enjaz-secondary,body[data-panel=insights] #today-overview,body[data-panel=insights] #daily-planning-mode{display:none!important;}
+#mini-focus:not([hidden]){position:fixed;bottom:calc(76px + env(safe-area-inset-bottom));left:12px;right:12px;display:flex;align-items:center;gap:10px;z-index:39;padding:10px 14px;background:#24324a;border:1px solid #6574c1;border-radius:13px;box-shadow:0 6px 20px #0005;}#mini-focus-time{font-weight:700;font-variant-numeric:tabular-nums;margin-right:auto;}#mini-focus button{padding:5px 12px;background:#818cf8;color:#0f172a;border-radius:8px;font-weight:600;font-size:12px;}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;}}
+</style>
+
 </head>
 <body class="p-4 md:p-8">
 
 <!-- HEADER -->
-<header class="max-w-7xl mx-auto mt-2 mb-10 flex flex-col items-center text-center gap-4">
+<header class="enjaz-header max-w-7xl mx-auto">
     <div class="flex flex-col items-center gap-3">
-        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">My Dashboard</h1>
-        <div class="h-1 w-16 rounded-full bg-gradient-to-r from-brand-primary to-brand-info"></div>
+        <h1 class="text-white font-bold tracking-tight">Enjaz<span class="brand-ar" lang="ar">إنجاز</span></h1><p class="brand-caption">A little progress, every day.</p>
+        
     </div>
     <div class="flex items-center gap-2 flex-wrap justify-center">
         <button id="open-insights-btn" class="text-xs font-bold px-3 py-2 rounded-lg bg-dark-800 border border-dark-600 text-dark-300 hover:text-white hover:border-brand-primary">Insights</button>
@@ -385,12 +409,108 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
     </div>
 </header>
 
-<main class="max-w-7xl mx-auto flex flex-col gap-6">
-    <!-- TOP ROW: Pomodoro & Habits -->
-    <div id="main-core-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- POMODORO -->
-        <section id="pomo-section" class="card rounded-2xl p-6 relative overflow-hidden flex flex-col min-h-[340px]">
+<main class="enjaz-main max-w-7xl mx-auto">
+<section id="today-overview" class="card rounded-2xl p-5 md:p-6 relative overflow-hidden">
+                <div class="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 mb-5">
+            <div>
+                
+                <h2 class="text-2xl md:text-3xl font-bold text-white">Today at a Glance</h2>
+                <p id="dashboard-message" class="text-sm text-dark-400 mt-1">Plan your focus, finish the important work, and keep your streak alive.</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-dark-400 bg-dark-900/60 border border-dark-700 rounded-xl px-3 py-2">
+                <span class="w-2 h-2 rounded-full bg-brand-success"></span>
+                <span id="dashboard-date-label">Today</span>
+            </div>
+        </div>
+        <div class="dashboard-stat-grid grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Focus</span><span class="text-brand-primary">◷</span></div>
+                <div id="dash-focus" class="text-2xl font-bold text-white">0m</div><div id="dash-focus-sub" class="text-[11px] text-dark-500 mt-1">sessions today</div>
+            </div>
+            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Habits</span><span class="text-brand-success">◆</span></div>
+                <div id="dash-habits" class="text-2xl font-bold text-white">0%</div><div id="dash-habits-sub" class="text-[11px] text-dark-500 mt-1">today's adherence</div>
+            </div>
+            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Tasks</span><span class="text-brand-danger">✓</span></div>
+                <div id="dash-tasks" class="text-2xl font-bold text-white">0/0</div><div id="dash-tasks-sub" class="text-[11px] text-dark-500 mt-1">completed today</div>
+            </div>
+            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Courses</span><span class="text-brand-info">▰</span></div>
+                <div id="dash-courses" class="text-2xl font-bold text-white">0%</div><div id="dash-courses-sub" class="text-[11px] text-dark-500 mt-1">overall progress</div>
+            </div>
+        </div>
+    </section>
+<div class="enjaz-workspace">
+<section id="tasks-section" class="card rounded-2xl p-6 h-[600px] flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-dark-700 pb-4 mb-5 gap-4">
+                <div class="flex items-center gap-3 flex-wrap">
+                    <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
+                        <svg class="w-5 h-5 text-brand-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        Tasks
+                    </h2>
+                    <span id="tasks-date-display" class="text-xs font-bold text-dark-300 bg-dark-900 px-3 py-1 rounded-full border border-dark-600 shadow-inner tracking-wide"></span>
+                </div>
+                <button id="toggle-archive-btn" class="archive-btn text-xs text-dark-300 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900/80 uppercase tracking-wider whitespace-nowrap">
+                    Archive
+                </button>
+            </div>
+
+            <div id="active-tasks-view" class="flex flex-col h-full flex-1 overflow-hidden">
+                <form id="add-task-form" class="mb-5 bg-dark-900 p-4 rounded-xl border border-dark-700">
+                    <input type="text" id="task-input" required placeholder="What needs to be done today?" class="w-full bg-transparent border-b border-dark-600 pb-2 mb-4 focus:outline-none focus:border-brand-danger transition text-sm placeholder-dark-500 text-white">
+                    <details class="task-options"><summary>Options <span>Priority · Time · Focus</span></summary>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
+                        <select aria-label="Task priority" id="task-priority" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="high">High Priority</option><option value="medium" selected>Medium</option><option value="low">Low</option></select>
+                        <div class="relative flex items-center"><span class="absolute left-2.5 text-[9px] text-slate-400 pointer-events-none">⏰</span><input id="task-due" type="time" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] text-white focus:outline-none focus:border-brand-danger" title="Due time / وقت المهمة"><span class="sr-only">وقت المهمة</span></div>
+                        <select aria-label="Focus sessions" id="task-focus" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="0">No Focus</option><option value="1">1 Focus</option><option value="2">2 Focus</option><option value="3">3 Focus</option><option value="4">4 Focus</option></select>
+                    </div>
+                    </details>
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-brand-danger/90 text-white font-bold px-5 py-2 rounded-lg hover:bg-brand-danger transition text-xs whitespace-nowrap">Add Task</button>
+                    </div>
+                </form>
+
+                <div class="mb-3 flex gap-2">
+                    <input id="task-search" type="search" placeholder="Search today’s tasks..." class="flex-1 bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-xs text-white placeholder-dark-500 focus:outline-none focus:border-brand-danger">
+                    <div class="flex gap-2">
+                        <select id="task-filter" class="bg-dark-900 border border-dark-700 rounded-lg px-2.5 py-2 text-[10px] font-bold text-dark-400 focus:outline-none">
+                            <option value="all">All</option><option value="open">Open</option><option value="done">Done</option><option value="high">High Priority</option>
+                        </select>
+                        <button id="complete-all-tasks" type="button" class="text-[10px] font-bold uppercase tracking-wider px-3 rounded-lg border border-dark-700 text-dark-400 hover:text-white hover:bg-dark-700">Complete all</button>
+                    </div>
+                </div>
+                <div class="flex-1 overflow-y-auto pr-2 space-y-5 custom-scrollbar">
+                    <div>
+                        <h3 class="text-brand-danger font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-danger"></span> High Priority
+                        </h3>
+                        <div id="list-must" class="space-y-2"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-brand-warning font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-warning"></span> Medium Priority
+                        </h3>
+                        <div id="list-important" class="space-y-2"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-brand-info font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-info"></span> Low Priority
+                        </h3>
+                        <div id="list-small" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="archive-tasks-view" class="hidden flex-col h-full flex-1 overflow-hidden">
+                <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
+                    <svg class="w-5 h-5 text-dark-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <p class="text-sm text-dark-400">Past tasks automatically move here.</p>
+                </div>
+                <div id="list-archive" class="flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar"></div>
+            </div>
+        </section>
+<section id="pomo-section" class="card rounded-2xl p-6 relative overflow-hidden flex flex-col min-h-[340px]">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-primary to-brand-info"></div>
             <div class="flex justify-between items-center mb-4 border-b border-dark-700 pb-4">
                 <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
@@ -460,9 +580,9 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
                 </div>
             </div>
         </section>
-
-        <!-- HABIT TRACKER (SAT - FRI) -->
-        <section id="habit-section" class="card rounded-2xl p-6 flex flex-col min-h-[340px]">
+</div>
+<div class="enjaz-secondary">
+<section id="habit-section" class="card rounded-2xl p-6 flex flex-col min-h-[340px]">
             <div class="flex items-center justify-between border-b border-dark-700 pb-4 mb-4">
                 <div class="flex items-center gap-3">
                     <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
@@ -499,82 +619,7 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
                 <div id="archive-habits-list" class="space-y-2 flex-1 overflow-y-auto custom-scrollbar pr-2 max-h-[170px]"></div>
             </div>
         </section>
-    </div>
-
-
-    <!-- BOTTOM ROW: Tasks & Courses -->
-    <div id="main-work-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- DAILY TASKS -->
-        <section id="tasks-section" class="card rounded-2xl p-6 h-[600px] flex flex-col">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-dark-700 pb-4 mb-5 gap-4">
-                <div class="flex items-center gap-3 flex-wrap">
-                    <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
-                        <svg class="w-5 h-5 text-brand-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                        Tasks
-                    </h2>
-                    <span id="tasks-date-display" class="text-xs font-bold text-dark-300 bg-dark-900 px-3 py-1 rounded-full border border-dark-600 shadow-inner tracking-wide"></span>
-                </div>
-                <button id="toggle-archive-btn" class="archive-btn text-xs text-dark-300 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900/80 uppercase tracking-wider whitespace-nowrap">
-                    Archive
-                </button>
-            </div>
-
-            <div id="active-tasks-view" class="flex flex-col h-full flex-1 overflow-hidden">
-                <form id="add-task-form" class="mb-5 bg-dark-900 p-4 rounded-xl border border-dark-700">
-                    <input type="text" id="task-input" required placeholder="What needs to be done today?" class="w-full bg-transparent border-b border-dark-600 pb-2 mb-4 focus:outline-none focus:border-brand-danger transition text-sm placeholder-dark-500 text-white">
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
-                        <select id="task-priority" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="high">High Priority</option><option value="medium" selected>Medium</option><option value="low">Low</option></select>
-                        <div class="relative flex items-center"><span class="absolute left-2.5 text-[9px] text-slate-400 pointer-events-none">⏰</span><input id="task-due" type="time" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] text-white focus:outline-none focus:border-brand-danger" title="Due time / وقت المهمة"><span class="sr-only">وقت المهمة</span></div>
-                        <select id="task-focus" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="0">No Focus</option><option value="1">1 Focus</option><option value="2">2 Focus</option><option value="3">3 Focus</option><option value="4">4 Focus</option></select>
-                    </div>
-                    <div class="flex justify-end">
-                        <button type="submit" class="bg-brand-danger/90 text-white font-bold px-5 py-2 rounded-lg hover:bg-brand-danger transition text-xs whitespace-nowrap">Add Task</button>
-                    </div>
-                </form>
-
-                <div class="mb-3 flex gap-2">
-                    <input id="task-search" type="search" placeholder="Search today’s tasks..." class="flex-1 bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-xs text-white placeholder-dark-500 focus:outline-none focus:border-brand-danger">
-                    <div class="flex gap-2">
-                        <select id="task-filter" class="bg-dark-900 border border-dark-700 rounded-lg px-2.5 py-2 text-[10px] font-bold text-dark-400 focus:outline-none">
-                            <option value="all">All</option><option value="open">Open</option><option value="done">Done</option><option value="high">High Priority</option>
-                        </select>
-                        <button id="complete-all-tasks" type="button" class="text-[10px] font-bold uppercase tracking-wider px-3 rounded-lg border border-dark-700 text-dark-400 hover:text-white hover:bg-dark-700">Complete all</button>
-                    </div>
-                </div>
-                <div class="flex-1 overflow-y-auto pr-2 space-y-5 custom-scrollbar">
-                    <div>
-                        <h3 class="text-brand-danger font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-brand-danger"></span> High Priority
-                        </h3>
-                        <div id="list-must" class="space-y-2"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-brand-warning font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-brand-warning"></span> Medium Priority
-                        </h3>
-                        <div id="list-important" class="space-y-2"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-brand-info font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-brand-info"></span> Low Priority
-                        </h3>
-                        <div id="list-small" class="space-y-2"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="archive-tasks-view" class="hidden flex-col h-full flex-1 overflow-hidden">
-                <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
-                    <svg class="w-5 h-5 text-dark-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-                    <p class="text-sm text-dark-400">Past tasks automatically move here.</p>
-                </div>
-                <div id="list-archive" class="flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar"></div>
-            </div>
-        </section>
-
-        <!-- COURSES PROGRESS -->
-        <section id="courses-section" class="card rounded-2xl p-6 h-[600px] flex flex-col relative overflow-hidden">
+<section id="courses-section" class="card rounded-2xl p-6 h-[600px] flex flex-col relative overflow-hidden">
             <div class="absolute top-0 right-0 w-40 h-40 bg-brand-info/5 rounded-full blur-3xl pointer-events-none"></div>
             
             <div class="flex items-center justify-between border-b border-dark-700 pb-4 mb-5 relative z-10">
@@ -623,44 +668,8 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
                 <div id="archive-courses-list" class="flex-1 overflow-y-auto space-y-4 relative z-10 pr-2 custom-scrollbar"></div>
             </div>
         </section>
-    </div>
-
-    <!-- DAILY COMMAND CENTER -->
-    <section class="card rounded-2xl p-5 md:p-6 relative overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-72 h-72 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 mb-5">
-            <div>
-                
-                <h2 class="text-2xl md:text-3xl font-bold text-white">Today at a Glance</h2>
-                <p id="dashboard-message" class="text-sm text-dark-400 mt-1">Plan your focus, finish the important work, and keep your streak alive.</p>
-            </div>
-            <div class="flex items-center gap-2 text-xs text-dark-400 bg-dark-900/60 border border-dark-700 rounded-xl px-3 py-2">
-                <span class="w-2 h-2 rounded-full bg-brand-success"></span>
-                <span id="dashboard-date-label">Today</span>
-            </div>
-        </div>
-        <div class="dashboard-stat-grid grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
-            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Focus</span><span class="text-brand-primary">◷</span></div>
-                <div id="dash-focus" class="text-2xl font-bold text-white">0m</div><div id="dash-focus-sub" class="text-[11px] text-dark-500 mt-1">sessions today</div>
-            </div>
-            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Habits</span><span class="text-brand-success">◆</span></div>
-                <div id="dash-habits" class="text-2xl font-bold text-white">0%</div><div id="dash-habits-sub" class="text-[11px] text-dark-500 mt-1">today's adherence</div>
-            </div>
-            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Tasks</span><span class="text-brand-danger">✓</span></div>
-                <div id="dash-tasks" class="text-2xl font-bold text-white">0/0</div><div id="dash-tasks-sub" class="text-[11px] text-dark-500 mt-1">completed today</div>
-            </div>
-            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Courses</span><span class="text-brand-info">▰</span></div>
-                <div id="dash-courses" class="text-2xl font-bold text-white">0%</div><div id="dash-courses-sub" class="text-[11px] text-dark-500 mt-1">overall progress</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DAILY PLANNING MODE -->
-    <section class="card rounded-2xl p-5 relative overflow-hidden" id="daily-planning-mode">
+</div>
+<section class="card rounded-2xl p-5 relative overflow-hidden" id="daily-planning-mode">
         <div class="absolute -top-20 -left-20 w-64 h-64 bg-brand-info/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
             <div>
@@ -681,10 +690,7 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
         </div>
         <div id="daily-plan-queue" class="space-y-2"></div>
     </section>
-
-
-    <!-- INSIGHTS & ANALYTICS -->
-    <details id="insights-panel" open class="card rounded-2xl overflow-hidden">
+<details id="insights-panel" class="card rounded-2xl overflow-hidden">
         <summary class="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4 hover:bg-dark-800/50">
             <div><p class="text-[10px] uppercase tracking-[0.2em] text-brand-primary font-bold">Insights</p><h2 class="text-lg font-bold text-white">Weekly & Monthly</h2></div>
             <div class="flex items-center"><select id="insights-period" onclick="event.stopPropagation()" class="insights-period-select" aria-label="Insights period" title="Choose insights period"><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select></div>
@@ -707,6 +713,14 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
         </div>
     </details>
 </main>
+
+<nav class="mobile-nav" aria-label="Dashboard sections">
+<button type="button" data-panel="today" aria-current="page">◷ <span>Today</span></button>
+<button type="button" data-panel="habits">✓ <span>Habits</span></button>
+<button type="button" data-panel="courses">▤ <span>Courses</span></button>
+<button type="button" data-panel="insights">▥ <span>Insights</span></button>
+</nav>
+<div id="mini-focus" hidden><span id="mini-focus-time">25:00</span><button type="button" id="mini-focus-toggle">Start</button><button type="button" id="mini-focus-open" aria-label="Show focus timer">↗</button></div>
 
 <!-- Delete Confirmation Modal -->
 <div id="custom-modal" class="fixed inset-0 bg-dark-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
@@ -1691,5 +1705,20 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
 </script>
 
 
+<script>
+// Presentation-only navigation. Existing task, timer and sync handlers are retained.
+(()=>{
+ document.body.dataset.panel='today';
+ const positions={};
+ const selectPanel=(name)=>{positions[document.body.dataset.panel]=window.scrollY;document.body.dataset.panel=name;document.querySelectorAll('.mobile-nav button').forEach(b=>{if(b.dataset.panel===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});if(name==='insights')document.getElementById('insights-panel').open=true;window.scrollTo({top:positions[name]||0,behavior:'instant'});};
+ document.querySelectorAll('.mobile-nav button').forEach(b=>b.addEventListener('click',()=>selectPanel(b.dataset.panel)));
+ document.getElementById('open-insights-btn').addEventListener('click',()=>{if(matchMedia('(max-width:640px)').matches)selectPanel('insights');});
+ const timer=document.getElementById('pomo-display'),start=document.getElementById('pomo-start-btn'),mini=document.getElementById('mini-focus');let visible=true;
+ const sync=()=>{document.getElementById('mini-focus-time').textContent=timer.textContent;document.getElementById('mini-focus-toggle').textContent=start.textContent;mini.hidden=visible||!/pause/i.test(start.textContent)||!matchMedia('(max-width:640px)').matches;};
+ new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();}).observe(document.getElementById('pomo-section'));
+ new MutationObserver(sync).observe(document.getElementById('pomo-section'),{subtree:true,childList:true,characterData:true});
+ document.getElementById('mini-focus-toggle').addEventListener('click',()=>start.click());document.getElementById('mini-focus-open').addEventListener('click',()=>{selectPanel('today');document.getElementById('pomo-section').scrollIntoView({behavior:'smooth',block:'center'});});
+})();
+</script>
 </body>
 </html>
