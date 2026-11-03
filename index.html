@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>My Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Enjaz — Your daily workspace</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -366,18 +366,106 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
   .dashboard-fullscreen .fullscreen-btn{position:sticky!important;top:0!important;z-index:2147483001!important;}
 }
 </style>
+
+<style id="enjaz-workspace-design">
+body{background-color:#0c1424;padding:24px 28px;background-image:radial-gradient(ellipse at 0 0,rgba(99,102,241,.09),transparent 55%);}
+.enjaz-header{display:flex!important;align-items:center!important;justify-content:space-between;flex-direction:row!important;text-align:left!important;gap:20px!important;margin:0 auto 24px!important;min-height:64px;}
+.enjaz-header>div:first-child{align-items:flex-start;gap:3px;}.enjaz-header h1{font-size:30px!important;line-height:1.2!important;display:flex;align-items:center;gap:12px;}.brand-ar{font-size:20px;font-weight:500;color:#a5b4fc;border-left:1px solid #354158;padding-left:12px}.brand-caption{color:#a1aec2;font-size:12px;}
+.enjaz-header>div:nth-child(2){margin-left:auto;width:auto!important;}.enjaz-header button{min-height:38px!important;border-radius:10px;}.enjaz-header #connection-status{box-shadow:none;font-size:11px;padding:8px 12px;}
+.enjaz-main{display:flex;flex-direction:column;gap:20px!important;}.enjaz-workspace{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(310px,1fr);gap:20px;align-items:start;}.enjaz-secondary{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.enjaz-main .card{background:linear-gradient(145deg,#1a2639,#172234);border-color:#2d3a50;box-shadow:0 4px 20px rgba(0,0,0,.1);}.enjaz-main .card:hover{border-color:#45546d;box-shadow:0 4px 20px rgba(0,0,0,.1);}
+#today-overview{padding:16px 20px!important;background:transparent;border:0;box-shadow:none;}#today-overview>div:first-of-type{margin-bottom:12px!important;}#today-overview h2{font-size:15px!important;}#today-overview p{display:none;}#today-overview .dashboard-stat-grid{margin:0;gap:12px;}#today-overview .metric-glow{padding:14px 16px;box-shadow:none;background:#152034;border-color:#29364c;}#today-overview .metric-glow>div:first-child{margin-bottom:5px;}#today-overview .text-dark-500{color:#a4b1c7;}#today-overview .text-2xl{font-size:25px;}
+#tasks-section,#courses-section,#habit-section{height:auto!important;min-height:0!important;padding:20px!important;}#tasks-section{min-height:410px!important;}#tasks-section #active-tasks-view,#habit-section #active-habits-view,#courses-section #active-courses-view{height:auto!important;}
+#tasks-section .overflow-y-auto{max-height:520px;}#habits-list,#archive-habits-list{max-height:330px;}#courses-section .overflow-y-auto{max-height:390px;}
+#pomo-section{min-height:410px!important;padding:20px!important;}#pomo-section .ring-container{width:150px;height:150px;margin:12px auto 20px;}#pomo-display{font-size:40px;letter-spacing:-1px;}#pomo-section .pomo-actions{justify-content:center!important;margin-top:16px;}.ring-circle{filter:none;}.section-title{font-size:16px!important;}.section-title svg{border:0;box-shadow:none;}
+#add-task-form{position:relative;padding:14px!important;background:#111b2d;border-color:#344158;margin-bottom:16px;}#task-input{padding:7px 0 12px;margin-bottom:10px;font-size:14px;border-color:#344158;}#task-input::placeholder,#new-habit-input::placeholder,#task-search::placeholder{color:#93a2ba;}.task-options{margin-right:110px;}.task-options summary{font-size:12px;color:#cbd5e1;cursor:pointer;padding:9px 0;}.task-options summary span{font-size:10px;color:#98a9c2;margin-left:8px;}.task-options[open]{margin-right:0;}.task-options .grid{margin:10px 0 48px;}.task-options~div{position:absolute;bottom:14px;right:14px;}#add-task-form button[type=submit]{min-height:36px!important;background:#818cf8;color:#0f172a;border-radius:9px;}
+.enjaz-main .text-dark-500{color:#98a7bf;}.enjaz-main .text-dark-400{color:#aab8ce;}.enjaz-main .archive-btn,.enjaz-main .fullscreen-btn{font-size:10px!important;min-width:0;min-height:32px;border-radius:8px;text-transform:none;letter-spacing:0;}.enjaz-main button{box-shadow:none;}#daily-planning-mode{padding:20px!important;}#daily-planning-mode>div.absolute{display:none;}.metric-glow{box-shadow:none;}
+.mobile-nav,#mini-focus{display:none;}#insights-panel{scroll-margin-top:20px;}#insights-panel>summary{min-height:72px;}
+@media(max-width:900px){.enjaz-workspace{grid-template-columns:minmax(0,1.3fr) minmax(280px,1fr);}.enjaz-header{flex-wrap:wrap;}.enjaz-header #connection-status{margin-left:auto;}.enjaz-secondary{grid-template-columns:1fr;}}
+@media(max-width:640px){body{padding:14px 12px 92px!important;}.enjaz-header{gap:12px!important;margin-bottom:14px!important;}.enjaz-header h1{font-size:26px!important;}.enjaz-header>div:first-child{width:100%;}.brand-caption{font-size:11px;}.enjaz-header>div:nth-child(2){margin-left:0;gap:6px!important;}.enjaz-header>div:nth-child(2)>button{flex:none;min-height:36px!important;font-size:10px;}.enjaz-header #connection-status{font-size:9px!important;padding:6px 8px!important;}.enjaz-main{gap:14px!important;}.enjaz-workspace,.enjaz-secondary{display:flex;flex-direction:column;gap:14px;}#today-overview{padding:0!important;}#today-overview .metric-glow{padding:12px;}#today-overview .text-2xl{font-size:23px;}#today-overview .dashboard-stat-grid{gap:8px;}.task-options{margin-right:90px;}.task-options summary span{display:none;}#add-task-form button[type=submit]{width:auto!important;padding:8px 12px;}#tasks-section,#courses-section,#habit-section,#pomo-section{padding:16px!important;min-height:0!important;}.enjaz-main .section-title{font-size:15px!important;}#pomo-section{min-height:350px!important;}#pomo-section>.border-b{flex-wrap:wrap;}.enjaz-main .text-dark-500{font-size:11px;}#task-search{min-width:0;}#complete-all-tasks{padding:6px;font-size:9px;}
+.mobile-nav{display:flex;position:fixed;z-index:40;bottom:0;left:0;right:0;padding:9px 12px calc(9px + env(safe-area-inset-bottom));background:rgba(15,23,42,.97);border-top:1px solid #334155;backdrop-filter:blur(15px);gap:5px;}.mobile-nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:#a2b1c8;border-radius:10px;font-size:18px;min-height:45px;}.mobile-nav button span{font-size:10px;font-weight:600;}.mobile-nav button[aria-current=page]{color:#c7d2fe;background:#818cf81c;}
+body[data-panel=today] #habit-section,body[data-panel=today] #courses-section,body[data-panel=today] #insights-panel,
+body[data-panel=habits] #tasks-section,body[data-panel=habits] #pomo-section,body[data-panel=habits] #today-overview,body[data-panel=habits] #courses-section,body[data-panel=habits] #daily-planning-mode,body[data-panel=habits] #insights-panel,
+body[data-panel=courses] #tasks-section,body[data-panel=courses] #pomo-section,body[data-panel=courses] #today-overview,body[data-panel=courses] #habit-section,body[data-panel=courses] #daily-planning-mode,body[data-panel=courses] #insights-panel,
+body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-overview,body[data-panel=insights] #daily-planning-mode{display:none!important;}
+#mini-focus:not([hidden]){position:fixed;bottom:calc(76px + env(safe-area-inset-bottom));left:12px;right:12px;display:flex;align-items:center;gap:10px;z-index:39;padding:10px 14px;background:#24324a;border:1px solid #6574c1;border-radius:13px;box-shadow:0 6px 20px #0005;}#mini-focus-time{font-weight:700;font-variant-numeric:tabular-nums;margin-right:auto;}#mini-focus button{padding:5px 12px;background:#818cf8;color:#0f172a;border-radius:8px;font-weight:600;font-size:12px;}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;}}
+</style>
+
+
+<style id="enjaz-alignment-refinement">
+.enjaz-header h1{font-family:"Space Grotesk",Inter,system-ui,sans-serif;font-size:38px!important;font-weight:700;letter-spacing:-1.8px;line-height:1.1!important;}
+.enjaz-workspace{grid-template-columns:minmax(0,1.65fr) minmax(310px,1fr);align-items:start;}.enjaz-column{display:flex;flex-direction:column;gap:20px;min-width:0;}
+#courses-section{min-height:330px!important;}#courses-section .overflow-y-auto{max-height:560px;}#habit-section{min-height:200px!important;}
+.enjaz-main .section-title{display:flex!important;align-items:center!important;gap:10px!important;line-height:32px!important;margin:0;}
+.enjaz-main .section-title>.enjaz-icon{width:32px!important;height:32px!important;min-width:32px!important;padding:7px!important;border-radius:10px!important;flex-shrink:0!important;box-sizing:border-box;background:rgba(129,140,248,.12);color:#a5b4fc;border:1px solid rgba(129,140,248,.18);}
+#tasks-section .section-title>.enjaz-icon{color:#fb8ba6;background:#fb718513;border-color:#fb71852b;}#habit-section .section-title>.enjaz-icon{color:#46d9ad;background:#34d39913;border-color:#34d3992b;}#courses-section .section-title>.enjaz-icon{color:#67d1f6;background:#38bdf813;border-color:#38bdf82b;}
+.enjaz-column>section>div:first-child:not(.absolute){min-height:49px;align-items:center!important;gap:10px!important;padding-bottom:16px!important;margin-bottom:16px!important;}
+#pomo-section>div.border-b{min-height:49px;gap:10px;align-items:center;padding-bottom:16px!important;margin-bottom:16px!important;}
+#today-overview{padding:0!important;}#today-overview .metric-glow>div:first-child{display:flex;align-items:center;min-height:28px;}#today-overview .metric-glow>div:first-child>span:last-child{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:rgba(148,163,184,.06);}#today-overview .enjaz-icon{display:block;width:18px;height:18px;padding:0;}
+.enjaz-header button{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:38px;}.enjaz-header button .enjaz-icon{display:block;width:16px;height:16px;flex-shrink:0;}.enjaz-header #connection-status{height:38px;box-sizing:border-box;}
+@media(max-width:900px) and (min-width:641px){.enjaz-workspace{grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);}}
+@media(max-width:640px){.enjaz-header h1{font-size:34px!important;letter-spacing:-1.5px;}.enjaz-workspace{display:flex;flex-direction:column;}.enjaz-column{display:contents;}#tasks-section{order:0;}#pomo-section{order:1;}#courses-section{order:2;}#habit-section{order:3;}#courses-section{min-height:330px!important;}#habit-section{min-height:200px!important;}.enjaz-main .section-title>.enjaz-icon{width:30px!important;height:30px!important;min-width:30px!important;padding:6px!important;}.enjaz-main .section-title{gap:8px!important;line-height:30px!important;}
+#today-overview>div:first-of-type{flex-direction:row!important;align-items:center!important;gap:8px!important;margin-bottom:10px!important;}#today-overview>div:first-of-type>div:last-child{width:auto!important;padding:5px 8px;font-size:10px;}
+#tasks-section>div:first-child{flex-direction:row!important;align-items:center!important;flex-wrap:wrap;gap:8px!important;}#tasks-section>div:first-child>div:first-child{flex:1;min-width:0;gap:6px;}#tasks-date-display{font-size:9px!important;padding:4px 6px!important;}#tasks-section .archive-btn{width:auto!important;min-width:0!important;min-height:32px!important;}
+}
+</style>
+<style>
+.insights-shell{position:relative;min-width:0;}.insights-period-control{position:absolute;right:20px;top:18px;z-index:2;}#insights-panel>summary{padding-right:155px!important;}.insights-period-control select{min-height:40px;cursor:pointer;}
+@media(max-width:640px){.insights-period-control{right:14px;top:16px;}#insights-panel>summary{padding-right:140px!important;min-height:76px;}body:not([data-panel=insights]) .insights-shell{display:none;}}
+</style>
+<style id="task-options-always-visible">
+#add-task-form .task-entry-controls{display:grid!important;grid-template-columns:minmax(75px,1fr) minmax(115px,1.25fr) minmax(78px,1fr) auto;align-items:center;gap:8px;width:100%;max-width:510px;}
+#add-task-form #task-input{margin-bottom:12px;}
+#add-task-form .task-entry-controls select,#add-task-form .task-entry-controls #task-due,#add-task-form .task-entry-controls .task-add-button{height:36px!important;min-height:36px!important;font-size:11px!important;line-height:normal;box-sizing:border-box;border-radius:8px!important;margin:0!important;width:100%!important;min-width:0!important;}
+#add-task-form .task-entry-controls select{padding:6px 7px!important;}
+#add-task-form .task-entry-controls .task-time-control{height:36px!important;min-width:0!important;border-radius:8px;background:#1e293b;border:1px solid #475569;position:relative;}
+#add-task-form .task-entry-controls #task-due{height:34px!important;min-height:34px!important;padding:5px 7px!important;background:transparent!important;border:0!important;position:relative;appearance:auto;color-scheme:dark;}
+#add-task-form .task-entry-controls #task-due::before{content:none!important;}
+#add-task-form .task-entry-controls #task-due::-webkit-calendar-picker-indicator{position:static!important;filter:none!important;width:14px!important;height:14px!important;opacity:.8;margin:0;padding:0;}
+#add-task-form .task-entry-controls .task-add-button{padding:6px 12px!important;color:#0f172a;background:#818cf8;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.task-add-symbol{display:none;}
+@media(max-width:640px){#add-task-form .task-entry-controls{grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr) minmax(0,.95fr) 34px;gap:5px;max-width:none;}
+#add-task-form .task-entry-controls select,#add-task-form .task-entry-controls #task-due{font-size:10px!important;padding-left:4px!important;padding-right:3px!important;}
+#add-task-form .task-entry-controls .task-add-button{padding:0!important;}.task-add-label{display:none;}.task-add-symbol{display:block;font-size:23px;font-weight:500;line-height:1;}
+}
+</style>
+<style id="habit-day-alignment">
+#habits-list{padding-right:0!important;}
+#habit-days-header{box-sizing:border-box;position:sticky;top:0;z-index:1;background:#172234;display:flex!important;justify-content:flex-end!important;gap:6px!important;padding:6px 13px!important;margin:0 0 8px!important;min-height:28px;width:100%!important;}
+#habits-list .habit-tracking-row{padding:12px!important;gap:8px!important;}
+#habits-list .habit-week-cells{display:grid!important;grid-template-columns:repeat(7,28px);gap:6px!important;}
+#habit-days-header>span,#habits-list .habit-circle{box-sizing:border-box;width:28px!important;min-width:28px!important;height:28px!important;display:flex!important;align-items:center;justify-content:center;flex:0 0 28px;}
+#habit-days-header>span{height:18px!important;font-size:10px;line-height:18px;}
+@media(max-width:640px){#habits-list .habit-week-cells{grid-template-columns:repeat(7,24px);}#habit-days-header>span,#habits-list .habit-circle{width:24px!important;min-width:24px!important;flex-basis:24px;height:24px!important;}#habit-days-header>span{height:18px!important;}#habits-list .habit-tracking-row>div:first-child{gap:3px!important;}#habits-list .habit-tracking-row>div:first-child>span{font-size:11px;}}
+</style>
+<style>
+#pomo-ring{transition:none!important;will-change:stroke-dashoffset;}
+</style>
+<style id="habit-order-editor">
+.habit-order-actions{display:flex;align-items:center;gap:5px;margin-left:auto;}
+.habit-order-button{height:32px;min-width:42px;padding:5px 9px;border:1px solid #475569;border-radius:8px;background:#0f172acc;color:#cbd5e1;font-size:11px;font-weight:600;}
+.habit-order-button[hidden]{display:none!important;}#edit-habit-order[aria-pressed=true]{background:#34d399;color:#0f172a;border-color:#34d399;}
+#habit-section>div:first-child{flex-wrap:wrap;}#habit-section button:disabled,#habit-section input:disabled{opacity:.35;cursor:default;}
+.editing-habit-order #habit-days-header,.editing-habit-order #habits-list .habit-week-cells,.editing-habit-order .delete-habit-btn{display:none!important;}
+.habit-reorder-controls{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.habit-reorder-controls button{height:34px;width:34px;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid #475569;background:#24324a;color:#e2e8f0;font-size:20px;line-height:1;}
+.editing-habit-order .habit-tracking-row{border-color:#34d39944;}
+@media(max-width:640px){.habit-order-button{font-size:10px;padding:5px 7px;min-width:36px;}.habit-order-actions{gap:4px;}}
+</style>
 </head>
 <body class="p-4 md:p-8">
 
 <!-- HEADER -->
-<header class="max-w-7xl mx-auto mt-2 mb-10 flex flex-col items-center text-center gap-4">
+<header class="enjaz-header max-w-7xl mx-auto">
     <div class="flex flex-col items-center gap-3">
-        <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">My Dashboard</h1>
-        <div class="h-1 w-16 rounded-full bg-gradient-to-r from-brand-primary to-brand-info"></div>
+        <h1 class="text-white font-bold tracking-tight">Enjaz</h1><p class="brand-caption">A little progress, every day.</p>
+        
     </div>
     <div class="flex items-center gap-2 flex-wrap justify-center">
-        <button id="open-insights-btn" class="text-xs font-bold px-3 py-2 rounded-lg bg-dark-800 border border-dark-600 text-dark-300 hover:text-white hover:border-brand-primary">Insights</button>
-        <button id="enable-notify-top" class="text-xs font-bold px-3 py-2 rounded-lg bg-dark-800 border border-dark-600 text-dark-300 hover:text-white hover:border-brand-info">Notifications</button>
+        <button id="open-insights-btn" class="text-xs font-bold px-3 py-2 rounded-lg bg-dark-800 border border-dark-600 text-dark-300 hover:text-white hover:border-brand-primary"><svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M7 16v-5m5 5V5m5 11V8"/></svg><span>Insights</span></button>
+        <button id="enable-notify-top" class="text-xs font-bold px-3 py-2 rounded-lg bg-dark-800 border border-dark-600 text-dark-300 hover:text-white hover:border-brand-info"><svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span>Notifications</span></button>
     </div>
     <div id="connection-status" class="text-xs px-4 py-1.5 rounded-full bg-dark-800/80 border border-dark-700 text-brand-success flex items-center gap-2 font-medium shadow-md">
         <div class="w-2.5 h-2.5 rounded-full bg-brand-success shadow-[0_0_8px_rgba(52,211,153,0.8)]" id="status-dot"></div>
@@ -385,16 +473,160 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
     </div>
 </header>
 
-<main class="max-w-7xl mx-auto flex flex-col gap-6">
-    <!-- TOP ROW: Pomodoro & Habits -->
-    <div id="main-core-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- POMODORO -->
-        <section id="pomo-section" class="card rounded-2xl p-6 relative overflow-hidden flex flex-col min-h-[340px]">
+<main class="enjaz-main max-w-7xl mx-auto">
+<section id="today-overview" class="card rounded-2xl p-5 md:p-6 relative overflow-hidden">
+                <div class="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 mb-5">
+            <div>
+                
+                <h2 class="text-2xl md:text-3xl font-bold text-white">Today at a Glance</h2>
+                <p id="dashboard-message" class="text-sm text-dark-400 mt-1">Plan your focus, finish the important work, and keep your streak alive.</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-dark-400 bg-dark-900/60 border border-dark-700 rounded-xl px-3 py-2">
+                <span class="w-2 h-2 rounded-full bg-brand-success"></span>
+                <span id="dashboard-date-label">Today</span>
+            </div>
+        </div>
+        <div class="dashboard-stat-grid grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Focus</span><span class="text-brand-primary"><svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></div>
+                <div id="dash-focus" class="text-2xl font-bold text-white">0m</div><div id="dash-focus-sub" class="text-[11px] text-dark-500 mt-1">sessions today</div>
+            </div>
+            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Habits</span><span class="text-brand-success"><svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="m8 12 3 3 5-6"/></svg></span></div>
+                <div id="dash-habits" class="text-2xl font-bold text-white">0%</div><div id="dash-habits-sub" class="text-[11px] text-dark-500 mt-1">today's adherence</div>
+            </div>
+            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Tasks</span><span class="text-brand-danger"><svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 4V2h6v2m-6 9 2 2 4-4"/></svg></span></div>
+                <div id="dash-tasks" class="text-2xl font-bold text-white">0/0</div><div id="dash-tasks-sub" class="text-[11px] text-dark-500 mt-1">completed today</div>
+            </div>
+            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Courses</span><span class="text-brand-info"><svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6C9 4 5 4 3 5v15c3-1 6-1 9 1 3-2 6-2 9-1V5c-2-1-6-1-9 1Zm0 0v15"/></svg></span></div>
+                <div id="dash-courses" class="text-2xl font-bold text-white">0%</div><div id="dash-courses-sub" class="text-[11px] text-dark-500 mt-1">overall progress</div>
+            </div>
+        </div>
+    </section>
+<div class="enjaz-workspace">
+<div class="enjaz-column enjaz-primary-column">
+<section id="tasks-section" class="card rounded-2xl p-6 h-[600px] flex flex-col">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-dark-700 pb-4 mb-5 gap-4">
+                <div class="flex items-center gap-3 flex-wrap">
+                    <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
+                        <svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 4V2h6v2m-6 9 2 2 4-4"/></svg>
+                        Tasks
+                    </h2>
+                    <span id="tasks-date-display" class="text-xs font-bold text-dark-300 bg-dark-900 px-3 py-1 rounded-full border border-dark-600 shadow-inner tracking-wide"></span>
+                </div>
+                <button id="toggle-archive-btn" class="archive-btn text-xs text-dark-300 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900/80 uppercase tracking-wider whitespace-nowrap">
+                    Archive
+                </button>
+            </div>
+
+            <div id="active-tasks-view" class="flex flex-col h-full flex-1 overflow-hidden">
+                <form id="add-task-form" class="mb-5 bg-dark-900 p-4 rounded-xl border border-dark-700">
+                    <input type="text" id="task-input" required placeholder="What needs to be done today?" class="w-full bg-transparent border-b border-dark-600 pb-2 mb-4 focus:outline-none focus:border-brand-danger transition text-sm placeholder-dark-500 text-white">
+                    <div class="task-entry-controls">
+                        <select aria-label="Task priority" id="task-priority" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select>
+                        <div class="task-time-control"><input id="task-due" type="time" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] text-white focus:outline-none focus:border-brand-danger" title="Due time / وقت المهمة"></div>
+                        <select aria-label="Focus sessions" id="task-focus" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="0">0 Focus</option><option value="1">1 Focus</option><option value="2">2 Focus</option><option value="3">3 Focus</option><option value="4">4 Focus</option></select>
+                        <button type="submit" class="task-add-button" aria-label="Add task"><span class="task-add-label">Add Task</span><span class="task-add-symbol" aria-hidden="true">+</span></button>
+                    </div>
+                </form>
+
+                <div class="mb-3 flex gap-2">
+                    <input id="task-search" type="search" placeholder="Search today’s tasks..." class="flex-1 bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-xs text-white placeholder-dark-500 focus:outline-none focus:border-brand-danger">
+                    <div class="flex gap-2">
+                        <select id="task-filter" class="bg-dark-900 border border-dark-700 rounded-lg px-2.5 py-2 text-[10px] font-bold text-dark-400 focus:outline-none">
+                            <option value="all">All</option><option value="open">Open</option><option value="done">Done</option><option value="high">High Priority</option>
+                        </select>
+                        <button id="complete-all-tasks" type="button" class="text-[10px] font-bold uppercase tracking-wider px-3 rounded-lg border border-dark-700 text-dark-400 hover:text-white hover:bg-dark-700">Complete all</button>
+                    </div>
+                </div>
+                <div class="flex-1 overflow-y-auto pr-2 space-y-5 custom-scrollbar">
+                    <div>
+                        <h3 class="text-brand-danger font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-danger"></span> High Priority
+                        </h3>
+                        <div id="list-must" class="space-y-2"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-brand-warning font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-warning"></span> Medium Priority
+                        </h3>
+                        <div id="list-important" class="space-y-2"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-brand-info font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-brand-info"></span> Low Priority
+                        </h3>
+                        <div id="list-small" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="archive-tasks-view" class="hidden flex-col h-full flex-1 overflow-hidden">
+                <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
+                    <svg class="w-5 h-5 text-dark-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+                    <p class="text-sm text-dark-400">Past tasks automatically move here.</p>
+                </div>
+                <div id="list-archive" class="flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar"></div>
+            </div>
+        </section>
+<section id="courses-section" class="card rounded-2xl p-6 h-[600px] flex flex-col relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-40 h-40 bg-brand-info/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="flex items-center justify-between border-b border-dark-700 pb-4 mb-5 relative z-10">
+                <div class="flex items-center gap-3 min-w-0">
+                    <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
+                        <svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6C9 4 5 4 3 5v15c3-1 6-1 9 1 3-2 6-2 9-1V5c-2-1-6-1-9 1Zm0 0v15"/></svg>
+                        Courses
+                    </h2>
+                    <button id="add-course-toggle" class="archive-btn bg-brand-info/10 hover:bg-brand-info/20 text-brand-info font-bold py-1.5 px-3 rounded-lg transition border border-brand-info/30 flex items-center gap-1 whitespace-nowrap">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        <span>New</span>
+                    </button>
+                </div>
+                <button id="toggle-course-archive-btn" class="archive-btn text-xs text-dark-300 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900/80 uppercase tracking-wider whitespace-nowrap">
+                    Archive
+                </button>
+            </div>
+
+            <form id="add-course-form" class="hidden mb-5 bg-dark-900 p-4 rounded-xl border border-dark-700 relative z-10 space-y-3 shadow-inner">
+                <div>
+                    <label class="text-dark-400 text-[10px] font-bold mb-1 block uppercase">Course Title</label>
+                    <input type="text" id="course-title" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-info text-white">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-dark-400 text-[10px] font-bold mb-1 block uppercase">Start Date</label>
+                        <input type="date" id="course-start" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-info text-white">
+                    </div>
+                    <div>
+                        <label class="text-dark-400 text-[10px] font-bold mb-1 block uppercase">Expected End</label>
+                        <input type="date" id="course-end" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-info text-white">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-brand-info/90 text-dark-900 px-4 py-2 rounded-lg text-sm font-bold hover:bg-brand-info transition shadow">Create Course</button>
+            </form>
+
+            <div id="active-courses-view" class="flex flex-col h-full flex-1 overflow-hidden">
+                <div id="courses-list" class="flex-1 overflow-y-auto space-y-5 relative z-10 pr-2 custom-scrollbar"></div>
+            </div>
+
+            <div id="archive-courses-view" class="hidden flex-col h-full flex-1 overflow-hidden">
+                 <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
+                    <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <p class="text-sm text-dark-400">Completed courses (100%) move here.</p>
+                </div>
+                <div id="archive-courses-list" class="flex-1 overflow-y-auto space-y-4 relative z-10 pr-2 custom-scrollbar"></div>
+            </div>
+        </section>
+</div>
+<div class="enjaz-column enjaz-focus-column">
+<section id="pomo-section" class="card rounded-2xl p-6 relative overflow-hidden flex flex-col min-h-[340px]">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-primary to-brand-info"></div>
             <div class="flex justify-between items-center mb-4 border-b border-dark-700 pb-4">
                 <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
-                    <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
                     Pomodoro
                 </h2>
                 <div class="pomo-header-actions">
@@ -460,16 +692,18 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
                 </div>
             </div>
         </section>
-
-        <!-- HABIT TRACKER (SAT - FRI) -->
-        <section id="habit-section" class="card rounded-2xl p-6 flex flex-col min-h-[340px]">
+<section id="habit-section" class="card rounded-2xl p-6 flex flex-col min-h-[340px]">
             <div class="flex items-center justify-between border-b border-dark-700 pb-4 mb-4">
                 <div class="flex items-center gap-3">
                     <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
-                        <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <svg class="enjaz-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="m8 12 3 3 5-6"/></svg>
                         Habits
                     </h2>
                     <span id="habit-week-range" class="text-xs font-bold text-dark-300 bg-dark-900 px-3 py-1 rounded-full border border-dark-600 shadow-inner"></span>
+                </div>
+                <div class="habit-order-actions">
+                    <button type="button" id="edit-habit-order" class="habit-order-button" aria-label="Edit habit order">Edit</button>
+                    <button type="button" id="cancel-habit-order" class="habit-order-button" hidden>Cancel</button>
                 </div>
                 <button id="toggle-habit-archive-btn" class="archive-btn text-xs text-dark-300 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900/80 uppercase tracking-wider whitespace-nowrap">
                     Archive
@@ -499,195 +733,13 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
                 <div id="archive-habits-list" class="space-y-2 flex-1 overflow-y-auto custom-scrollbar pr-2 max-h-[170px]"></div>
             </div>
         </section>
-    </div>
-
-
-    <!-- BOTTOM ROW: Tasks & Courses -->
-    <div id="main-work-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- DAILY TASKS -->
-        <section id="tasks-section" class="card rounded-2xl p-6 h-[600px] flex flex-col">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-dark-700 pb-4 mb-5 gap-4">
-                <div class="flex items-center gap-3 flex-wrap">
-                    <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
-                        <svg class="w-5 h-5 text-brand-danger" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                        Tasks
-                    </h2>
-                    <span id="tasks-date-display" class="text-xs font-bold text-dark-300 bg-dark-900 px-3 py-1 rounded-full border border-dark-600 shadow-inner tracking-wide"></span>
-                </div>
-                <button id="toggle-archive-btn" class="archive-btn text-xs text-dark-300 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900/80 uppercase tracking-wider whitespace-nowrap">
-                    Archive
-                </button>
-            </div>
-
-            <div id="active-tasks-view" class="flex flex-col h-full flex-1 overflow-hidden">
-                <form id="add-task-form" class="mb-5 bg-dark-900 p-4 rounded-xl border border-dark-700">
-                    <input type="text" id="task-input" required placeholder="What needs to be done today?" class="w-full bg-transparent border-b border-dark-600 pb-2 mb-4 focus:outline-none focus:border-brand-danger transition text-sm placeholder-dark-500 text-white">
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
-                        <select id="task-priority" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="high">High Priority</option><option value="medium" selected>Medium</option><option value="low">Low</option></select>
-                        <div class="relative flex items-center"><span class="absolute left-2.5 text-[9px] text-slate-400 pointer-events-none">⏰</span><input id="task-due" type="time" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] text-white focus:outline-none focus:border-brand-danger" title="Due time / وقت المهمة"><span class="sr-only">وقت المهمة</span></div>
-                        <select id="task-focus" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="0">No Focus</option><option value="1">1 Focus</option><option value="2">2 Focus</option><option value="3">3 Focus</option><option value="4">4 Focus</option></select>
-                    </div>
-                    <div class="flex justify-end">
-                        <button type="submit" class="bg-brand-danger/90 text-white font-bold px-5 py-2 rounded-lg hover:bg-brand-danger transition text-xs whitespace-nowrap">Add Task</button>
-                    </div>
-                </form>
-
-                <div class="mb-3 flex gap-2">
-                    <input id="task-search" type="search" placeholder="Search today’s tasks..." class="flex-1 bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-xs text-white placeholder-dark-500 focus:outline-none focus:border-brand-danger">
-                    <div class="flex gap-2">
-                        <select id="task-filter" class="bg-dark-900 border border-dark-700 rounded-lg px-2.5 py-2 text-[10px] font-bold text-dark-400 focus:outline-none">
-                            <option value="all">All</option><option value="open">Open</option><option value="done">Done</option><option value="high">High Priority</option>
-                        </select>
-                        <button id="complete-all-tasks" type="button" class="text-[10px] font-bold uppercase tracking-wider px-3 rounded-lg border border-dark-700 text-dark-400 hover:text-white hover:bg-dark-700">Complete all</button>
-                    </div>
-                </div>
-                <div class="flex-1 overflow-y-auto pr-2 space-y-5 custom-scrollbar">
-                    <div>
-                        <h3 class="text-brand-danger font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-brand-danger"></span> High Priority
-                        </h3>
-                        <div id="list-must" class="space-y-2"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-brand-warning font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-brand-warning"></span> Medium Priority
-                        </h3>
-                        <div id="list-important" class="space-y-2"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-brand-info font-bold text-[11px] mb-2 uppercase tracking-wider flex items-center gap-2 border-b border-dark-700 pb-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-brand-info"></span> Low Priority
-                        </h3>
-                        <div id="list-small" class="space-y-2"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="archive-tasks-view" class="hidden flex-col h-full flex-1 overflow-hidden">
-                <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
-                    <svg class="w-5 h-5 text-dark-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-                    <p class="text-sm text-dark-400">Past tasks automatically move here.</p>
-                </div>
-                <div id="list-archive" class="flex-1 overflow-y-auto pr-2 space-y-2 custom-scrollbar"></div>
-            </div>
-        </section>
-
-        <!-- COURSES PROGRESS -->
-        <section id="courses-section" class="card rounded-2xl p-6 h-[600px] flex flex-col relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-40 h-40 bg-brand-info/5 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="flex items-center justify-between border-b border-dark-700 pb-4 mb-5 relative z-10">
-                <div class="flex items-center gap-3 min-w-0">
-                    <h2 class="section-title text-lg font-bold tracking-tight flex items-center gap-2.5">
-                        <svg class="w-5 h-5 text-brand-info" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18 5.754 18 7.5 18s3.332-.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                        Courses
-                    </h2>
-                    <button id="add-course-toggle" class="archive-btn bg-brand-info/10 hover:bg-brand-info/20 text-brand-info font-bold py-1.5 px-3 rounded-lg transition border border-brand-info/30 flex items-center gap-1 whitespace-nowrap">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                        <span>New</span>
-                    </button>
-                </div>
-                <button id="toggle-course-archive-btn" class="archive-btn text-xs text-dark-300 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900/80 uppercase tracking-wider whitespace-nowrap">
-                    Archive
-                </button>
-            </div>
-
-            <form id="add-course-form" class="hidden mb-5 bg-dark-900 p-4 rounded-xl border border-dark-700 relative z-10 space-y-3 shadow-inner">
-                <div>
-                    <label class="text-dark-400 text-[10px] font-bold mb-1 block uppercase">Course Title</label>
-                    <input type="text" id="course-title" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-info text-white">
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="text-dark-400 text-[10px] font-bold mb-1 block uppercase">Start Date</label>
-                        <input type="date" id="course-start" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-info text-white">
-                    </div>
-                    <div>
-                        <label class="text-dark-400 text-[10px] font-bold mb-1 block uppercase">Expected End</label>
-                        <input type="date" id="course-end" required class="w-full bg-dark-800 border border-dark-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-info text-white">
-                    </div>
-                </div>
-                <button type="submit" class="w-full bg-brand-info/90 text-dark-900 px-4 py-2 rounded-lg text-sm font-bold hover:bg-brand-info transition shadow">Create Course</button>
-            </form>
-
-            <div id="active-courses-view" class="flex flex-col h-full flex-1 overflow-hidden">
-                <div id="courses-list" class="flex-1 overflow-y-auto space-y-5 relative z-10 pr-2 custom-scrollbar"></div>
-            </div>
-
-            <div id="archive-courses-view" class="hidden flex-col h-full flex-1 overflow-hidden">
-                 <div class="bg-dark-900 p-4 rounded-xl border border-dark-700 mb-4 flex items-center gap-3">
-                    <svg class="w-5 h-5 text-brand-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <p class="text-sm text-dark-400">Completed courses (100%) move here.</p>
-                </div>
-                <div id="archive-courses-list" class="flex-1 overflow-y-auto space-y-4 relative z-10 pr-2 custom-scrollbar"></div>
-            </div>
-        </section>
-    </div>
-
-    <!-- DAILY COMMAND CENTER -->
-    <section class="card rounded-2xl p-5 md:p-6 relative overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-72 h-72 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 mb-5">
-            <div>
-                
-                <h2 class="text-2xl md:text-3xl font-bold text-white">Today at a Glance</h2>
-                <p id="dashboard-message" class="text-sm text-dark-400 mt-1">Plan your focus, finish the important work, and keep your streak alive.</p>
-            </div>
-            <div class="flex items-center gap-2 text-xs text-dark-400 bg-dark-900/60 border border-dark-700 rounded-xl px-3 py-2">
-                <span class="w-2 h-2 rounded-full bg-brand-success"></span>
-                <span id="dashboard-date-label">Today</span>
-            </div>
-        </div>
-        <div class="dashboard-stat-grid grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
-            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Focus</span><span class="text-brand-primary">◷</span></div>
-                <div id="dash-focus" class="text-2xl font-bold text-white">0m</div><div id="dash-focus-sub" class="text-[11px] text-dark-500 mt-1">sessions today</div>
-            </div>
-            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Habits</span><span class="text-brand-success">◆</span></div>
-                <div id="dash-habits" class="text-2xl font-bold text-white">0%</div><div id="dash-habits-sub" class="text-[11px] text-dark-500 mt-1">today's adherence</div>
-            </div>
-            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Tasks</span><span class="text-brand-danger">✓</span></div>
-                <div id="dash-tasks" class="text-2xl font-bold text-white">0/0</div><div id="dash-tasks-sub" class="text-[11px] text-dark-500 mt-1">completed today</div>
-            </div>
-            <div class="metric-glow bg-dark-900/70 border border-dark-700 rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2"><span class="text-[10px] uppercase tracking-wider font-bold text-dark-500">Courses</span><span class="text-brand-info">▰</span></div>
-                <div id="dash-courses" class="text-2xl font-bold text-white">0%</div><div id="dash-courses-sub" class="text-[11px] text-dark-500 mt-1">overall progress</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DAILY PLANNING MODE -->
-    <section class="card rounded-2xl p-5 relative overflow-hidden" id="daily-planning-mode">
-        <div class="absolute -top-20 -left-20 w-64 h-64 bg-brand-info/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
-            <div>
-                
-                <h2 class="text-xl font-bold text-white">Today’s Focus</h2>
-                <p id="planning-subtitle" class="text-xs text-dark-400 mt-1">Your priorities, habits, and learning blocks — arranged automatically.</p>
-            </div>
-            <div class="flex gap-2 flex-wrap">
-                <button id="generate-plan-btn" class="bg-brand-primary text-dark-900 font-bold px-4 py-2 rounded-lg text-xs hover:opacity-90">Generate Today's Plan</button>
-                
-            </div>
-        </div>
-        <div id="planning-alert" class="hidden mb-4 rounded-xl border border-brand-warning/30 bg-brand-warning/10 px-3 py-2 text-xs text-brand-warning"></div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-4">
-            <div class="bg-dark-900/60 border border-dark-700 rounded-xl p-3"><div class="text-[9px] uppercase tracking-wider text-dark-500 font-bold">Plan Blocks</div><div id="plan-block-count" class="text-xl font-bold text-white mt-1">0</div></div>
-            <div class="bg-dark-900/60 border border-dark-700 rounded-xl p-3"><div class="text-[9px] uppercase tracking-wider text-dark-500 font-bold">Planned Focus</div><div id="plan-focus-minutes" class="text-xl font-bold text-brand-primary mt-1">0m</div></div>
-            <div class="bg-dark-900/60 border border-dark-700 rounded-xl p-3"><div class="text-[9px] uppercase tracking-wider text-dark-500 font-bold">Next Up</div><div id="plan-next" class="text-sm font-bold text-brand-success mt-2 truncate">Nothing queued</div></div>
-        </div>
-        <div id="daily-plan-queue" class="space-y-2"></div>
-    </section>
-
-
-    <!-- INSIGHTS & ANALYTICS -->
-    <details id="insights-panel" open class="card rounded-2xl overflow-hidden">
+</div>
+</div>
+<div class="insights-shell">
+<div class="insights-period-control"><select id="insights-period" class="insights-period-select" aria-label="Insights period" title="Choose insights period"><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select></div>
+<details id="insights-panel" class="card rounded-2xl overflow-hidden">
         <summary class="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4 hover:bg-dark-800/50">
             <div><p class="text-[10px] uppercase tracking-[0.2em] text-brand-primary font-bold">Insights</p><h2 class="text-lg font-bold text-white">Weekly & Monthly</h2></div>
-            <div class="flex items-center"><select id="insights-period" onclick="event.stopPropagation()" class="insights-period-select" aria-label="Insights period" title="Choose insights period"><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select></div>
         </summary>
         <div class="px-5 pb-5 pt-1">
             <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-4">
@@ -706,7 +758,16 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
             </div>
         </div>
     </details>
+</div>
 </main>
+
+<nav class="mobile-nav" aria-label="Dashboard sections">
+<button type="button" data-panel="today" aria-current="page">◷ <span>Today</span></button>
+<button type="button" data-panel="habits">✓ <span>Habits</span></button>
+<button type="button" data-panel="courses">▤ <span>Courses</span></button>
+<button type="button" data-panel="insights">▥ <span>Insights</span></button>
+</nav>
+<div id="mini-focus" hidden><span id="mini-focus-time">25:00</span><button type="button" id="mini-focus-toggle">Start</button><button type="button" id="mini-focus-open" aria-label="Show focus timer">↗</button></div>
 
 <!-- Delete Confirmation Modal -->
 <div id="custom-modal" class="fixed inset-0 bg-dark-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
@@ -761,6 +822,8 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
             }
         } catch(e) { console.warn("Failed to load local data."); }
     };
+
+    loadFromLocal();
 
     // ==== DATE FORMATTING ====
     const formatCustomDate = (date) => {
@@ -827,12 +890,12 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
     ['pomo-section','habit-section','tasks-section','courses-section'].forEach(setupFullscreen);
     const insightsPanel=document.getElementById('insights-panel'), insightsPeriod=document.getElementById('insights-period');
     const syncInsightsPeriod=()=>{const weekly=insightsPeriod?.value!=='monthly';document.getElementById('weekly-insights')?.classList.toggle('hidden',!weekly);document.getElementById('monthly-insights')?.classList.toggle('hidden',weekly); if(!weekly){requestAnimationFrame(()=>renderCalendar());}};
-    insightsPeriod?.addEventListener('change',syncInsightsPeriod);
+    insightsPeriod?.addEventListener('change',()=>{ insightsPanel.open=true; syncInsightsPeriod(); renderDashboard(); });
     document.querySelector('#insights-panel > summary')?.addEventListener('click',(e)=>{ if(e.target.closest('select')) return; e.preventDefault(); insightsPanel.open=!insightsPanel.open; });
     syncInsightsPeriod();
     document.getElementById('open-insights-btn')?.addEventListener('click',()=>{insightsPanel.open=true;insightsPanel.scrollIntoView({behavior:'smooth',block:'start'});syncInsightsPeriod();});
     const notifyTopBtn=document.getElementById('enable-notify-top');
-    const syncNotificationButton=()=>{ if(!notifyTopBtn)return; const enabled=('Notification' in window && Notification.permission==='granted' && !!notifyState().enabled); notifyTopBtn.textContent=enabled?'Notifications ✓':'Notifications'; notifyTopBtn.classList.toggle('notify-top-active',enabled); };
+    const syncNotificationButton=()=>{ if(!notifyTopBtn)return; const enabled=('Notification' in window && Notification.permission==='granted' && !!notifyState().enabled); notifyTopBtn.querySelector('span').textContent=enabled?'Notifications ✓':'Notifications'; notifyTopBtn.classList.toggle('notify-top-active',enabled); document.getElementById('planning-alert')?.classList.toggle('hidden',enabled); };
     syncNotificationButton();
     notifyTopBtn?.addEventListener('click',async()=>{
         try { if(window.pomoAudioContext?.state==='suspended') await window.pomoAudioContext.resume(); } catch(e) {}
@@ -969,13 +1032,17 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
         const safeLeft = Math.max(0, Math.ceil(pomoTimeLeft || 0));
         const minutes = Math.floor(safeLeft / 60);
         const seconds = safeLeft % 60;
-        pomoDisplay.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-        const ratio = currentTotalTime > 0 ? Math.min(1, Math.max(0, safeLeft / currentTotalTime)) : 0;
+        const label = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        if (pomoDisplay.textContent !== label) pomoDisplay.textContent = label;
+        const ratio = currentTotalTime > 0 ? Math.min(1, Math.max(0, pomoTimeLeft / currentTotalTime)) : 0;
         pomoRing.style.strokeDashoffset = String((1 - ratio) * 408);
-        pomoCycleText.textContent = `Cycle: ${currentCycle}/${config.maxCycles}`;
+        const cycleLabel = `Cycle: ${currentCycle}/${config.maxCycles}`;
+        if (pomoCycleText.textContent !== cycleLabel) pomoCycleText.textContent = cycleLabel;
     };
 
+    let pomoTickerGeneration = 0;
     const stopPomoTicker = () => {
+        pomoTickerGeneration++;
         if (pomoInterval) clearInterval(pomoInterval);
         pomoInterval = null;
         if (pomoAnimationFrame) cancelAnimationFrame(pomoAnimationFrame);
@@ -984,16 +1051,19 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
 
     const startPomoTicker = () => {
         stopPomoTicker();
-        // Render with requestAnimationFrame for a smooth mobile UI; the absolute
-        // end timestamp remains the single source of truth for timing accuracy.
+        const generation = pomoTickerGeneration;
         const frame = () => {
-            if (!isPomoRunning || !pomoEndAt) return;
+            if (generation !== pomoTickerGeneration || !isPomoRunning || !pomoEndAt || document.hidden) return;
             tickPomo();
-            if (isPomoRunning) pomoAnimationFrame = requestAnimationFrame(frame);
+            if (generation === pomoTickerGeneration && isPomoRunning) pomoAnimationFrame = requestAnimationFrame(frame);
         };
         frame();
-        // Persistence is throttled inside tickPomo, so the animation does not
-        // cause excessive localStorage writes.
+        if (generation !== pomoTickerGeneration) return;
+        // Background tabs may be throttled. Always reconcile with the absolute
+        // end timestamp; never replay missed animation frames on return.
+        pomoInterval = setInterval(() => {
+            if (generation === pomoTickerGeneration && document.hidden && isPomoRunning) tickPomo();
+        }, 1000);
     };
 
     const resetPomoState = (state = 'work') => {
@@ -1080,7 +1150,7 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
     function tickPomo() {
         if (!isPomoRunning || !pomoEndAt) return;
         const remainingMs = pomoEndAt - Date.now();
-        pomoTimeLeft = Math.max(0, Math.ceil(remainingMs / 1000));
+        pomoTimeLeft = Math.max(0, remainingMs / 1000);
         updatePomoDisplay();
 
         if (pomoTimeLeft <= 10 && pomoTimeLeft > 0 && !pomoAudioCuePlayed) {
@@ -1098,8 +1168,8 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
         }
 
         // Save at most once per second, not every 250ms.
-        if (pomoTimeLeft !== pomoLastSavedSecond) {
-            pomoLastSavedSecond = pomoTimeLeft;
+        if (Math.ceil(pomoTimeLeft) !== pomoLastSavedSecond) {
+            pomoLastSavedSecond = Math.ceil(pomoTimeLeft);
             savePomoState();
         }
     }
@@ -1196,9 +1266,11 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
 
     // Keep a running timer accurate even when the browser resumes a suspended tab.
     document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && isPomoRunning) tickPomo();
+        if (!isPomoRunning) return;
+        if (document.visibilityState === 'visible') { tickPomo(); startPomoTicker(); }
+        else if (pomoAnimationFrame) { cancelAnimationFrame(pomoAnimationFrame); pomoAnimationFrame = null; }
     });
-    window.addEventListener('pageshow', () => { if (isPomoRunning) tickPomo(); });
+    window.addEventListener('pageshow', () => { if (isPomoRunning) { tickPomo(); startPomoTicker(); } });
 
     // ==== HABIT TRACKER (Saturday to Friday) ====
     const getWeekDates = () => {
@@ -1225,10 +1297,40 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
     const currentWeekInfo = getWeekDates();
     document.getElementById('habit-week-range').textContent = currentWeekInfo.dateRangeStr;
 
+    let habitOrderDraft = null;
+    const editHabitOrderBtn = document.getElementById('edit-habit-order');
+    const cancelHabitOrderBtn = document.getElementById('cancel-habit-order');
+    editHabitOrderBtn.addEventListener('click', () => {
+        if (habitOrderDraft) {
+            const records = new Map(habits.map(h => [h.id, h]));
+            const reordered = habitOrderDraft.map(id => records.get(id)).filter(Boolean);
+            const included = new Set(habitOrderDraft);
+            habits = [...reordered, ...habits.filter(h => !included.has(h.id))];
+            saveToLocal();
+            habitOrderDraft = null;
+        } else {
+            habitOrderDraft = habits.map(h => h.id);
+        }
+        renderHabits();
+    });
+    cancelHabitOrderBtn.addEventListener('click', () => { habitOrderDraft = null; renderHabits(); });
+
     const renderHabits = () => {
         const list = document.getElementById('habits-list');
         const archiveList = document.getElementById('archive-habits-list');
         const header = document.getElementById('habit-days-header');
+        const editing = habitOrderDraft !== null;
+        document.getElementById('habit-section').classList.toggle('editing-habit-order', editing);
+        editHabitOrderBtn.textContent = editing ? 'Save' : 'Edit';
+        editHabitOrderBtn.setAttribute('aria-label', editing ? 'Save habit order' : 'Edit habit order');
+        editHabitOrderBtn.setAttribute('aria-pressed', String(editing));
+        editHabitOrderBtn.disabled = !editing && habits.length === 0;
+        cancelHabitOrderBtn.hidden = !editing;
+        document.getElementById('toggle-habit-archive-btn').disabled = editing;
+        document.querySelectorAll('#add-habit-form input, #add-habit-form button').forEach(el => { el.disabled = editing; });
+        const draftRanks = new Map((habitOrderDraft || []).map((id, index) => [id, index]));
+        const displayedHabits = editing ? [...habits].sort((a,b) => (draftRanks.get(a.id) ?? Infinity) - (draftRanks.get(b.id) ?? Infinity)) : habits;
+
         
         header.innerHTML = '';
         currentWeekInfo.labels.forEach(lbl => {
@@ -1237,13 +1339,13 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
             span.textContent = lbl; header.appendChild(span);
         });
 
-        list.innerHTML = ''; archiveList.innerHTML = '';
-        if(habits.length === 0) list.innerHTML = `<p class="text-xs text-dark-500 italic text-center py-4">No habits tracked yet.</p>`;
+        list.replaceChildren(header); archiveList.innerHTML = '';
+        if(habits.length === 0) list.insertAdjacentHTML('beforeend', `<p class="text-xs text-dark-500 italic text-center py-4">No habits tracked yet.</p>`);
 
-        habits.forEach(habit => {
+        displayedHabits.forEach((habit, habitIndex) => {
             // Active View
             const item = document.createElement('div');
-            item.className = 'group flex items-center justify-between bg-dark-900/60 p-2.5 sm:p-3 rounded-xl border border-dark-700 hover:border-dark-600 transition gap-2';
+            item.className = 'habit-tracking-row group flex items-center justify-between bg-dark-900/60 p-2.5 sm:p-3 rounded-xl border border-dark-700 hover:border-dark-600 transition gap-2';
             
             let html = `
                 <div class="flex items-center gap-2 min-w-0 flex-1">
@@ -1252,7 +1354,7 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
                     </button>
                     <span class="text-[13px] text-white font-medium break-words leading-tight">${habit.title}</span>
                 </div>
-                <div class="flex justify-end gap-[6px] flex-shrink-0">
+                <div class="habit-week-cells flex justify-end gap-[6px] flex-shrink-0">
             `;
             
             currentWeekInfo.dates.forEach(dateStr => {
@@ -1266,6 +1368,28 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
             });
             html += `</div>`;
             item.innerHTML = html;
+            if (editing) {
+                const controls = document.createElement('div');
+                controls.className = 'habit-reorder-controls';
+                [['up', -1, '↑'], ['down', 1, '↓']].forEach(([direction, delta, symbol]) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.textContent = symbol;
+                    button.setAttribute('aria-label', `Move ${habit.title} ${direction}`);
+                    button.title = `Move ${direction}`;
+                    button.disabled = habitIndex + delta < 0 || habitIndex + delta >= displayedHabits.length;
+                    button.addEventListener('click', () => {
+                        const index = habitOrderDraft.indexOf(habit.id), target = index + delta;
+                        if (index < 0 || target < 0 || target >= habitOrderDraft.length) return;
+                        [habitOrderDraft[index], habitOrderDraft[target]] = [habitOrderDraft[target], habitOrderDraft[index]];
+                        renderHabits();
+                        document.querySelectorAll('.habit-tracking-row')[target]?.querySelector(`button[title="Move ${direction}"]`)?.focus();
+                    });
+                    controls.appendChild(button);
+                });
+                item.appendChild(controls);
+            }
+
 
             item.querySelectorAll('.habit-circle').forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -1367,7 +1491,6 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
                 <div class="text-[11px] text-dark-500 mb-4 flex gap-3 flex-wrap font-medium uppercase tracking-wider">
                     <span>Start: <span class="text-dark-400">${course.startDate}</span></span>
                     <span>End: <span class="text-dark-400">${course.endDate}</span></span>
-                    <span class="course-eta text-brand-info">ETA: ${etaText}</span>
                 </div>
                 <div class="w-full bg-dark-900 rounded-full h-2 mb-2 border border-dark-700 overflow-hidden shadow-inner">
                     <div class="course-bar ${isCourseComplete ? 'bg-brand-success' : 'bg-gradient-to-r from-brand-primary to-brand-info'} h-2 rounded-full transition-all duration-500 ease-out" style="width: ${percent}%"></div>
@@ -1595,7 +1718,7 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
         return dailyPlan;
     };
     const renderDailyPlanMode = () => {
-        const plan=buildDailyPlan(false), el=document.getElementById('daily-plan-queue'); if(!el)return;
+        const el=document.getElementById('daily-plan-queue'); if(!el)return; const plan=buildDailyPlan(false);
         const alert=document.getElementById('planning-alert');
         const state=notifyState();
         document.getElementById('plan-block-count').textContent=plan.items.length;
@@ -1604,7 +1727,7 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
         if(!plan.items.length){ el.innerHTML='<div class="text-sm text-dark-500 text-center py-4">You are clear. Add a task, habit, or lesson and regenerate the plan.</div>'; }
         else el.innerHTML=plan.items.map((x,i)=>`<div class="plan-item flex items-center gap-3 bg-dark-900/60 border border-dark-700 rounded-xl p-3" data-plan-index="${i}"><span class="plan-number">${i+1}</span><div class="min-w-0 flex-1"><div class="text-sm font-bold text-white truncate">${x.title}</div><div class="text-[10px] text-dark-500 uppercase mt-1">${x.kind} · ${x.minutes}m · ${x.meta}</div></div><button class="plan-start-btn bg-dark-800 border border-dark-600 text-brand-primary font-bold px-3 py-1.5 rounded-lg text-[10px] hover:border-brand-primary">Start</button></div>`).join('');
         el.querySelectorAll('.plan-start-btn').forEach(btn=>btn.addEventListener('click',()=>{ const item=plan.items[Number(btn.closest('.plan-item').dataset.planIndex)]; startFocusForTask({text:item.title,focusBlocks:Math.max(1,Math.ceil(item.minutes/config.work))}); }));
-        if(state.enabled) { alert.classList.add('hidden'); } else { alert.classList.remove('hidden'); alert.textContent='Tip: enable browser notifications so the dashboard can remind you when it is time to start the next focus block.'; }
+        if(state.enabled && 'Notification' in window && Notification.permission==='granted') { alert.classList.add('hidden'); } else { alert.classList.remove('hidden'); alert.textContent='Tip: enable browser notifications so the dashboard can remind you when it is time to start the next focus block.'; }
     };
     document.getElementById('generate-plan-btn')?.addEventListener('click',()=>{ buildDailyPlan(true); renderDailyPlanMode(); sendProductivityNotification('Daily plan refreshed','Your focus queue is ready.'); });
     document.getElementById('notify-btn')?.addEventListener('click',async()=>{
@@ -1661,7 +1784,8 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
         const streaks = habits.map(getHabitStreak);
         const bestCurrentStreak = streaks.length ? Math.max(...streaks) : 0;
         const nextDue = openTasks.filter(t=>t.dueTime).sort((a,b)=>a.dueTime.localeCompare(b.dueTime))[0];
-        document.getElementById('dash-focus-plan').textContent = `${focusPlan} focus block${focusPlan===1?'':'s'} planned`;
+        const focusPlanLabel = document.getElementById('dash-focus-plan');
+        if (focusPlanLabel) focusPlanLabel.textContent = `${focusPlan} focus block${focusPlan===1?'':'s'} planned`;
         document.getElementById('insight-completion').textContent = `${completionRate}%`;
         document.getElementById('insight-completion-sub').textContent = monthly ? 'this month' : 'this week';
         document.getElementById('insight-open').textContent = openTasks.length + overdue.length;
@@ -1675,21 +1799,35 @@ button,a,[role="button"],input,select,textarea{touch-action:manipulation;-webkit
         const streakBox=document.getElementById('streak-summary'); streakBox.innerHTML='';
         const top=[...habits].map(h=>({title:h.title, streak:getHabitStreak(h), best:getBestStreak(h)})).sort((a,b)=>b.streak-a.streak).slice(0,3);
         if(!top.length) streakBox.innerHTML='<p class="text-xs text-dark-500">Add habits to build streaks.</p>'; else top.forEach(x=>streakBox.insertAdjacentHTML('beforeend', `<div class="flex items-center justify-between bg-dark-800/60 rounded-lg px-3 py-2"><span class="text-xs text-white truncate pr-2">${x.title}</span><span class="streak-badge text-[10px] font-bold text-brand-success">🔥 ${x.streak} <span class="text-dark-500">/ ${x.best}</span></span></div>`));
-        renderHeatmap(); renderDailyPlan(); renderCalendar(); renderDailyPlanMode(); maybeMorningPlan();
+        renderCalendar(); renderDailyPlanMode(); maybeMorningPlan();
     };
-    renderHeatmap(); renderDailyPlan(); renderCalendar();
+    renderCalendar();
 
     document.getElementById('task-search')?.addEventListener('input', renderTodos);
     document.getElementById('task-filter')?.addEventListener('change', renderTodos);
     document.getElementById('complete-all-tasks')?.addEventListener('click', () => { let changed=false; todos.forEach(t=>{ if(t.dateStr===todayStr && !t.completed){t.completed=true; t.completedAt=Date.now(); changed=true;} }); if(changed){saveToLocal(); renderTodos(); renderDashboard();} });
 
-    // Load Local Data instantly and Render
-    loadFromLocal();
+    // Render the records already restored before UI setup.
     todos.forEach(t => { if (typeof t.completedAt === 'undefined') t.completedAt = t.completed ? t.createdAt : null; if (!t.priority) t.priority='medium'; if (typeof t.focusBlocks==='undefined') t.focusBlocks=1; });
     renderTodos(); renderCourses(); renderHabits(); renderDashboard();
 
 </script>
 
 
+<script>
+// Presentation-only navigation. Existing task, timer and sync handlers are retained.
+(()=>{
+ document.body.dataset.panel='today';
+ const positions={};
+ const selectPanel=(name)=>{positions[document.body.dataset.panel]=window.scrollY;document.body.dataset.panel=name;document.querySelectorAll('.mobile-nav button').forEach(b=>{if(b.dataset.panel===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});if(name==='insights')document.getElementById('insights-panel').open=true;window.scrollTo({top:positions[name]||0,behavior:'instant'});};
+ document.querySelectorAll('.mobile-nav button').forEach(b=>b.addEventListener('click',()=>selectPanel(b.dataset.panel)));
+ document.getElementById('open-insights-btn').addEventListener('click',()=>{if(matchMedia('(max-width:640px)').matches)selectPanel('insights');});
+ const timer=document.getElementById('pomo-display'),start=document.getElementById('pomo-start-btn'),mini=document.getElementById('mini-focus');let visible=true;
+ const sync=()=>{document.getElementById('mini-focus-time').textContent=timer.textContent;document.getElementById('mini-focus-toggle').textContent=start.textContent;mini.hidden=visible||!/pause/i.test(start.textContent)||!matchMedia('(max-width:640px)').matches;};
+ new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();}).observe(document.getElementById('pomo-section'));
+ new MutationObserver(sync).observe(document.getElementById('pomo-section'),{subtree:true,childList:true,characterData:true});
+ document.getElementById('mini-focus-toggle').addEventListener('click',()=>start.click());document.getElementById('mini-focus-open').addEventListener('click',()=>{selectPanel('today');document.getElementById('pomo-section').scrollIntoView({behavior:'smooth',block:'center'});});
+})();
+</script>
 </body>
 </html>
