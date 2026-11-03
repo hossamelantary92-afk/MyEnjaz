@@ -544,6 +544,29 @@ button.bg-brand-primary,.bg-brand-primary,.task-add-button{background:var(--ej-m
  #add-task-form .task-entry-controls .task-time-control{padding:0 4px!important;gap:2px!important}
 }
 </style>
+<style id="enjaz-habits-pomodoro-fix">
+/* Restore selected Pomodoro images above the dashboard's important card background. */
+#pomo-section{background-color:#10263b!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+#pomo-section.fullscreen-active,#pomo-section.dashboard-fullscreen{background-size:cover!important;background-position:center!important}
+#pomo-bg-panel{background:rgba(8,24,40,.97)!important;min-height:0}
+#pomo-bg-gallery{min-height:0}
+#habit-section>div:first-child{display:flex!important;align-items:center!important;justify-content:flex-start!important;flex-wrap:wrap!important;gap:9px!important}
+#habit-section>div:first-child>div:first-child{display:flex!important;align-items:center!important;flex:1 1 220px!important;min-width:0!important;flex-wrap:wrap!important;gap:8px!important}
+#habit-section .habit-order-actions{margin-left:auto!important;flex:0 0 auto!important}
+#habit-section #toggle-habit-archive-btn{flex:0 0 auto!important}
+#habit-section>div:first-child>.fullscreen-btn{flex:0 0 auto!important;min-height:36px!important}
+@media(max-width:640px){
+ #habit-section>div:first-child{display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;gap:8px!important;align-items:center!important}
+ #habit-section>div:first-child>div:first-child{grid-column:1 / -1!important;flex-wrap:nowrap!important;justify-content:space-between!important}
+ #habit-section .habit-order-actions{grid-column:1!important;margin-left:0!important;justify-self:start!important}
+ #habit-section #toggle-habit-archive-btn{grid-column:2!important;justify-self:end!important}
+ #habit-section>div:first-child>.fullscreen-btn{grid-column:3!important;justify-self:end!important}
+ #habit-section .habit-order-button,#habit-section .archive-btn,#habit-section .fullscreen-btn{min-height:37px!important;padding:7px 10px!important;font-size:11px!important}
+ #habit-section #habit-week-range{white-space:nowrap!important;font-size:11px!important;padding:6px 10px!important}
+ #habit-section .section-title{white-space:nowrap!important}
+}
+@media(max-width:390px){#habit-section>div:first-child{grid-template-columns:1fr 1fr 1fr!important}#habit-section .habit-order-actions{justify-self:stretch!important}#habit-section #toggle-habit-archive-btn,#habit-section>div:first-child>.fullscreen-btn{justify-self:stretch!important}}
+</style>
 </head>
 <body class="p-4 md:p-8">
 
@@ -996,7 +1019,7 @@ button.bg-brand-primary,.bg-brand-primary,.task-add-button{background:var(--ej-m
     });
 
     const POMO_BG_KEY='productivityDashPomoBackground';
-    const applyPomoBackground=(url)=>{ const sec=document.getElementById('pomo-section'); if(!sec)return; if(url){sec.style.backgroundImage=`linear-gradient(rgba(15,23,42,.78),rgba(15,23,42,.92)),url("${url}")`;sec.style.backgroundSize='cover';sec.style.backgroundPosition='center';localStorage.setItem(POMO_BG_KEY,url);}else{sec.style.backgroundImage='';localStorage.removeItem(POMO_BG_KEY);} document.querySelectorAll('.pomo-bg-choice').forEach(b=>b.classList.toggle('selected',b.dataset.bg===url)); };
+    const applyPomoBackground=(url)=>{ const sec=document.getElementById('pomo-section'); if(!sec)return; if(url){sec.style.setProperty('background-image',`linear-gradient(rgba(9,28,44,.62),rgba(9,28,44,.78)),url("${url}")`,'important');sec.style.backgroundSize='cover';sec.style.backgroundPosition='center';localStorage.setItem(POMO_BG_KEY,url);}else{sec.style.removeProperty('background-image');localStorage.removeItem(POMO_BG_KEY);} document.querySelectorAll('.pomo-bg-choice').forEach(b=>b.classList.toggle('selected',b.dataset.bg===url)); };
     applyPomoBackground(localStorage.getItem(POMO_BG_KEY));
     document.getElementById('pomo-bg-btn')?.addEventListener('click',()=>document.getElementById('pomo-bg-panel')?.classList.remove('hidden'));
     document.getElementById('pomo-bg-close')?.addEventListener('click',()=>document.getElementById('pomo-bg-panel')?.classList.add('hidden'));
