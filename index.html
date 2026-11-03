@@ -443,6 +443,17 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
 <style>
 #pomo-ring{transition:none!important;will-change:stroke-dashoffset;}
 </style>
+<style id="habit-order-editor">
+.habit-order-actions{display:flex;align-items:center;gap:5px;margin-left:auto;}
+.habit-order-button{height:32px;min-width:42px;padding:5px 9px;border:1px solid #475569;border-radius:8px;background:#0f172acc;color:#cbd5e1;font-size:11px;font-weight:600;}
+.habit-order-button[hidden]{display:none!important;}#edit-habit-order[aria-pressed=true]{background:#34d399;color:#0f172a;border-color:#34d399;}
+#habit-section>div:first-child{flex-wrap:wrap;}#habit-section button:disabled,#habit-section input:disabled{opacity:.35;cursor:default;}
+.editing-habit-order #habit-days-header,.editing-habit-order #habits-list .habit-week-cells,.editing-habit-order .delete-habit-btn{display:none!important;}
+.habit-reorder-controls{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.habit-reorder-controls button{height:34px;width:34px;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid #475569;background:#24324a;color:#e2e8f0;font-size:20px;line-height:1;}
+.editing-habit-order .habit-tracking-row{border-color:#34d39944;}
+@media(max-width:640px){.habit-order-button{font-size:10px;padding:5px 7px;min-width:36px;}.habit-order-actions{gap:4px;}}
+</style>
 </head>
 <body class="p-4 md:p-8">
 
@@ -690,6 +701,10 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
                     </h2>
                     <span id="habit-week-range" class="text-xs font-bold text-dark-300 bg-dark-900 px-3 py-1 rounded-full border border-dark-600 shadow-inner"></span>
                 </div>
+                <div class="habit-order-actions">
+                    <button type="button" id="edit-habit-order" class="habit-order-button" aria-label="Edit habit order">Edit</button>
+                    <button type="button" id="cancel-habit-order" class="habit-order-button" hidden>Cancel</button>
+                </div>
                 <button id="toggle-habit-archive-btn" class="archive-btn text-xs text-dark-300 font-bold hover:text-white transition px-3 py-1.5 border border-dark-600 rounded-lg bg-dark-900/80 uppercase tracking-wider whitespace-nowrap">
                     Archive
                 </button>
@@ -720,27 +735,6 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
         </section>
 </div>
 </div>
-<section class="card rounded-2xl p-5 relative overflow-hidden" id="daily-planning-mode">
-        <div class="absolute -top-20 -left-20 w-64 h-64 bg-brand-info/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
-            <div>
-                
-                <h2 class="text-xl font-bold text-white">Today’s Focus</h2>
-                <p id="planning-subtitle" class="text-xs text-dark-400 mt-1">Your priorities, habits, and learning blocks — arranged automatically.</p>
-            </div>
-            <div class="flex gap-2 flex-wrap">
-                <button id="generate-plan-btn" class="bg-brand-primary text-dark-900 font-bold px-4 py-2 rounded-lg text-xs hover:opacity-90">Generate Today's Plan</button>
-                
-            </div>
-        </div>
-        <div id="planning-alert" class="hidden mb-4 rounded-xl border border-brand-warning/30 bg-brand-warning/10 px-3 py-2 text-xs text-brand-warning"></div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-4">
-            <div class="bg-dark-900/60 border border-dark-700 rounded-xl p-3"><div class="text-[9px] uppercase tracking-wider text-dark-500 font-bold">Plan Blocks</div><div id="plan-block-count" class="text-xl font-bold text-white mt-1">0</div></div>
-            <div class="bg-dark-900/60 border border-dark-700 rounded-xl p-3"><div class="text-[9px] uppercase tracking-wider text-dark-500 font-bold">Planned Focus</div><div id="plan-focus-minutes" class="text-xl font-bold text-brand-primary mt-1">0m</div></div>
-            <div class="bg-dark-900/60 border border-dark-700 rounded-xl p-3"><div class="text-[9px] uppercase tracking-wider text-dark-500 font-bold">Next Up</div><div id="plan-next" class="text-sm font-bold text-brand-success mt-2 truncate">Nothing queued</div></div>
-        </div>
-        <div id="daily-plan-queue" class="space-y-2"></div>
-    </section>
 <div class="insights-shell">
 <div class="insights-period-control"><select id="insights-period" class="insights-period-select" aria-label="Insights period" title="Choose insights period"><option value="weekly">Weekly</option><option value="monthly">Monthly</option></select></div>
 <details id="insights-panel" class="card rounded-2xl overflow-hidden">
@@ -1303,10 +1297,40 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
     const currentWeekInfo = getWeekDates();
     document.getElementById('habit-week-range').textContent = currentWeekInfo.dateRangeStr;
 
+    let habitOrderDraft = null;
+    const editHabitOrderBtn = document.getElementById('edit-habit-order');
+    const cancelHabitOrderBtn = document.getElementById('cancel-habit-order');
+    editHabitOrderBtn.addEventListener('click', () => {
+        if (habitOrderDraft) {
+            const records = new Map(habits.map(h => [h.id, h]));
+            const reordered = habitOrderDraft.map(id => records.get(id)).filter(Boolean);
+            const included = new Set(habitOrderDraft);
+            habits = [...reordered, ...habits.filter(h => !included.has(h.id))];
+            saveToLocal();
+            habitOrderDraft = null;
+        } else {
+            habitOrderDraft = habits.map(h => h.id);
+        }
+        renderHabits();
+    });
+    cancelHabitOrderBtn.addEventListener('click', () => { habitOrderDraft = null; renderHabits(); });
+
     const renderHabits = () => {
         const list = document.getElementById('habits-list');
         const archiveList = document.getElementById('archive-habits-list');
         const header = document.getElementById('habit-days-header');
+        const editing = habitOrderDraft !== null;
+        document.getElementById('habit-section').classList.toggle('editing-habit-order', editing);
+        editHabitOrderBtn.textContent = editing ? 'Save' : 'Edit';
+        editHabitOrderBtn.setAttribute('aria-label', editing ? 'Save habit order' : 'Edit habit order');
+        editHabitOrderBtn.setAttribute('aria-pressed', String(editing));
+        editHabitOrderBtn.disabled = !editing && habits.length === 0;
+        cancelHabitOrderBtn.hidden = !editing;
+        document.getElementById('toggle-habit-archive-btn').disabled = editing;
+        document.querySelectorAll('#add-habit-form input, #add-habit-form button').forEach(el => { el.disabled = editing; });
+        const draftRanks = new Map((habitOrderDraft || []).map((id, index) => [id, index]));
+        const displayedHabits = editing ? [...habits].sort((a,b) => (draftRanks.get(a.id) ?? Infinity) - (draftRanks.get(b.id) ?? Infinity)) : habits;
+
         
         header.innerHTML = '';
         currentWeekInfo.labels.forEach(lbl => {
@@ -1318,7 +1342,7 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
         list.replaceChildren(header); archiveList.innerHTML = '';
         if(habits.length === 0) list.insertAdjacentHTML('beforeend', `<p class="text-xs text-dark-500 italic text-center py-4">No habits tracked yet.</p>`);
 
-        habits.forEach(habit => {
+        displayedHabits.forEach((habit, habitIndex) => {
             // Active View
             const item = document.createElement('div');
             item.className = 'habit-tracking-row group flex items-center justify-between bg-dark-900/60 p-2.5 sm:p-3 rounded-xl border border-dark-700 hover:border-dark-600 transition gap-2';
@@ -1344,6 +1368,28 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
             });
             html += `</div>`;
             item.innerHTML = html;
+            if (editing) {
+                const controls = document.createElement('div');
+                controls.className = 'habit-reorder-controls';
+                [['up', -1, '↑'], ['down', 1, '↓']].forEach(([direction, delta, symbol]) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.textContent = symbol;
+                    button.setAttribute('aria-label', `Move ${habit.title} ${direction}`);
+                    button.title = `Move ${direction}`;
+                    button.disabled = habitIndex + delta < 0 || habitIndex + delta >= displayedHabits.length;
+                    button.addEventListener('click', () => {
+                        const index = habitOrderDraft.indexOf(habit.id), target = index + delta;
+                        if (index < 0 || target < 0 || target >= habitOrderDraft.length) return;
+                        [habitOrderDraft[index], habitOrderDraft[target]] = [habitOrderDraft[target], habitOrderDraft[index]];
+                        renderHabits();
+                        document.querySelectorAll('.habit-tracking-row')[target]?.querySelector(`button[title="Move ${direction}"]`)?.focus();
+                    });
+                    controls.appendChild(button);
+                });
+                item.appendChild(controls);
+            }
+
 
             item.querySelectorAll('.habit-circle').forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -1672,7 +1718,7 @@ body[data-panel=insights] .enjaz-workspace,body[data-panel=insights] #today-over
         return dailyPlan;
     };
     const renderDailyPlanMode = () => {
-        const plan=buildDailyPlan(false), el=document.getElementById('daily-plan-queue'); if(!el)return;
+        const el=document.getElementById('daily-plan-queue'); if(!el)return; const plan=buildDailyPlan(false);
         const alert=document.getElementById('planning-alert');
         const state=notifyState();
         document.getElementById('plan-block-count').textContent=plan.items.length;
