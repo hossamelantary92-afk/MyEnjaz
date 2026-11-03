@@ -523,6 +523,27 @@ button.bg-brand-primary,.bg-brand-primary,.task-add-button{background:var(--ej-m
 }
 @media(max-width:380px){.enjaz-header>div:nth-of-type(2)>button{font-size:10px!important;padding:8px!important}#connection-status{font-size:9px!important;padding:6px!important}}
 </style>
+<style id="enjaz-mobile-polish-v3">
+/* Stable, visual-only refinements. */
+.task-time-control{display:flex!important;align-items:center!important;gap:4px!important;padding:0 8px!important;overflow:hidden}
+.task-time-icon{width:17px;height:17px;flex:0 0 17px;color:#34d399;pointer-events:none}
+#add-task-form .task-entry-controls #task-due{min-width:0!important;width:100%!important;padding-left:2px!important;padding-right:0!important;font-variant-numeric:tabular-nums}
+.mobile-nav{background:rgba(8,23,40,.97)!important;border-top:1px solid rgba(52,211,153,.19)!important;box-shadow:0 -8px 28px rgba(0,0,0,.22)}
+.mobile-nav button{justify-content:center;gap:5px!important;transition:background .18s ease,color .18s ease}
+.mobile-nav-icon{width:21px;height:21px;flex-shrink:0}
+.mobile-nav button[aria-current=page]{color:#a7f3d0!important;background:rgba(52,211,153,.12)!important}
+.mobile-nav button:focus-visible{outline:2px solid #34d399;outline-offset:-2px}
+#task-search{min-width:0}
+#tasks-section button,#habit-section button,#courses-section button{touch-action:manipulation}
+@media(max-width:640px){
+ .enjaz-header{padding-top:calc(env(safe-area-inset-top) + 5px)!important}
+ .mobile-nav{padding-bottom:calc(10px + env(safe-area-inset-bottom))!important}
+ .mobile-nav button{min-height:53px!important;border-radius:13px!important}
+ .mobile-nav button span{font-size:10px!important;letter-spacing:.01em}
+ .task-time-icon{width:15px;height:15px;flex-basis:15px}
+ #add-task-form .task-entry-controls .task-time-control{padding:0 4px!important;gap:2px!important}
+}
+</style>
 </head>
 <body class="p-4 md:p-8">
 
@@ -595,7 +616,7 @@ button.bg-brand-primary,.bg-brand-primary,.task-add-button{background:var(--ej-m
                     <input type="text" id="task-input" required placeholder="What needs to be done today?" class="w-full bg-transparent border-b border-dark-600 pb-2 mb-4 focus:outline-none focus:border-brand-danger transition text-sm placeholder-dark-500 text-white">
                     <div class="task-entry-controls">
                         <select aria-label="Task priority" id="task-priority" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="high">High</option><option value="medium" selected>Medium</option><option value="low">Low</option></select>
-                        <div class="task-time-control"><input id="task-due" type="time" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] text-white focus:outline-none focus:border-brand-danger" title="Due time / وقت المهمة"></div>
+                        <div class="task-time-control"><svg class="task-time-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><input id="task-due" type="time" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] text-white focus:outline-none focus:border-brand-danger" title="Due time / وقت المهمة"></div>
                         <select aria-label="Focus sessions" id="task-focus" class="bg-dark-800 border border-dark-600 rounded-lg px-2.5 py-2 text-[11px] font-bold text-white focus:outline-none focus:border-brand-danger"><option value="0">0 Focus</option><option value="1">1 Focus</option><option value="2">2 Focus</option><option value="3">3 Focus</option><option value="4">4 Focus</option></select>
                         <button type="submit" class="task-add-button" aria-label="Add task"><span class="task-add-label">Add Task</span><span class="task-add-symbol" aria-hidden="true">+</span></button>
                     </div>
@@ -831,10 +852,10 @@ button.bg-brand-primary,.bg-brand-primary,.task-add-button{background:var(--ej-m
 </main>
 
 <nav class="mobile-nav" aria-label="Dashboard sections">
-<button type="button" data-panel="today" aria-current="page">◷ <span>Today</span></button>
-<button type="button" data-panel="habits">✓ <span>Habits</span></button>
-<button type="button" data-panel="courses">▤ <span>Courses</span></button>
-<button type="button" data-panel="insights">▥ <span>Insights</span></button>
+<button type="button" data-panel="today" aria-current="page"><svg class="mobile-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg> <span>Today</span></button>
+<button type="button" data-panel="habits"><svg class="mobile-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg> <span>Habits</span></button>
+<button type="button" data-panel="courses"><svg class="mobile-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5c3-1 5.5-.5 8 1v13c-2.5-1.5-5-2-8-1V5.5Zm16 0c-3-1-5.5-.5-8 1v13c2.5-1.5 5-2 8-1V5.5Z"/></svg> <span>Courses</span></button>
+<button type="button" data-panel="insights"><svg class="mobile-nav-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V12m5 8V7m5 13V4m5 16v-9"/></svg> <span>Insights</span></button>
 </nav>
 <div id="mini-focus" hidden><span id="mini-focus-time">25:00</span><button type="button" id="mini-focus-toggle">Start</button><button type="button" id="mini-focus-open" aria-label="Show focus timer">↗</button></div>
 
